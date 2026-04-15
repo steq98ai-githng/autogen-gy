@@ -14,6 +14,35 @@ import ReactMarkdown from "react-markdown";
 import { Tooltip } from "antd";
 import remarkGfm from "remark-gfm";
 
+const SAFE_IMAGE_FALLBACK_SRC = "/api/placeholder/400/320";
+
+const sanitizeImageSrc = (src: string): string => {
+  if (!src) return SAFE_IMAGE_FALLBACK_SRC;
+
+  const trimmedSrc = src.trim();
+
+  // Allow only base64-encoded data URLs for safe raster formats (exclude svg)
+  if (
+    /^data:image\/(?:png|jpeg|jpg|gif|webp);base64,[a-zA-Z0-9+/=]+$/i.test(
+      trimmedSrc
+    )
+  ) {
+    return trimmedSrc;
+  }
+
+  // Allow only absolute http(s) URLs and return canonicalized URL
+  try {
+    const parsed = new URL(trimmedSrc);
+    if (parsed.protocol === "http:" || parsed.protocol === "https:") {
+      return parsed.toString();
+    }
+  } catch {
+    // Invalid URL, fall through to safe fallback
+  }
+
+  return SAFE_IMAGE_FALLBACK_SRC;
+};
+
 export const LoadingIndicator = ({ size = 16 }: { size: number }) => (
   <div className="inline-flex items-center gap-2 text-accent   mr-2">
     <Loader2 size={size} className="animate-spin" />
@@ -197,6 +226,8 @@ const FullScreenImage: React.FC<{
   alt: string;
   onClose: () => void;
 }> = ({ src, alt, onClose }) => {
+  const safeSrc = sanitizeImageSrc(src);
+
   return (
     <div
       className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center"
@@ -210,7 +241,7 @@ const FullScreenImage: React.FC<{
         <X size={24} />
       </button>
       <img
-        src={src}
+        src={safeSrc}
         alt={alt}
         className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
         onClick={(e) => e.stopPropagation()}
@@ -225,18 +256,19 @@ export const ClickableImage: React.FC<{
   className?: string;
 }> = ({ src, alt, className = "" }) => {
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const safeSrc = sanitizeImageSrc(src);
 
   return (
     <>
       <img
-        src={src}
+        src={safeSrc}
         alt={alt}
         className={`${className} cursor-pointer rounded hover:opacity-90 transition-opacity`}
         onClick={() => setIsFullScreen(true)}
       />
       {isFullScreen && (
         <FullScreenImage
-          src={src}
+          src={safeSrc}
           alt={alt}
           onClose={() => setIsFullScreen(false)}
         />
