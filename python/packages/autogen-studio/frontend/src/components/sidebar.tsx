@@ -249,6 +249,7 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
                     placement="right"
                   >
                     <button
+                      aria-label={isExpanded ? "Close Sidebar" : "Open Sidebar"}
                       onClick={() =>
                         setSidebarState({ isExpanded: !isExpanded })
                       }
@@ -295,6 +296,7 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
                     placement="right"
                   >
                     <button
+                      aria-label={isExpanded ? "Close Sidebar" : "Open Sidebar"}
                       onClick={() =>
                         setSidebarState({ isExpanded: !isExpanded })
                       }
