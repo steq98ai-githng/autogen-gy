@@ -1,0 +1,39 @@
+name: CI Test & AI Self-Healing
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  test-and-feedback:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 執行測試 (Run Tests)
+        id: run_tests
+        run: |
+          npm install
+          npm run test > test_results.log 2>&1  # 將結果輸出到 log
+        continue-on-error: true # 關鍵：測試失敗不要立刻停止 workflow
+
+      - name: 如果測試失敗，自動留言叫 Jules 修 (Trigger Jules on Failure)
+        if: steps.run_tests.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            // 讀取最後 50 行錯誤訊息，避免 token 爆掉
+            const log = fs.readFileSync('test_results.log', 'utf8').split('\n').slice(-50).join('\n');             
+            const prompt = `⚠️ **CI 測試失敗！**\n請根據以下的錯誤日誌修正你的程式碼，並更新這個 PR：\n\`\`\`\n${log}\n\`\`\``;
+            
+            // 在 PR 留下 comment，這會自動觸發 Jules 再次介入
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: prompt
+            });
+            
+            // 標記這個 action 為失敗
+            core.setFailed('測試未通過，已通知 Jules 進行修復。');
