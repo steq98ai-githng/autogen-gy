@@ -4,7 +4,7 @@
   "description": "AutoGen project",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {},
   "devDependencies": {
