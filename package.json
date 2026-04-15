@@ -1,0 +1,13 @@
+{
+  "name": "autogen-gy",
+  "version": "1.0.0",
+  "description": "AutoGen project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
