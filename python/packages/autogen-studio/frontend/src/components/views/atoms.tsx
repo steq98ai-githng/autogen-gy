@@ -21,16 +21,20 @@ const sanitizeImageSrc = (src: string): string => {
 
   const trimmedSrc = src.trim();
 
-  // Allow only base64-encoded image data URLs
-  if (/^data:image\/[a-zA-Z0-9.+-]+;base64,[a-zA-Z0-9+/=]+$/.test(trimmedSrc)) {
+  // Allow only base64-encoded data URLs for safe raster formats (exclude svg)
+  if (
+    /^data:image\/(?:png|jpeg|jpg|gif|webp);base64,[a-zA-Z0-9+/=]+$/i.test(
+      trimmedSrc
+    )
+  ) {
     return trimmedSrc;
   }
 
-  // Allow only http(s) absolute URLs
+  // Allow only absolute http(s) URLs and return canonicalized URL
   try {
     const parsed = new URL(trimmedSrc);
     if (parsed.protocol === "http:" || parsed.protocol === "https:") {
-      return trimmedSrc;
+      return parsed.toString();
     }
   } catch {
     // Invalid URL, fall through to safe fallback
