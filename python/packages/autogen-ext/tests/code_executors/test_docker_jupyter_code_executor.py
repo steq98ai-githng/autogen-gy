@@ -77,7 +77,7 @@ async def test_execute_code(executor_and_temp_dir: ExecutorFixture) -> None:
 async def test_execute_code_and_persist_variable(executor_and_temp_dir: ExecutorFixture) -> None:
     with tempfile.TemporaryDirectory() as temp_dir:
         async with DockerJupyterServer(bind_dir=temp_dir) as jupyter_server:
-            async with DockerJupyterCodeExecutor(jupyter_server=jupyter_server) as executor:
+            async with DockerJupyterCodeExecutor(jupyter_server=jupyter_server, timeout=120) as executor:
                 code_blocks_first = [
                     CodeBlock(code="a = 100 + 100; print(a)", language="python"),
                 ]
