@@ -88,11 +88,26 @@ public class FunctionContract
             var properties = propertiesElement.Deserialize<Dictionary<string, JsonElement>>() ?? new Dictionary<string, JsonElement>();
             foreach (var property in properties)
             {
-                var parameterType = parameterList.FirstOrDefault(p => p.Name == property.Key)?.ParameterType;
+                Type? schemaType = null;
+                if (property.Value.TryGetProperty("type", out var typeElement))
+                {
+                    schemaType = typeElement.GetString() switch
+                    {
+                        "string" => typeof(string),
+                        "integer" => typeof(int),
+                        "number" => typeof(double),
+                        "boolean" => typeof(bool),
+                        "array" => typeof(object[]),
+                        "object" => typeof(object),
+                        _ => typeof(object),
+                    };
+                }
+
+                var parameterType = parameterList.FirstOrDefault(p => p.Name == property.Key)?.ParameterType ?? schemaType;
                 var parameter = new FunctionParameterContract
                 {
                     Name = property.Key,
-                    ParameterType = parameterType, // TODO: Need to get the type from the schema
+                    ParameterType = parameterType,
                     IsRequired = isRequiredProperties.Contains(property.Key),
                 };
                 if (property.Value.TryGetProperty("description", out var descriptionElement))
