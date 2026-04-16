@@ -1,43 +1,42 @@
-import os
-import json
-import subprocess
 import asyncio
-from typing import Optional
-from tqdm import tqdm
+import json
+import os
 import sqlite3
+import subprocess
+from contextlib import closing
+from typing import Optional
 
 from chromadb import PersistentClient
 from chromadb.utils import embedding_functions
+from tqdm import tqdm
 
 from ._config import get_gitty_dir
 from ._github import get_github_issue_content
 
+
 def init_db(db_path: str) -> None:
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS issues (
-            number INTEGER PRIMARY KEY,
-            title TEXT,
-            updatedAt TEXT,
-            content TEXT
-        )
-    """)
-    conn.close()
+    with closing(sqlite3.connect(db_path)) as conn:
+        with conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS issues (
+                    number INTEGER PRIMARY KEY,
+                    title TEXT,
+                    updatedAt TEXT,
+                    content TEXT
+                )
+            """)
 
 
 def update_issue(db_path: str, number: int, title: str, updatedAt: str, content: str) -> None:
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute(
-        """
-        INSERT OR REPLACE INTO issues (number, title, updatedAt, content)
-        VALUES (?, ?, ?, ?)
-        """,
-        (number, title, updatedAt, content),
-    )
-    conn.commit()
-    conn.close()
+    with closing(sqlite3.connect(db_path)) as conn:
+        with conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO issues (number, title, updatedAt, content)
+                VALUES (?, ?, ?, ?)
+                """,
+                (number, title, updatedAt, content),
+            )
 
 
 def update_chroma(gitty_dir: str, db_path: str) -> None:
@@ -48,11 +47,9 @@ def update_chroma(gitty_dir: str, db_path: str) -> None:
     except Exception:
         collection = chroma_client.create_collection("issues")
 
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("SELECT number, title, content FROM issues")
-    rows = cursor.fetchall()
-    conn.close()
+    with closing(sqlite3.connect(db_path)) as conn:
+        cursor = conn.execute("SELECT number, title, content FROM issues")
+        rows = cursor.fetchall()
 
     sentence_transformer_ef = embedding_functions.DefaultEmbeddingFunction()
 
@@ -78,66 +75,60 @@ def fetch_and_update_issues(owner: str, repo: str, db_path: Optional[str] = None
     if db_path is None:
         gitty_dir = get_gitty_dir()
         db_path = os.path.join(gitty_dir, "issues.db")
-    print(f"Using database at: {db_path}")
 
     # Fetch issues using gh CLI (fetch summary without content)
     cmd = ["gh", "issue", "list", "--repo", f"{owner}/{repo}", "-L", "1000", "--json", "number,title,updatedAt"]
     result = subprocess.run(cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        print("Error fetching issues:", result.stderr)
         return
     try:
         issues = json.loads(result.stdout)
-    except json.JSONDecodeError as e:
-        print("Error decoding issues JSON:", e)
+    except json.JSONDecodeError:
         return
 
-    print(f"Fetched {len(issues)} issues. Beginning update...")
 
     # Connect to or create the SQLite database
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS issues (
-            number INTEGER PRIMARY KEY,
-            title TEXT,
-            updatedAt TEXT,
-            content TEXT
-        )
-    """)
-
-    for issue in tqdm(issues, desc="Fetching issues"):
-        number = issue.get("number")
-        title = issue.get("title")
-        updatedAt = issue.get("updatedAt")
-        # Retrieve full issue content using the async method
-
-        cursor.execute("SELECT updatedAt FROM issues WHERE number = ?", (number,))
-        row = cursor.fetchone()
-        if row:
-            existing_updatedAt = row[0]
-            if updatedAt > existing_updatedAt:
-                content = asyncio.run(get_github_issue_content(owner, repo, number))
-                cursor.execute(
-                    """
-                    UPDATE issues
-                    SET title = ?, updatedAt = ?, content = ?
-                    WHERE number = ?
-                """,
-                    (title, updatedAt, content, number),
+    with closing(sqlite3.connect(db_path)) as conn:
+        with conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS issues (
+                    number INTEGER PRIMARY KEY,
+                    title TEXT,
+                    updatedAt TEXT,
+                    content TEXT
                 )
-        else:
-            content = asyncio.run(get_github_issue_content(owner, repo, number))
-            cursor.execute(
-                """
-                INSERT INTO issues (number, title, updatedAt, content)
-                VALUES (?, ?, ?, ?)
-            """,
-                (number, title, updatedAt, content),
-            )
-    conn.commit()
-    conn.close()
-    print("Issue database update complete.")
+            """)
+
+            for issue in tqdm(issues, desc="Fetching issues"):
+                number = issue.get("number")
+                title = issue.get("title")
+                updatedAt = issue.get("updatedAt")
+                # Retrieve full issue content using the async method
+
+                cursor = conn.execute("SELECT updatedAt FROM issues WHERE number = ?", (number,))
+                row = cursor.fetchone()
+                if row:
+                    existing_updatedAt = row[0]
+                    if updatedAt > existing_updatedAt:
+                        content = asyncio.run(get_github_issue_content(owner, repo, number))
+                        conn.execute(
+                            """
+                            UPDATE issues
+                            SET title = ?, updatedAt = ?, content = ?
+                            WHERE number = ?
+                        """,
+                            (title, updatedAt, content, number),
+                        )
+                else:
+                    content = asyncio.run(get_github_issue_content(owner, repo, number))
+                    conn.execute(
+                        """
+                        INSERT INTO issues (number, title, updatedAt, content)
+                        VALUES (?, ?, ?, ?)
+                    """,
+                        (number, title, updatedAt, content),
+                    )
+
 
     # Update Chroma DB with latest issues
     gitty_dir = get_gitty_dir()
@@ -149,11 +140,9 @@ def fetch_and_update_issues(owner: str, repo: str, db_path: Optional[str] = None
     except Exception:
         collection = chroma_client.create_collection("issues")
 
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    cursor.execute("SELECT number, title, content FROM issues")
-    rows = cursor.fetchall()
-    conn.close()
+    with closing(sqlite3.connect(db_path)) as conn:
+        cursor = conn.execute("SELECT number, title, content FROM issues")
+        rows = cursor.fetchall()
 
     # New embedding function using sentence_transformers
     sentence_transformer_ef = embedding_functions.DefaultEmbeddingFunction()
@@ -167,4 +156,3 @@ def fetch_and_update_issues(owner: str, repo: str, db_path: Optional[str] = None
             metadatas=[meta],
             ids=[str(issue_number)],
         )
-    print("Chroma DB update complete.")
