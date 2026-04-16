@@ -189,11 +189,22 @@ def test_shutdown_port(mock_subprocess: MagicMock) -> None:
     mock_result.returncode = 0
     mock_result.stdout = "1234\n5678"
     mock_subprocess.return_value = mock_result
-    
+
+    # 1. Test valid port as int
     LiteStudio.shutdown_port(8080)
-    
-    # Should attempt to find and kill process on port
-    mock_subprocess.assert_called()
+    # Should attempt to find process on port
+    mock_subprocess.assert_any_call(["lsof", "-ti", ":8080"], capture_output=True, text=True)
+
+    # 2. Test valid port as string
+    mock_subprocess.reset_mock()
+    LiteStudio.shutdown_port("9090")
+    mock_subprocess.assert_any_call(["lsof", "-ti", ":9090"], capture_output=True, text=True)
+
+    # 3. Test malicious port string (security fix verification)
+    mock_subprocess.reset_mock()
+    LiteStudio.shutdown_port("-h")
+    # Should NOT call subprocess.run for malicious input
+    mock_subprocess.assert_not_called()
 
 
 @patch('uvicorn.run')
