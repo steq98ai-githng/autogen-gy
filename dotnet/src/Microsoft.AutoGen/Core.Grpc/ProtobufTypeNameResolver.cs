@@ -14,8 +14,7 @@ public class ProtobufTypeNameResolver : ITypeNameResolver
         if (typeof(IMessage).IsAssignableFrom(input))
         {
             // Try to get the descriptor from the static property first to avoid instantiation
-            var descriptor = input.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public)?.GetValue(null) as MessageDescriptor;
-            if (descriptor != null)
+            if (input.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public)?.GetValue(null) is MessageDescriptor descriptor)
             {
                 return descriptor.FullName;
             }
