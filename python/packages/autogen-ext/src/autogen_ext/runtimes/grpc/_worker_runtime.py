@@ -169,7 +169,6 @@ class HostConnection:
     ) -> Task[None]:
         from grpc.aio import StreamStreamCall
 
-        # TODO: where do exceptions from reading the iterable go? How do we recover from those?
         stream: StreamStreamCall[agent_worker_pb2.Message, agent_worker_pb2.Message] = stub.OpenChannel(  # type: ignore
             QueueAsyncIterable(send_queue), metadata=[("client-id", client_id)]
         )
@@ -179,7 +178,15 @@ class HostConnection:
         async def read_loop() -> None:
             while True:
                 logger.info("Waiting for message from host")
-                message = cast(agent_worker_pb2.Message, await stream.read())  # type: ignore
+                try:
+                    message = cast(agent_worker_pb2.Message, await stream.read())  # type: ignore
+                except grpc.aio.AioRpcError as e:
+                    logger.error(f"gRPC error reading from stream: {e}")
+                    break
+                except Exception as e:
+                    logger.error(f"Unexpected error reading from stream: {e}", exc_info=True)
+                    break
+
                 if message == grpc.aio.EOF:  # type: ignore
                     logger.info("EOF")
                     break
