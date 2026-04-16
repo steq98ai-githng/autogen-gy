@@ -59,41 +59,40 @@ async def bing_search(
     if response_filter.lower() not in valid_filters:
         raise ValueError(f"Invalid response_filter value. Must be one of: {', '.join(valid_filters)}")
 
-    async def fetch_page_content(url: str, max_length: Optional[int] = 50000) -> str:
+    async def fetch_page_content(client: httpx.AsyncClient, url: str, max_length: Optional[int] = 50000) -> str:
         """Helper function to fetch and convert webpage content to markdown"""
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
         try:
-            async with httpx.AsyncClient() as client:
-                response = await client.get(url, headers=headers, timeout=10)
-                response.raise_for_status()
+            response = await client.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
 
-                soup = BeautifulSoup(response.text, "html.parser")
+            soup = BeautifulSoup(response.text, "html.parser")
 
-                # Remove script and style elements
-                for script in soup(["script", "style"]):
-                    script.decompose()
+            # Remove script and style elements
+            for script in soup(["script", "style"]):
+                script.decompose()
 
-                # Convert relative URLs to absolute
-                for tag in soup.find_all(["a", "img"]):
-                    if tag.get("href"):
-                        tag["href"] = urljoin(url, tag["href"])
-                    if tag.get("src"):
-                        tag["src"] = urljoin(url, tag["src"])
+            # Convert relative URLs to absolute
+            for tag in soup.find_all(["a", "img"]):
+                if tag.get("href"):
+                    tag["href"] = urljoin(url, tag["href"])
+                if tag.get("src"):
+                    tag["src"] = urljoin(url, tag["src"])
 
-                h2t = html2text.HTML2Text()
-                h2t.body_width = 0
-                h2t.ignore_images = False
-                h2t.ignore_emphasis = False
-                h2t.ignore_links = False
-                h2t.ignore_tables = False
+            h2t = html2text.HTML2Text()
+            h2t.body_width = 0
+            h2t.ignore_images = False
+            h2t.ignore_emphasis = False
+            h2t.ignore_links = False
+            h2t.ignore_tables = False
 
-                markdown = h2t.handle(str(soup))
+            markdown = h2t.handle(str(soup))
 
-                if max_length and len(markdown) > max_length:
-                    markdown = markdown[:max_length] + "\n...(truncated)"
+            if max_length and len(markdown) > max_length:
+                markdown = markdown[:max_length] + "\n...(truncated)"
 
-                return markdown.strip()
+            return markdown.strip()
 
         except Exception as e:
             return f"Error fetching content: {str(e)}"
@@ -133,54 +132,58 @@ async def bing_search(
             response.raise_for_status()
             data = response.json()
 
-        # Process results based on response_filter
-        results = []
-        if response_filter == "webpages" and "webPages" in data:
-            items = data["webPages"]["value"]
-        elif response_filter == "news" and "news" in data:
-            items = data["news"]["value"]
-        elif response_filter == "images" and "images" in data:
-            items = data["images"]["value"]
-        elif response_filter == "videos" and "videos" in data:
-            items = data["videos"]["value"]
-        else:
-            if not any(key in data for key in ["webPages", "news", "images", "videos"]):
-                return []  # No results found
-            raise ValueError(f"No {response_filter} results found in API response")
+            # Process results based on response_filter
+            results = []
+            if response_filter == "webpages" and "webPages" in data:
+                items = data["webPages"]["value"]
+            elif response_filter == "news" and "news" in data:
+                items = data["news"]["value"]
+            elif response_filter == "images" and "images" in data:
+                items = data["images"]["value"]
+            elif response_filter == "videos" and "videos" in data:
+                items = data["videos"]["value"]
+            else:
+                if not any(key in data for key in ["webPages", "news", "images", "videos"]):
+                    return []  # No results found
+                raise ValueError(f"No {response_filter} results found in API response")
 
-        # Extract relevant information based on result type
-        for item in items:
-            result = {"title": item.get("name", "")}
+            # Extract relevant information based on result type
+            for item in items:
+                result = {"title": item.get("name", "")}
 
-            if response_filter == "webpages":
-                result["link"] = item.get("url", "")
-                if include_snippets:
-                    result["snippet"] = item.get("snippet", "")
-                if include_content:
-                    result["content"] = await fetch_page_content(result["link"], max_length=content_max_length)
+                if response_filter == "webpages":
+                    result["link"] = item.get("url", "")
+                    if include_snippets:
+                        result["snippet"] = item.get("snippet", "")
+                    if include_content:
+                        result["content"] = await fetch_page_content(
+                            client, result["link"], max_length=content_max_length
+                        )
 
-            elif response_filter == "news":
-                result["link"] = item.get("url", "")
-                if include_snippets:
-                    result["snippet"] = item.get("description", "")
-                result["date"] = item.get("datePublished", "")
-                if include_content:
-                    result["content"] = await fetch_page_content(result["link"], max_length=content_max_length)
+                elif response_filter == "news":
+                    result["link"] = item.get("url", "")
+                    if include_snippets:
+                        result["snippet"] = item.get("description", "")
+                    result["date"] = item.get("datePublished", "")
+                    if include_content:
+                        result["content"] = await fetch_page_content(
+                            client, result["link"], max_length=content_max_length
+                        )
 
-            elif response_filter == "images":
-                result["link"] = item.get("contentUrl", "")
-                result["thumbnail"] = item.get("thumbnailUrl", "")
-                if include_snippets:
-                    result["snippet"] = item.get("description", "")
+                elif response_filter == "images":
+                    result["link"] = item.get("contentUrl", "")
+                    result["thumbnail"] = item.get("thumbnailUrl", "")
+                    if include_snippets:
+                        result["snippet"] = item.get("description", "")
 
-            elif response_filter == "videos":
-                result["link"] = item.get("contentUrl", "")
-                result["thumbnail"] = item.get("thumbnailUrl", "")
-                if include_snippets:
-                    result["snippet"] = item.get("description", "")
-                result["duration"] = item.get("duration", "")
+                elif response_filter == "videos":
+                    result["link"] = item.get("contentUrl", "")
+                    result["thumbnail"] = item.get("thumbnailUrl", "")
+                    if include_snippets:
+                        result["snippet"] = item.get("description", "")
+                    result["duration"] = item.get("duration", "")
 
-            results.append(result)
+                results.append(result)
 
         return results[:num_results]
 
