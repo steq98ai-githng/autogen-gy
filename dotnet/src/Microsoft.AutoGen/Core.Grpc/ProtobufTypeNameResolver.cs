@@ -13,13 +13,15 @@ public class ProtobufTypeNameResolver : ITypeNameResolver
     {
         if (typeof(IMessage).IsAssignableFrom(input))
         {
-            // Try to get the descriptor from the static property first to avoid instantiation
-            if (input.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public)?.GetValue(null) is MessageDescriptor descriptor)
+            var descriptorProperty = input.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public);
+            if (descriptorProperty != null)
             {
-                return descriptor.FullName;
+                if (descriptorProperty.GetValue(null) is MessageDescriptor descriptor)
+                {
+                    return descriptor.FullName;
+                }
             }
 
-            // Fallback to instantiation if static property is not found
             var protoMessage = (IMessage?)Activator.CreateInstance(input) ?? throw new InvalidOperationException($"Failed to create instance of {input.FullName}");
             return protoMessage.Descriptor.FullName;
         }
