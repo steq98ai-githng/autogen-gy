@@ -16,8 +16,7 @@ public class ProtobufTypeNameResolver : ITypeNameResolver
             var descriptorProperty = input.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public);
             if (descriptorProperty != null)
             {
-                var descriptor = descriptorProperty.GetValue(null) as MessageDescriptor;
-                if (descriptor != null)
+                if (descriptorProperty.GetValue(null) is MessageDescriptor descriptor)
                 {
                     return descriptor.FullName;
                 }
