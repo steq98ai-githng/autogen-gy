@@ -86,21 +86,24 @@ class LangChainToolAdapter(BaseTool[BaseModel, Any]):
             from langchain_community.utilities.sql_database import SQLDatabase
             from langchain_openai import ChatOpenAI
             from sqlalchemy import Engine, create_engine
-            from sqlalchemy.pool import StaticPool
 
 
             def get_engine_for_chinook_db() -> Engine:
+                import uuid
+
                 url = "https://raw.githubusercontent.com/lerocha/chinook-database/master/ChinookDatabase/DataSources/Chinook_Sqlite.sql"
                 response = requests.get(url)
                 sql_script = response.text
-                connection = sqlite3.connect(":memory:", check_same_thread=False)
+                # Use a unique named in-memory database with shared cache to allow multiple connections
+                db_name = f"chinook_{uuid.uuid4().hex}"
+                db_uri = f"file:{db_name}?mode=memory&cache=shared"
+                connection = sqlite3.connect(db_uri, uri=True)
                 connection.executescript(sql_script)
-                return create_engine(
-                    "sqlite://",
-                    creator=lambda: connection,
-                    poolclass=StaticPool,
-                    connect_args={"check_same_thread": False},
-                )
+                # Create the engine with the shared-cache URI.
+                # We must keep the original 'connection' open to keep the database alive.
+                engine = create_engine(f"sqlite:///{db_uri}", connect_args={"uri": True})
+                engine.info["keepalive"] = connection
+                return engine
 
 
             async def main() -> None:
