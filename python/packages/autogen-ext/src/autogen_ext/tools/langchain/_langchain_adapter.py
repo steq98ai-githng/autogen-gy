@@ -102,7 +102,8 @@ class LangChainToolAdapter(BaseTool[BaseModel, Any]):
                 # Create the engine with the shared-cache URI.
                 # We must keep the original 'connection' open to keep the database alive.
                 engine = create_engine(f"sqlite:///{db_uri}", connect_args={"uri": True})
-                setattr(engine, "keepalive", connection)  # type: ignore
+                # Store connection in engine dictionary to keep it alive
+                engine.__dict__["keepalive"] = connection  # type: ignore
                 return engine
 
 
