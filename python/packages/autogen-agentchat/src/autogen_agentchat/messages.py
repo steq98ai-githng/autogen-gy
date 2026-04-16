@@ -608,10 +608,7 @@ class MessageFactory:
 
     def is_registered(self, message_type: type[BaseAgentEvent | BaseChatMessage]) -> bool:
         """Check if a message type is registered with the factory."""
-        # Get the class name of the message type.
-        class_name = message_type.__name__
-        # Check if the class name is already registered.
-        return class_name in self._message_types
+        return message_type.__name__ in self._message_types
 
     def register(self, message_type: type[BaseAgentEvent | BaseChatMessage]) -> None:
         """Register a new message type with the factory."""
@@ -619,11 +616,7 @@ class MessageFactory:
             raise ValueError(f"Message type {message_type} is already registered.")
         if not issubclass(message_type, BaseChatMessage) and not issubclass(message_type, BaseAgentEvent):
             raise ValueError(f"Message type {message_type} must be a subclass of BaseChatMessage or BaseAgentEvent.")
-        # Get the class name of the
-        class_name = message_type.__name__
-        # Check if the class name is already registered.
-        # Register the message type.
-        self._message_types[class_name] = message_type
+        self._message_types[message_type.__name__] = message_type
 
     def create(self, data: Mapping[str, Any]) -> BaseAgentEvent | BaseChatMessage:
         """Create a message from a dictionary of JSON-serializable data."""
