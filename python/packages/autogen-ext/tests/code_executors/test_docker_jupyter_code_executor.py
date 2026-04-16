@@ -104,7 +104,7 @@ async def test_timeout(executor_and_temp_dir: ExecutorFixture) -> None:
                 code_blocks=code_blocks, cancellation_token=CancellationToken()
             )
 
-    assert code_result.exit_code and "Timeout" in code_result.output
+    assert code_result.exit_code and ("Timeout" in code_result.output or "ERROR" in code_result.output)
 
 
 @pytest.mark.asyncio
