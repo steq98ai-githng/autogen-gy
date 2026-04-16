@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 namespace Microsoft.AutoGen.Core.Grpc;
 
 public static class AgentsAppBuilderExtensions
@@ -74,7 +75,8 @@ public static class AgentsAppBuilderExtensions
                     services.GetRequiredService<IHostApplicationLifetime>(),
                     services,
                     services.GetRequiredService<ILogger<GrpcAgentRuntime>>(),
-                    useStrictDeserialiation);
+                    useStrictDeserialiation,
+                    services.GetService<IOptions<GrpcWorkerOptions>>());
             });
         builder.Services.AddHostedService<GrpcAgentRuntime>(services =>
         {
