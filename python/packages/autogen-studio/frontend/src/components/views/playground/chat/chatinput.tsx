@@ -464,6 +464,8 @@ export default function ChatInput({
               disabled={
                 isInputDisabled || (text.trim() === "" && fileList.length === 0)
               }
+              aria-label={loading ? "Sending message" : "Send message"}
+              title={loading ? "Sending message" : "Send message"}
               className={`bg-accent transition duration-300 rounded flex justify-center items-center w-11 h-9 ${
                 isInputDisabled || (text.trim() === "" && fileList.length === 0)
                   ? "cursor-not-allowed opacity-50"
