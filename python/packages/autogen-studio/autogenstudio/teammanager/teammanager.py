@@ -47,17 +47,24 @@ class TeamManager:
     @staticmethod
     async def load_from_file(path: Union[str, Path]) -> Any:
         """Load team configuration from JSON/YAML file"""
-        path = Path(path)
-        if not path.exists():
-            raise FileNotFoundError(f"Config file not found: {path}")
+        base_dir = Path.cwd().resolve()
+        resolved_path = Path(path).expanduser().resolve(strict=False)
 
-        async with aiofiles.open(path) as f:
+        try:
+            resolved_path.relative_to(base_dir)
+        except ValueError:
+            raise ValueError(f"Config path is outside allowed directory: {resolved_path}")
+
+        if not resolved_path.exists():
+            raise FileNotFoundError(f"Config file not found: {resolved_path}")
+
+        async with aiofiles.open(resolved_path) as f:
             content = await f.read()
-            if path.suffix == ".json":
+            if resolved_path.suffix == ".json":
                 return json.loads(content)
-            elif path.suffix in (".yml", ".yaml"):
+            elif resolved_path.suffix in (".yml", ".yaml"):
                 return yaml.safe_load(content)
-            raise ValueError(f"Unsupported file format: {path.suffix}")
+            raise ValueError(f"Unsupported file format: {resolved_path.suffix}")
 
     @staticmethod
     async def load_from_directory(directory: Union[str, Path]) -> List[Any]:
