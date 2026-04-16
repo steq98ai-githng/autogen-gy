@@ -37,7 +37,7 @@ async def main() -> None:
 
     # 4. Construct RoundRobinGroupChat
     team = RoundRobinGroupChat(
-        [executor, developer, reviewer],
+        [developer, executor, reviewer],
         termination_condition=termination
     )
 
