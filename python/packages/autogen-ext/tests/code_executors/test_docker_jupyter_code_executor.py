@@ -110,7 +110,7 @@ async def test_timeout(executor_and_temp_dir: ExecutorFixture) -> None:
 @pytest.mark.asyncio
 @pytest.mark.parametrize("executor_and_temp_dir", ["docker"], indirect=True)
 async def test_canncellation(executor_and_temp_dir: ExecutorFixture) -> None:
-    _executor, temp_dir = executor_and_temp_dir
+    _executor, _ = executor_and_temp_dir
     # Write code that sleep for 10 seconds and then write "hello world!"
     # to a file.
     code = """import time, os
