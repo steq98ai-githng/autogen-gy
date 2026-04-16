@@ -242,6 +242,6 @@ class LiteStudio:
                 for pid in pids:
                     subprocess.run(["kill", "-9", pid], check=False)
 
-        except (subprocess.SubprocessError, FileNotFoundError, ValueError):
+        except (subprocess.SubprocessError, FileNotFoundError, ValueError, TypeError):
             # lsof might not be available or port might be invalid
             pass
