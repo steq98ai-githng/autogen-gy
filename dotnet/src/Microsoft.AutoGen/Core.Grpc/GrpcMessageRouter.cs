@@ -102,25 +102,17 @@ internal sealed class GrpcMessageRouter(AgentRpc.AgentRpcClient client,
                                     IMessageSink<Message> incomingMessageSink,
                                     Guid clientId,
                                     ILogger<GrpcAgentRuntime> logger,
-                                    CancellationToken shutdownCancellation = default) : IDisposable
+                                    CancellationToken shutdownCancellation = default,
+                                    BoundedChannelOptions? channelOptions = null) : IDisposable
 {
-    private static readonly BoundedChannelOptions DefaultChannelOptions = new BoundedChannelOptions(1024)
-    {
-        AllowSynchronousContinuations = true,
-        SingleReader = true,
-        SingleWriter = false,
-        FullMode = BoundedChannelFullMode.Wait
-    };
-
     private readonly ILogger<GrpcAgentRuntime> _logger = logger;
 
     private readonly CancellationTokenSource _shutdownCts = CancellationTokenSource.CreateLinkedTokenSource(shutdownCancellation);
 
     private readonly IMessageSink<Message> _incomingMessageSink = incomingMessageSink;
 
-    // TODO: Enable a way to configure the channel options
     private readonly Channel<(Message Message, TaskCompletionSource WriteCompletionSource)> _outboundMessagesChannel
-        = Channel.CreateBounded<(Message, TaskCompletionSource)>(DefaultChannelOptions);
+        = Channel.CreateBounded<(Message, TaskCompletionSource)>(channelOptions ?? new GrpcWorkerOptions().ChannelOptions);
 
     private readonly AutoRestartChannel _incomingMessageChannel = new AutoRestartChannel(client, clientId, logger, shutdownCancellation);
 
