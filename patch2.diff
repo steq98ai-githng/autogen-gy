@@ -1,9 +1,0 @@
---- python/packages/autogen-ext/src/autogen_ext/tools/langchain/_langchain_adapter.py
-+++ python/packages/autogen-ext/src/autogen_ext/tools/langchain/_langchain_adapter.py
-@@ -102,7 +102,7 @@
-                 # Create the engine with the shared-cache URI.
-                 # We must keep the original 'connection' open to keep the database alive.
-                 engine = create_engine(f"sqlite:///{db_uri}", connect_args={"uri": True})
--                setattr(engine, "keepalive", connection)
-+                engine.__dict__["keepalive"] = connection
-                 return engine
