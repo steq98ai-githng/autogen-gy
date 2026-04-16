@@ -91,6 +91,11 @@ class WebSocketManager:
         """Start streaming task execution with proper run management"""
         if run_id not in self._connections or run_id in self._closed_connections:
             raise ValueError(f"No active connection for run {run_id}")
+
+        # Reject path-based team configuration from websocket input to prevent path traversal/arbitrary file access.
+        if isinstance(team_config, (str, Path)):
+            raise ValueError("Invalid team_config: file paths are not allowed for websocket start_stream requests")
+
         with RunContext.populate_context(run_id=run_id):
             team_manager = TeamManager()
             cancellation_token = CancellationToken()
