@@ -8,6 +8,7 @@ using Microsoft.AutoGen.Contracts;
 using Microsoft.AutoGen.Protobuf;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Microsoft.AutoGen.Core.Grpc;
 
@@ -91,13 +92,14 @@ public sealed class GrpcAgentRuntime : IHostedService, IAgentRuntime, IMessageSi
                             IHostApplicationLifetime hostApplicationLifetime,
                             IServiceProvider serviceProvider,
                             ILogger<GrpcAgentRuntime> logger,
-                            bool strictMessageDeserialization = false)
+                            bool strictMessageDeserialization = false,
+                            IOptions<GrpcWorkerOptions>? workerOptions = null)
     {
         this._client = client;
         this._logger = logger;
         this._shutdownCts = CancellationTokenSource.CreateLinkedTokenSource(hostApplicationLifetime.ApplicationStopping);
 
-        this._messageRouter = new GrpcMessageRouter(client, this, _clientId, logger, this._shutdownCts.Token);
+        this._messageRouter = new GrpcMessageRouter(client, this, _clientId, logger, this._shutdownCts.Token, workerOptions?.Value.ChannelOptions);
         this._agentsContainer = new AgentsContainer(this, this.SerializationRegistry);
         this._strictMessageDeserialization = strictMessageDeserialization;
 

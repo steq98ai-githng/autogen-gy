@@ -232,14 +232,16 @@ class LiteStudio:
             port: Port number to shutdown
         """
         try:
+            # Ensure port is an integer to prevent argument injection
+            port_int = int(port)
             # Try to find and kill process on port (Unix/Linux/Mac)
-            result = subprocess.run(["lsof", "-ti", f":{port}"], capture_output=True, text=True)
+            result = subprocess.run(["lsof", "-ti", f":{port_int}"], capture_output=True, text=True)
 
             if result.returncode == 0 and result.stdout.strip():
                 pids = result.stdout.strip().split("\n")
                 for pid in pids:
                     subprocess.run(["kill", "-9", pid], check=False)
 
-        except (subprocess.SubprocessError, FileNotFoundError):
-            # lsof might not be available on all systems
+        except (subprocess.SubprocessError, FileNotFoundError, ValueError, TypeError):
+            # lsof might not be available or port might be invalid
             pass
