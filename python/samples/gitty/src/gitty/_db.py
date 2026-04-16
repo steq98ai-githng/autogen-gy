@@ -106,35 +106,45 @@ def fetch_and_update_issues(owner: str, repo: str, db_path: Optional[str] = None
         )
     """)
 
+    # Pre-fetch existing issues to avoid N+1 queries
+    cursor.execute("SELECT number, updatedAt FROM issues")
+    existing_issues = {row[0]: row[1] for row in cursor.fetchall()}
+
+    to_update = []
+    to_insert = []
+
     for issue in tqdm(issues, desc="Fetching issues"):
         number = issue.get("number")
         title = issue.get("title")
         updatedAt = issue.get("updatedAt")
-        # Retrieve full issue content using the async method
 
-        cursor.execute("SELECT updatedAt FROM issues WHERE number = ?", (number,))
-        row = cursor.fetchone()
-        if row:
-            existing_updatedAt = row[0]
-            if updatedAt > existing_updatedAt:
+        if number in existing_issues:
+            if updatedAt > existing_issues[number]:
+                # Retrieve full issue content using the async method
                 content = asyncio.run(get_github_issue_content(owner, repo, number))
-                cursor.execute(
-                    """
-                    UPDATE issues
-                    SET title = ?, updatedAt = ?, content = ?
-                    WHERE number = ?
-                """,
-                    (title, updatedAt, content, number),
-                )
+                to_update.append((title, updatedAt, content, number))
         else:
+            # Retrieve full issue content using the async method
             content = asyncio.run(get_github_issue_content(owner, repo, number))
-            cursor.execute(
-                """
-                INSERT INTO issues (number, title, updatedAt, content)
-                VALUES (?, ?, ?, ?)
-            """,
-                (number, title, updatedAt, content),
-            )
+            to_insert.append((number, title, updatedAt, content))
+
+    if to_update:
+        cursor.executemany(
+            """
+            UPDATE issues
+            SET title = ?, updatedAt = ?, content = ?
+            WHERE number = ?
+        """,
+            to_update,
+        )
+    if to_insert:
+        cursor.executemany(
+            """
+            INSERT INTO issues (number, title, updatedAt, content)
+            VALUES (?, ?, ?, ?)
+        """,
+            to_insert,
+        )
     conn.commit()
     conn.close()
     print("Issue database update complete.")
