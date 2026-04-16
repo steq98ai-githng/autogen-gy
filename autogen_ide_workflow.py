@@ -9,8 +9,8 @@ async def main() -> None:
     # 1. Provide mock outputs for replay client
     client = ReplayChatCompletionClient(
         chat_completions=[
-            "I have written the module. TERMINATE",
-            "I reviewed the code. TERMINATE"
+            "```python\nprint('hello world')\n```",
+            "I reviewed the code and the execution output. It looks good. TERMINATE"
         ]
     )
 
