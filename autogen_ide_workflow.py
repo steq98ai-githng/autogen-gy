@@ -24,7 +24,7 @@ async def main() -> None:
     reviewer = AssistantAgent(
         "Reviewer",
         model_client=client,
-        system_message="你是代碼審查員。嚴格檢查代碼的模組化、可實作性與安全性。若有錯誤請提出具體修正建議。"
+        system_message="你是代碼審查員。嚴格檢查代碼的模組化、可實作性與安全性。若有錯誤請提出具體修正建議。若審查通過，請輸出 TERMINATE。"
     )
 
     executor = CodeExecutorAgent(
