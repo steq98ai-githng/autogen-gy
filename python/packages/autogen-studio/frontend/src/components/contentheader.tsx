@@ -122,7 +122,7 @@ const ContentHeader = ({
 
             {/* Dark Mode Toggle */}
             <button
-              aria-label="Toggle dark mode"
+              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               onClick={() =>
                 setDarkMode(darkMode === "dark" ? "light" : "dark")
               }
