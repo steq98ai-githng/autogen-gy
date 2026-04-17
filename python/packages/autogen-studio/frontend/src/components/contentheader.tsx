@@ -10,6 +10,7 @@ import { ChevronDown, Menu as MenuIcon } from "lucide-react";
 import { appContext } from "../hooks/provider";
 import { useConfigStore } from "../hooks/store";
 import { Link } from "gatsby";
+import { Tooltip } from "antd";
 import { sanitizeUrl } from "./utils/security-utils";
 
 type ContentHeaderProps = {
@@ -129,12 +130,23 @@ const ContentHeader = ({
               }
               className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
             >
-              {darkMode === "dark" ? (
-                <MoonIcon className="h-6 w-6" />
-              ) : (
-                <SunIcon className="h-6 w-6" />
-              )}
-            </button>
+              <button
+                onClick={() =>
+                  setDarkMode(darkMode === "dark" ? "light" : "dark")
+                }
+                className={classNames(
+                  "p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary transition-colors",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
+                )}
+                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode === "dark" ? (
+                  <MoonIcon className="h-6 w-6" />
+                ) : (
+                  <SunIcon className="h-6 w-6" />
+                )}
+              </button>
+            </Tooltip>
 
             {/* Notifications */}
             <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
