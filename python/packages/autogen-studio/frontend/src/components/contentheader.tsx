@@ -36,8 +36,9 @@ const ContentHeader = ({
         {/* Mobile Menu Button */}
         <button
           onClick={onMobileMenuToggle}
-          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors"
+          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Toggle mobile menu"
+          title="Toggle mobile menu"
         >
           <MenuIcon className="h-6 w-6" />
         </button>
@@ -146,7 +147,8 @@ const ContentHeader = ({
             {/* User Menu */}
             {user && (
               <Menu as="div" className="relative">
-                <MenuButton className="flex items-center">
+                <MenuButton className="flex items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                  <span className="sr-only">Open user menu</span>
                   {user.avatar_url ? (
                     <img
                       className="h-8 w-8 rounded-full"
