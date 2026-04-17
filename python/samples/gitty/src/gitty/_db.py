@@ -103,8 +103,8 @@ def fetch_and_update_issues(owner: str, repo: str, db_path: Optional[str] = None
     cursor.execute("SELECT number, updatedAt FROM issues")
     existing_issues = {row[0]: row[1] for row in cursor.fetchall()}
 
-    to_update = []
-    to_insert = []
+    to_update: list[tuple[str, str, str, int]] = []
+    to_insert: list[tuple[int, str, str, str]] = []
 
     for issue in tqdm(issues, desc="Fetching issues"):
         number = issue.get("number")
