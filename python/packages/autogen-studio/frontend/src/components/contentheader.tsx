@@ -125,7 +125,9 @@ const ContentHeader = ({
               onClick={() =>
                 setDarkMode(darkMode === "dark" ? "light" : "dark")
               }
-              className="text-secondary hover:text-primary"
+              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 transition-colors"
             >
               {darkMode === "dark" ? (
                 <MoonIcon className="h-6 w-6" />
@@ -135,7 +137,11 @@ const ContentHeader = ({
             </button>
 
             {/* Notifications */}
-            <button className="text-secondary hidden hover:text-primary">
+            <button
+              aria-label="View notifications"
+              title="View notifications"
+              className="p-2 rounded-md hidden text-secondary hover:text-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 transition-colors"
+            >
               <BellIcon className="h-6 w-6" />
             </button>
 
