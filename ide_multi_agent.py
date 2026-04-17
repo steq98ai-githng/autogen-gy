@@ -75,8 +75,7 @@ async def main_execution_pipeline():
         else:
              await Console(team.run_stream(task=task_prompt))
     except Exception as e:
-        # [修正] 針對 API Key 錯誤或網路問題提供工程化降級日誌，保證程式不中斷
-        print(f"[Fallback] Network or Auth failed. Simulation mode validated syntax. Trace: {e}")
+        print(f"[Error] Execution failed: {e}")
 
 if __name__ == "__main__":
     # 單一事件迴圈進入點，避免重複初始化
