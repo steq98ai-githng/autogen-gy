@@ -10,6 +10,7 @@ import { ChevronDown, Menu as MenuIcon } from "lucide-react";
 import { appContext } from "../hooks/provider";
 import { useConfigStore } from "../hooks/store";
 import { Link } from "gatsby";
+import { Tooltip } from "antd";
 import { sanitizeUrl } from "./utils/security-utils";
 
 type ContentHeaderProps = {
@@ -121,18 +122,26 @@ const ContentHeader = ({
             </form>
 
             {/* Dark Mode Toggle */}
-            <button
-              onClick={() =>
-                setDarkMode(darkMode === "dark" ? "light" : "dark")
-              }
-              className="text-secondary hover:text-primary"
+            <Tooltip
+              title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
-              {darkMode === "dark" ? (
-                <MoonIcon className="h-6 w-6" />
-              ) : (
-                <SunIcon className="h-6 w-6" />
-              )}
-            </button>
+              <button
+                onClick={() =>
+                  setDarkMode(darkMode === "dark" ? "light" : "dark")
+                }
+                className={classNames(
+                  "text-secondary hover:text-primary transition-colors",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50 rounded"
+                )}
+                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode === "dark" ? (
+                  <MoonIcon className="h-6 w-6" />
+                ) : (
+                  <SunIcon className="h-6 w-6" />
+                )}
+              </button>
+            </Tooltip>
 
             {/* Notifications */}
             <button className="text-secondary hidden hover:text-primary">
