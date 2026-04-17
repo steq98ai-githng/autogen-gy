@@ -373,7 +373,7 @@ export default function ChatInput({
               <Button
                 type="text"
                 size="small"
-                aria-label="Remove file"
+                aria-label={"Remove " + file.name}
                 className="p-0 ml-1 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 onClick={() =>
                   setFileList((prev) => prev.filter((f) => f.uid !== file.uid))
