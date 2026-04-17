@@ -123,12 +123,11 @@ const ContentHeader = ({
 
             {/* Dark Mode Toggle */}
             <button
+              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               onClick={() =>
                 setDarkMode(darkMode === "dark" ? "light" : "dark")
               }
-              className="text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
-              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
             >
               {darkMode === "dark" ? (
                 <MoonIcon className="h-6 w-6" />
@@ -138,7 +137,7 @@ const ContentHeader = ({
             </button>
 
             {/* Notifications */}
-            <button className="text-secondary hidden hover:text-primary">
+            <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
               <BellIcon className="h-6 w-6" />
             </button>
 
