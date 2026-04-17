@@ -37,8 +37,9 @@ const ContentHeader = ({
         {/* Mobile Menu Button */}
         <button
           onClick={onMobileMenuToggle}
-          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors"
+          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           aria-label="Toggle mobile menu"
+          title="Toggle mobile menu"
         >
           <MenuIcon className="h-6 w-6" />
         </button>
@@ -122,8 +123,12 @@ const ContentHeader = ({
             </form>
 
             {/* Dark Mode Toggle */}
-            <Tooltip
-              title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            <button
+              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              onClick={() =>
+                setDarkMode(darkMode === "dark" ? "light" : "dark")
+              }
+              className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
             >
               <button
                 onClick={() =>
@@ -144,7 +149,7 @@ const ContentHeader = ({
             </Tooltip>
 
             {/* Notifications */}
-            <button className="text-secondary hidden hover:text-primary">
+            <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
               <BellIcon className="h-6 w-6" />
             </button>
 
@@ -154,7 +159,8 @@ const ContentHeader = ({
             {/* User Menu */}
             {user && (
               <Menu as="div" className="relative">
-                <MenuButton className="flex items-center">
+                <MenuButton className="flex items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                  <span className="sr-only">Open user menu</span>
                   {user.avatar_url ? (
                     <img
                       className="h-8 w-8 rounded-full"
