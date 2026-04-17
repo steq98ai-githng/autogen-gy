@@ -130,8 +130,8 @@ const ContentHeader = ({
                   setDarkMode(darkMode === "dark" ? "light" : "dark")
                 }
                 className={classNames(
-                  "text-secondary hover:text-primary transition-colors",
-                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50 rounded"
+                  "p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary transition-colors",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
                 )}
                 aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
