@@ -51,7 +51,7 @@ class IDEDevelopmentTeam:
             model_client=self.model_client,
             system_message="職責：驗證語法、檢測依賴衝突，並提供最終修正後代碼。"
         )
-        return RoundRobinGroupChat(participants=[architect, coder, reviewer], max_turns=3)
+        return RoundRobinGroupChat(participants=[architect, coder, reviewer], max_turns=6)
 
 class SeedKnowledgeManager:
     """模組化設計：知識自動持久化"""
