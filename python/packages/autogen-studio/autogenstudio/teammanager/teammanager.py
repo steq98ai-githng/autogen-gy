@@ -52,8 +52,8 @@ class TeamManager:
 
         try:
             resolved_path.relative_to(base_dir)
-        except ValueError:
-            raise ValueError(f"Config path is outside allowed directory: {resolved_path}")
+        except ValueError as err:
+            raise ValueError(f"Config path is outside allowed directory: {resolved_path}") from err
 
         if not resolved_path.exists():
             raise FileNotFoundError(f"Config file not found: {resolved_path}")
