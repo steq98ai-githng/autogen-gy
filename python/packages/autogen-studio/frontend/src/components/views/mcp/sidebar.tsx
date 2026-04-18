@@ -187,6 +187,7 @@ export const McpSidebar: React.FC<McpSidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`MCP Workbenches (${mcpWorkbenches.length})`}>
             <button
+              aria-label={`MCP Workbenches (${mcpWorkbenches.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -209,8 +210,9 @@ export const McpSidebar: React.FC<McpSidebarProps> = ({
           </span>
         </div>
         <Tooltip title="Close Sidebar">
-          <button
-            onClick={onToggle}
+            <button
+              aria-label="Close Sidebar"
+              onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
             <PanelLeftClose strokeWidth={1.5} className="h-6 w-6" />

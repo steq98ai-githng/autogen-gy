@@ -7,3 +7,6 @@
 ## 2026-04-17 - [Missing Accessibility on Standalone Utility Icon Buttons]
 **Learning:** In Autogen Studio, standalone utility icon buttons (like Dark Mode toggle, Mobile Menu, and User Profile Menu) frequently lack semantic `aria-label`, `title` tooltips, and distinct focus states for keyboard navigation. This compromises accessibility and makes these controls difficult to discern for screen readers and power users.
 **Action:** When working on navigation bars or generic headers, always verify that every icon-only button contains explicit `aria-label`/`title` tags and apply global focus visibility utilities such as `focus:outline-none focus-visible:ring-2 focus-visible:ring-accent` for uniform keyboard accessibility.
+## 2024-04-18 - Missing ARIA labels on Icon-only Sidebar Buttons
+**Learning:** Icon-only sidebar toggle buttons wrapped in `Tooltip`s frequently lack `aria-label`s across many components in this app, rendering them inaccessible to screen readers. Relying solely on `Tooltip`s for context is insufficient for accessibility.
+**Action:** When adding icon-only buttons, even with tooltips, always add an explicit `aria-label` directly to the interactive `<button>` element.

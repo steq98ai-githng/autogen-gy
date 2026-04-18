@@ -33,6 +33,7 @@ export const LabsSidebar: React.FC<LabsSidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title="Documentation">
             <button
+              aria-label="Documentation"
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -56,8 +57,9 @@ export const LabsSidebar: React.FC<LabsSidebarProps> = ({
           </span> */}
         </div>
         <Tooltip title="Close Sidebar">
-          <button
-            onClick={onToggle}
+            <button
+              aria-label="Close Sidebar"
+              onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
             <PanelLeftClose strokeWidth={1.5} className="h-6 w-6" />
