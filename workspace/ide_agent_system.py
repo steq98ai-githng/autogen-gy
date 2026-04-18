@@ -6,7 +6,7 @@ from autogen_ext.models.openai import OpenAIChatCompletionClient
 import logging
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Setup basic logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
