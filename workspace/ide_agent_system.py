@@ -84,7 +84,7 @@ class IDEMultiAgentSystem:
 
     def _persist_knowledge(self, knowledge_dict: dict):
         """Persists the optimized knowledge to the seed knowledge base."""
-        seed_file = Path("knowledge_base/seed_knowledge_v202405.json")
+        seed_file = self.output_dir / "knowledge_base" / "seed_knowledge_v202405.json"
         seed_file.parent.mkdir(parents=True, exist_ok=True)
 
         data = {
