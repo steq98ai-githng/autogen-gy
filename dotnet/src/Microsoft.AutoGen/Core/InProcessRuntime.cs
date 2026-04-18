@@ -6,11 +6,13 @@ using System.Diagnostics;
 using System.Text.Json;
 using Microsoft.AutoGen.Contracts;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AutoGen.Core;
 
 public sealed class InProcessRuntime : IAgentRuntime, IHostedService
 {
+    private readonly ILogger<InProcessRuntime>? _logger;
     public bool DeliverToSelf { get; set; } //= false;
 
     internal Dictionary<AgentId, IHostableAgent> agentInstances = new();
@@ -29,8 +31,9 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
         return func();
     }
 
-    public InProcessRuntime()
+    public InProcessRuntime(ILogger<InProcessRuntime>? logger = null)
     {
+        _logger = logger;
     }
 
     private ConcurrentQueue<MessageDelivery> messageDeliveryQueue = new();
@@ -331,8 +334,8 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
 
         if (this.finishSource != null)
         {
-            // TODO: Log as warning instead?
-            throw new InvalidOperationException("Runtime is already stopping.");
+            _logger?.LogWarning("Runtime is already stopping.");
+            return ValueTask.CompletedTask;
         }
 
         this.finishSource = CancellationTokenSource.CreateLinkedTokenSource(token);

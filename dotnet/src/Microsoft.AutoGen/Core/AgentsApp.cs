@@ -31,7 +31,7 @@ public class AgentsAppBuilder
 
     public AgentsAppBuilder UseInProcessRuntime(bool deliverToSelf = false)
     {
-        this.Services.AddSingleton<IAgentRuntime, InProcessRuntime>(_ => new InProcessRuntime { DeliverToSelf = deliverToSelf });
+        this.Services.AddSingleton<IAgentRuntime, InProcessRuntime>(services => new InProcessRuntime(services.GetService<ILogger<InProcessRuntime>>()) { DeliverToSelf = deliverToSelf });
         this.Services.AddHostedService<InProcessRuntime>(services =>
         {
             return (services.GetRequiredService<IAgentRuntime>() as InProcessRuntime)!;
