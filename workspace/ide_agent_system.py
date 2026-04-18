@@ -80,7 +80,7 @@ class IDEMultiAgentSystem:
 
         # Automatic Persistence
         self._persist_knowledge(final_knowledge)
-        return "Task executed successfully and knowledge persisted."
+        return final_knowledge
 
     def _persist_knowledge(self, knowledge_dict: dict):
         """Persists the optimized knowledge to the seed knowledge base."""
