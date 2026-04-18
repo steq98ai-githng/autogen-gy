@@ -67,9 +67,8 @@ public class OllamaAgent : IStreamingAgent
             using Stream? stream = await response.Content.ReadAsStreamAsync().ConfigureAwait(false);
             using var reader = new StreamReader(stream);
 
-            while (!reader.EndOfStream && !cancellationToken.IsCancellationRequested)
+            while (!cancellationToken.IsCancellationRequested && await reader.ReadLineAsync() is string line)
             {
-                string? line = await reader.ReadLineAsync();
                 if (string.IsNullOrWhiteSpace(line))
                 {
                     continue;
