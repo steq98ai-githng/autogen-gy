@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -67,7 +67,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -85,7 +85,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -113,7 +113,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -141,7 +141,7 @@ jobs:
           python-version: "3.11"
       - name: Run uv sync
         run: |
-          CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+          uv sync --locked --all-extras
           echo "PKG_NAME=$(basename '${{ matrix.package }}')" >> $GITHUB_ENV
 
         working-directory: ./python
@@ -174,7 +174,7 @@ jobs:
           python-version: "3.11"
       - name: Run uv sync
         run: |
-          CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+          uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -208,7 +208,7 @@ jobs:
 
       - name: Install Python deps
         run: |
-          CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+          uv sync --locked --all-extras
         shell: pwsh
         working-directory: ./python
 
@@ -270,7 +270,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -288,7 +288,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -306,7 +306,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -324,7 +324,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
@@ -342,7 +342,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
+      - run: uv sync --locked --all-extras
         working-directory: ./python
       - name: Run task
         run: |
