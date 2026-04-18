@@ -4,7 +4,7 @@ import io
 import os
 import re
 import time
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 
 # TODO: Fix unfollowed import
 from markitdown import FileConversionException, MarkItDown, UnsupportedFormatException  # type: ignore
@@ -35,7 +35,7 @@ class MarkdownFileBrowser:
         self.page_title: Optional[str] = None
         self.viewport_current_page = 0
         self.viewport_pages: List[Tuple[int, int]] = list()
-        self._markdown_converter = MarkItDown()
+        self._markdown_converter: Any = MarkItDown()
         self._base_path = None if base_path is None else os.path.realpath(base_path)
         self._page_content: str = ""
         self._find_on_page_query: Union[str, None] = None
@@ -254,8 +254,8 @@ class MarkdownFileBrowser:
             self._set_page_content(f"# FileNotFoundError\n\nFile not found: {path}")
         else:
             try:
-                if os.path.isdir(path):  # TODO: Fix markdown_converter types
-                    res = self._markdown_converter.convert_stream(  # type: ignore
+                if os.path.isdir(path):
+                    res = self._markdown_converter.convert_stream(
                         io.BytesIO(self._fetch_local_dir(path).encode("utf-8")), file_extension=".txt"
                     )
                     assert self._validate_path(path)
