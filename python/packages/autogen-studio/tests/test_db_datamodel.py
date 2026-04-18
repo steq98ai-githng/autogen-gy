@@ -1,6 +1,9 @@
 from datetime import datetime, timezone
+
 import pytest
+
 from autogenstudio.datamodel.db import Session
+
 
 def test_parse_datetime_with_datetime():
     """Test parse_datetime with a datetime object"""
@@ -9,12 +12,14 @@ def test_parse_datetime_with_datetime():
     assert result == dt
     assert isinstance(result, datetime)
 
+
 def test_parse_datetime_with_iso_string():
     """Test parse_datetime with an ISO format string"""
     iso_string = "2023-10-27T10:00:00"
     result = Session.parse_datetime(iso_string)
     assert result == datetime.fromisoformat(iso_string)
     assert isinstance(result, datetime)
+
 
 def test_parse_datetime_with_z_string():
     """Test parse_datetime with an ISO string containing 'Z'"""
@@ -24,6 +29,7 @@ def test_parse_datetime_with_z_string():
     assert result == expected
     assert result.tzinfo == timezone.utc
 
+
 def test_parse_datetime_with_offset_string():
     """Test parse_datetime with an ISO string containing an offset"""
     offset_string = "2023-10-27T10:00:00+02:00"
@@ -31,6 +37,7 @@ def test_parse_datetime_with_offset_string():
     expected = datetime.fromisoformat(offset_string)
     assert result == expected
     assert result.utcoffset().total_seconds() == 2 * 3600
+
 
 def test_parse_datetime_invalid_string():
     """Test parse_datetime with an invalid string (should raise ValueError)"""
