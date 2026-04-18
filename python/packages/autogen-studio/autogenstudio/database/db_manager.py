@@ -6,7 +6,7 @@ from typing import Optional, Union
 
 from loguru import logger
 from sqlalchemy import exc, inspect, text
-from sqlmodel import Session, SQLModel, and_, create_engine, select
+from sqlmodel import Session, SQLModel, and_, create_engine, delete, select
 
 from ..datamodel import BaseDBModel, Response, Team
 from ..teammanager import TeamManager
@@ -251,17 +251,15 @@ class DatabaseManager:
             try:
                 if "sqlite" in str(self.engine.url):
                     session.exec(text("PRAGMA foreign_keys=ON"))  # type: ignore
-                statement = select(model_class)  # type: ignore
+                statement = delete(model_class)  # type: ignore
                 if filters:
                     conditions = [getattr(model_class, col) == value for col, value in filters.items()]
                     statement = statement.where(and_(*conditions))
 
-                rows = session.exec(statement).all()
+                result = session.exec(statement)
+                session.commit()
 
-                if rows:
-                    for row in rows:
-                        session.delete(row)
-                    session.commit()
+                if result.rowcount > 0:
                     status_message = f"{model_class.__name__} Deleted Successfully"
                 else:
                     status_message = "Row not found"
