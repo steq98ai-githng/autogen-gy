@@ -11,6 +11,7 @@ import { appContext } from "../hooks/provider";
 import { useConfigStore } from "../hooks/store";
 import { Link } from "gatsby";
 import { Tooltip } from "antd";
+import { sanitizeUrl } from "../components/utils/security-utils";
 
 
 type ContentHeaderProps = {
@@ -30,6 +31,7 @@ const ContentHeader = ({
   const { sidebar, setSidebarState, header } = useConfigStore();
   const { isExpanded } = sidebar;
   const { title, breadcrumbs } = header;
+  const safeAvatarUrl = user?.avatar_url ? sanitizeUrl(user.avatar_url) : "";
 
   return (
     <div className="sticky top-0 z-40 bg-primary border-b border-secondary">
@@ -158,10 +160,10 @@ const ContentHeader = ({
               <Menu as="div" className="relative">
                 <MenuButton className="flex items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
                   <span className="sr-only">Open user menu</span>
-                  {user.avatar_url ? (
+                  {safeAvatarUrl ? (
                     <img
                       className="h-8 w-8 rounded-full"
-                      src={user.avatar_url}
+                      src={safeAvatarUrl}
                       alt={user.name}
                     />
                   ) : (
