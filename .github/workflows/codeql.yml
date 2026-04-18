@@ -76,7 +76,7 @@ jobs:
     - uses: astral-sh/setup-uv@v5
       with:
         enable-cache: true
-    - run: uv sync --locked --all-extras
+    - run: CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
       working-directory: ./python
     - name: Prepare python venv
       run: |

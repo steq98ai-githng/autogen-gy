@@ -32,7 +32,7 @@ jobs:
           python-version: "3.11"
       - name: Run uv sync
         run: |
-          uv sync --locked --all-extras
+          CMAKE_ARGS="-DGGML_METAL=off -DGGML_ACCELERATE=off -DGGML_OPENMP=off" CMAKE_BUILD_PARALLEL_LEVEL=4 uv sync --locked --all-extras
           echo "PKG_NAME=$(basename '${{ matrix.package }}')" >> $GITHUB_ENV
 
         working-directory: ./python
