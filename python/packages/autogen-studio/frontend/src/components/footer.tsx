@@ -23,7 +23,7 @@ const Footer = () => {
         <a
           target={"_blank"}
           rel={"noopener noreferrer"}
-          className="underlipne inline-block border-accent border-b hover:text-accent"
+          className="underline inline-block border-accent border-b hover:text-accent"
           href="https://microsoft.github.io/autogen/"
         >
           {" "}

@@ -123,14 +123,9 @@ const ContentHeader = ({
             </form>
 
             {/* Dark Mode Toggle */}
-            <button
-              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              onClick={() =>
-                setDarkMode(darkMode === "dark" ? "light" : "dark")
-              }
-              className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
-            >
+            <Tooltip title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
               <button
+                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 onClick={() =>
                   setDarkMode(darkMode === "dark" ? "light" : "dark")
                 }
@@ -138,7 +133,6 @@ const ContentHeader = ({
                   "p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary transition-colors",
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
                 )}
-                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {darkMode === "dark" ? (
                   <MoonIcon className="h-6 w-6" />
@@ -149,9 +143,11 @@ const ContentHeader = ({
             </Tooltip>
 
             {/* Notifications */}
-            <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
-              <BellIcon className="h-6 w-6" />
-            </button>
+            <Tooltip title="Notifications">
+              <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
+                <BellIcon className="h-6 w-6" />
+              </button>
+            </Tooltip>
 
             {/* Separator */}
             <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-secondary" />
