@@ -317,7 +317,7 @@ def count_tokens_openai(
     try:
         encoding = tiktoken.encoding_for_model(model)
     except KeyError:
-        trace_logger.warning(f"Model {model} not found. Using cl100k_base encoding.")
+        trace_logger.warning("Model not found. Using cl100k_base encoding.")
         encoding = tiktoken.get_encoding("cl100k_base")
     tokens_per_message = 3
     tokens_per_name = 1
