@@ -29,6 +29,8 @@
     "@monaco-editor/react": "^4.6.0",
     "@tailwindcss/typography": "^0.5.9",
     "@xyflow/react": "^12.3.5",
+    "ajv": "^8.18.0",
+    "ajv-keywords": "^5.1.0",
     "antd": "^5.22.1",
     "autoprefixer": "^10.4.20",
     "gatsby": "^5.14.0",
