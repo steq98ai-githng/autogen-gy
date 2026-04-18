@@ -126,6 +126,7 @@ const ContentHeader = ({
             {/* Dark Mode Toggle */}
             <Tooltip title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
               <button
+                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
                 onClick={() =>
                   setDarkMode(darkMode === "dark" ? "light" : "dark")
                 }
@@ -133,7 +134,6 @@ const ContentHeader = ({
                   "p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary transition-colors",
                   "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
                 )}
-                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               >
                 {darkMode === "dark" ? (
                   <MoonIcon className="h-6 w-6" />
