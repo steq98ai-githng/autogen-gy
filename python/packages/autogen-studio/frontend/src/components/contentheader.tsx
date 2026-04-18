@@ -137,7 +137,7 @@ const ContentHeader = ({
             </button>
 
             {/* Notifications */}
-            <button
+            <button\n              type="button"
               aria-label="View notifications"
               title="View notifications"
               className="p-2 rounded-md hidden text-secondary hover:text-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 transition-colors"
