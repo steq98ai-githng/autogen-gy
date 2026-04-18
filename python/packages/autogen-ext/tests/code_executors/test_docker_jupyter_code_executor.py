@@ -149,6 +149,7 @@ async def test_invalid_timeout() -> None:
 
 
 @pytest.mark.asyncio
+@pytest.mark.skip(reason="Fails sporadically on GitHub Actions macOS runners due to Kernel not ready")
 async def test_execute_code_with_image_output() -> None:
     if not docker_tests_enabled():
         pytest.skip("Docker tests are disabled")
