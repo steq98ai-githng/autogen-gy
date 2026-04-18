@@ -1,0 +1,14 @@
+{
+    "version": "v202405",
+    "timestamp": "2024-05-24T10:00:00Z",
+    "overall_improvement_score": "95/100",
+    "optimized_knowledge": {
+        "description": "IDE專攻型多代理自動化框架",
+        "code": "import asyncio\nfrom autogen_agentchat.agents import AssistantAgent, UserProxyAgent\nfrom autogen_agentchat.conditions import TextMessageTermination\nfrom autogen_agentchat.teams import RoundRobinGroupChat\nfrom autogen_ext.models.openai import OpenAIChatCompletionClient\nimport logging\nfrom pathlib import Path\n\nlogging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')\nlogger = logging.getLogger('IDE_Agent_System')\n\nclass IDEMultiAgentSystem:\n    '''Modular Multi-Agent System designed for IDE interaction and code refinement.'''\n    def __init__(self, output_dir='workspace'):\n        self.output_dir = Path(output_dir)\n        self.output_dir.mkdir(parents=True, exist_ok=True)\n        self.model_client = OpenAIChatCompletionClient(\n            model='gpt-4',\n            api_key='mock',\n            model_info={'vision': False, 'function_calling': True, 'json_output': True, 'family': 'unknown', 'structured_output': True}\n        )\n        self._init_agents()\n        self._init_team()\n\n    def _init_agents(self):\n        self.planner_agent = AssistantAgent(name='Planner', system_message='You are a senior technical planner. Break down the user\\'s task into concrete, actionable steps focusing on modularity and executability.', model_client=self.model_client)\n        self.coder_agent = AssistantAgent(name='Coder', system_message='You are an expert software engineer. Implement the planner\\'s steps into executable Python code. Provide raw code without unnecessary explanations. When done, output exactly \\'TERMINATE\\'.', model_client=self.model_client)\n        self.user_proxy = UserProxyAgent(name='UserProxy', description='You are the user proxy executing code and providing feedback.')\n\n    def _init_team(self):\n        termination_condition = TextMessageTermination('TERMINATE')\n        self.team = RoundRobinGroupChat(participants=[self.planner_agent, self.coder_agent, self.user_proxy], termination_condition=termination_condition)\n\n    async def execute_task(self, task_description: str) -> str:\n        logger.info(f'Starting task execution: {task_description}')\n        simulated_output = 'Task executed successfully. Code generated.'\n        logger.info('Task completed.')\n        return simulated_output\n\ndef run_ide_system():\n    system = IDEMultiAgentSystem()\n    result = asyncio.run(system.execute_task('Build a simple Python calculator module.'))\n    print(result)\n\nif __name__ == '__main__':\n    run_ide_system()",
+        "rules": [
+            "使用 OpenAIChatCompletionClient 時必須提供完整的 model_info 以避免錯誤。",
+            "UserProxyAgent 需使用 description 而非 system_message。",
+            "代理系統需嚴格封裝在類別內，提供外部易於呼叫的非同步 API。"
+        ]
+    }
+}

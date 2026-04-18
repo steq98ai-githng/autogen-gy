@@ -10,6 +10,7 @@ import { ChevronDown, Menu as MenuIcon } from "lucide-react";
 import { appContext } from "../hooks/provider";
 import { useConfigStore } from "../hooks/store";
 import { Link } from "gatsby";
+import { Tooltip } from "antd";
 import { sanitizeUrl } from "./utils/security-utils";
 
 type ContentHeaderProps = {
@@ -34,13 +35,15 @@ const ContentHeader = ({
     <div className="sticky top-0 z-40 bg-primary border-b border-secondary">
       <div className="flex h-16 items-center gap-x-4 px-4">
         {/* Mobile Menu Button */}
-        <button
-          onClick={onMobileMenuToggle}
-          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors"
-          aria-label="Toggle mobile menu"
-        >
-          <MenuIcon className="h-6 w-6" />
-        </button>
+        <Tooltip title={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}>
+          <button
+            onClick={onMobileMenuToggle}
+            className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+          >
+            <MenuIcon className="h-6 w-6" />
+          </button>
+        </Tooltip>
 
         {/* Desktop Sidebar Toggle - Hidden on Mobile */}
         {/* <div className="hidden md:block">
@@ -121,29 +124,31 @@ const ContentHeader = ({
             </form>
 
             {/* Dark Mode Toggle */}
-            <button
-              onClick={() =>
-                setDarkMode(darkMode === "dark" ? "light" : "dark")
-              }
-              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 transition-colors"
-            >
-              {darkMode === "dark" ? (
-                <MoonIcon className="h-6 w-6" />
-              ) : (
-                <SunIcon className="h-6 w-6" />
-              )}
-            </button>
+            <Tooltip title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
+              <button
+                onClick={() =>
+                  setDarkMode(darkMode === "dark" ? "light" : "dark")
+                }
+                className={classNames(
+                  "p-2 rounded-md text-secondary hover:text-accent hover:bg-secondary transition-colors",
+                  "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
+                )}
+                aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode === "dark" ? (
+                  <MoonIcon className="h-6 w-6" />
+                ) : (
+                  <SunIcon className="h-6 w-6" />
+                )}
+              </button>
+            </Tooltip>
 
             {/* Notifications */}
-            <button\n              type="button"
-              aria-label="View notifications"
-              title="View notifications"
-              className="p-2 rounded-md hidden text-secondary hover:text-accent hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 transition-colors"
-            >
-              <BellIcon className="h-6 w-6" />
-            </button>
+            <Tooltip title="Notifications">
+              <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
+                <BellIcon className="h-6 w-6" />
+              </button>
+            </Tooltip>
 
             {/* Separator */}
             <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-secondary" />
@@ -151,7 +156,8 @@ const ContentHeader = ({
             {/* User Menu */}
             {user && (
               <Menu as="div" className="relative">
-                <MenuButton className="flex items-center">
+                <MenuButton className="flex items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                  <span className="sr-only">Open user menu</span>
                   {user.avatar_url ? (
                     <img
                       className="h-8 w-8 rounded-full"
