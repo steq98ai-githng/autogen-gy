@@ -11,7 +11,7 @@ import { appContext } from "../hooks/provider";
 import { useConfigStore } from "../hooks/store";
 import { Link } from "gatsby";
 import { Tooltip } from "antd";
-import { sanitizeUrl } from "./utils/security-utils";
+
 
 type ContentHeaderProps = {
   onMobileMenuToggle: () => void;
@@ -161,7 +161,7 @@ const ContentHeader = ({
                   {user.avatar_url ? (
                     <img
                       className="h-8 w-8 rounded-full"
-                      src={sanitizeUrl(user.avatar_url)}
+                      src={user.avatar_url}
                       alt={user.name}
                     />
                   ) : (

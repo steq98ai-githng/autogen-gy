@@ -102,7 +102,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         }
 
         if (data.user.avatar_url) {
-          data.user.avatar_url = sanitizeUrl(data.user.avatar_url);
+          const sanitizedAvatarUrl = sanitizeUrl(data.user.avatar_url);
+          data.user.avatar_url = sanitizedAvatarUrl || undefined;
         }
 
         // Store token

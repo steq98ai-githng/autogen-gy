@@ -2,45 +2,27 @@
 // Central location for security-related utility functions
 
 /**
- * Sanitizes URLs to prevent XSS attacks via javascript: protocol
- * Only allows http:// and https:// protocols
+ * Sanitizes avatar/image URLs to prevent untrusted external URL injection.
+ * Allows only http(s) URLs that resolve to the current origin.
  */
-// In security-utils.ts
 export const sanitizeUrl = (url: string | undefined | null): string => {
-  //   return url;
-  console.log("sanitizeUrl", url);
   if (!url || typeof url !== "string") return "";
 
-  // Only allow http and https protocols
-  if (url.startsWith("http://") || url.startsWith("https://")) {
-    try {
-      // Create URL object to validate structure
-      new URL(url);
-      // First encode URI characters
-      const encodedUrl = encodeURI(url);
-      // Then escape HTML special characters
-      return encodedUrl.replace(/[&<>"']/g, function (m) {
-        switch (m) {
-          case "&":
-            return "&amp;";
-          case "<":
-            return "&lt;";
-          case ">":
-            return "&gt;";
-          case '"':
-            return "&quot;";
-          case "'":
-            return "&#39;";
-          default:
-            return m;
-        }
-      });
-    } catch {
+  try {
+    const parsedUrl = new URL(url, window.location.origin);
+
+    if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
       return "";
     }
-  }
 
-  return "";
+    if (parsedUrl.origin !== window.location.origin) {
+      return "";
+    }
+
+    return parsedUrl.toString();
+  } catch {
+    return "";
+  }
 };
 
 /**
