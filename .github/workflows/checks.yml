@@ -57,6 +57,7 @@ jobs:
             "./packages/agbench",
             "./packages/autogen-ext",
             "./packages/autogen-agentchat",
+            "./packages/autogen-studio",
             "./packages/magentic-one-cli",
           ]
     steps:
@@ -103,6 +104,7 @@ jobs:
             "./packages/agbench",
             "./packages/autogen-ext",
             "./packages/autogen-agentchat",
+            "./packages/autogen-studio",
             "./packages/magentic-one-cli",
           ]
     steps:
@@ -130,6 +132,7 @@ jobs:
             "./packages/autogen-core",
             "./packages/autogen-ext",
             "./packages/autogen-agentchat",
+            "./packages/autogen-studio",
           ]
     steps:
       - uses: actions/checkout@v4
@@ -240,6 +243,7 @@ jobs:
             "./packages/autogen-core",
             "./packages/autogen-ext",
             "./packages/autogen-agentchat",
+            "./packages/autogen-studio",
             "autogen-ext-grpc",
           ]
     steps:
