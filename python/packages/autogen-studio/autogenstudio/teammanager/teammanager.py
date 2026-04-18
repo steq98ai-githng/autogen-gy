@@ -91,7 +91,7 @@ class TeamManager:
     ) -> BaseGroupChat:
         """Create team instance from config"""
         if isinstance(team_config, (str, Path)):
-            config = await self.load_from_file(team_config)
+            raise ValueError("Invalid team_config: file paths are not allowed in team creation requests")
         elif isinstance(team_config, dict):
             config = team_config
         elif isinstance(team_config, ComponentModel):
