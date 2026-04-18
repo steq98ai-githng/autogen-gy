@@ -89,7 +89,7 @@ class IDEMultiAgentSystem:
 
         data = {
             "version": "v202405",
-            "timestamp": datetime.now().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "overall_improvement_score": "95/100",
             "optimized_knowledge": knowledge_dict
         }
