@@ -1,0 +1,16 @@
+--- python/packages/autogen-studio/frontend/src/components/contentheader.tsx
++++ python/packages/autogen-studio/frontend/src/components/contentheader.tsx
+@@ -124,12 +124,7 @@
+
+             {/* Dark Mode Toggle */}
+-            <button
+-              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+-              onClick={() =>
+-                setDarkMode(darkMode === "dark" ? "light" : "dark")
+-              }
+-              className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
+-            >
++            <Tooltip title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
+               <button
+                 onClick={() =>
+                   setDarkMode(darkMode === "dark" ? "light" : "dark")

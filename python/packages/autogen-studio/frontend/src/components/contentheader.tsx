@@ -35,14 +35,15 @@ const ContentHeader = ({
     <div className="sticky top-0 z-40 bg-primary border-b border-secondary">
       <div className="flex h-16 items-center gap-x-4 px-4">
         {/* Mobile Menu Button */}
-        <button
-          onClick={onMobileMenuToggle}
-          className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          aria-label="Toggle mobile menu"
-          title="Toggle mobile menu"
-        >
-          <MenuIcon className="h-6 w-6" />
-        </button>
+        <Tooltip title={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}>
+          <button
+            onClick={onMobileMenuToggle}
+            className="md:hidden p-2 rounded-md hover:bg-secondary text-secondary hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            aria-label={isMobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+          >
+            <MenuIcon className="h-6 w-6" />
+          </button>
+        </Tooltip>
 
         {/* Desktop Sidebar Toggle - Hidden on Mobile */}
         {/* <div className="hidden md:block">
@@ -123,13 +124,7 @@ const ContentHeader = ({
             </form>
 
             {/* Dark Mode Toggle */}
-            <button
-              aria-label={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              onClick={() =>
-                setDarkMode(darkMode === "dark" ? "light" : "dark")
-              }
-              className="text-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1"
-            >
+            <Tooltip title={darkMode === "dark" ? "Switch to light mode" : "Switch to dark mode"}>
               <button
                 onClick={() =>
                   setDarkMode(darkMode === "dark" ? "light" : "dark")
@@ -149,9 +144,11 @@ const ContentHeader = ({
             </Tooltip>
 
             {/* Notifications */}
-            <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
-              <BellIcon className="h-6 w-6" />
-            </button>
+            <Tooltip title="Notifications">
+              <button aria-label="Notifications" className="text-secondary hidden hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md p-1">
+                <BellIcon className="h-6 w-6" />
+              </button>
+            </Tooltip>
 
             {/* Separator */}
             <div className="hidden lg:block lg:h-6 lg:w-px lg:bg-secondary" />
