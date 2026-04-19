@@ -38,7 +38,7 @@ file-surfer = [
 ]
 
 llama-cpp = [
-    "llama-cpp-python>=0.3.8; sys_platform != \"darwin\"",
+    "llama-cpp-python>=0.3.8",
 ]
 
 graphrag = ["graphrag>=2.3.0"]

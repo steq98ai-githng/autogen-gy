@@ -26,7 +26,7 @@ def docker_tests_enabled() -> bool:
 
     try:
         client = docker.from_env()
-        client.ping()  # type: ignore
+        client.ping()
         return True
     except DockerException:
         return False

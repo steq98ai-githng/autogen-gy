@@ -25,6 +25,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe fmt --check
         working-directory: ./python
@@ -43,6 +46,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe lint
         working-directory: ./python
@@ -71,6 +77,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe --directory ${{ matrix.package }} mypy
         working-directory: ./python
@@ -89,6 +98,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe docs-mypy
         working-directory: ./python
@@ -117,6 +129,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe --directory ${{ matrix.package }} pyright
         working-directory: ./python
@@ -147,6 +162,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe --directory ${{ matrix.package }} test
         working-directory: ./python
@@ -178,6 +196,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe --directory ./packages/autogen-ext test-grpc
         working-directory: ./python
@@ -274,6 +295,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe docs-check
         working-directory: ./python
@@ -292,6 +316,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe docs-check-examples
         working-directory: ./python
@@ -310,6 +337,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe samples-code-check
         working-directory: ./python
@@ -328,6 +358,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe markdown-code-lint
         working-directory: ./python
@@ -346,6 +379,9 @@ jobs:
         working-directory: ./python
       - name: Run task
         run: |
+          export SKIP_DOCKER="true"
+          source ${{ github.workspace }}/python/.venv/bin/activate
+
           source ${{ github.workspace }}/python/.venv/bin/activate
           poe gen-proto
           poe gen-test-proto
