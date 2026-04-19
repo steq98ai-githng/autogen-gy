@@ -43,6 +43,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`Galleries (${galleries.length})`}>
             <button
+              aria-label={`Galleries (${galleries.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -78,6 +79,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         </div>
         <Tooltip title="Close Sidebar">
           <button
+            aria-label="Close Sidebar"
             onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >

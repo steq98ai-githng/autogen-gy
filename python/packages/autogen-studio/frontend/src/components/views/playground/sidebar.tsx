@@ -50,6 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           >
             <button
+              aria-label={`Sessions (${sessions.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -82,6 +83,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
         <Tooltip title="Close Sidebar">
           <button
+            aria-label="Close Sidebar"
             onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
