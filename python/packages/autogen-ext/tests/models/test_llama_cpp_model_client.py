@@ -9,12 +9,11 @@ import torch
 # from autogen_agentchat.messages import TextMessage
 # from autogen_core import CancellationToken
 from autogen_core.models import RequestUsage, SystemMessage, UserMessage
-from llama_cpp import ChatCompletionRequestResponseFormat
 from pydantic import BaseModel
 
 # from autogen_core.tools import FunctionTool
 try:
-    from llama_cpp import ChatCompletionMessageToolCalls
+    from llama_cpp import ChatCompletionMessageToolCalls, ChatCompletionRequestResponseFormat
 
     if TYPE_CHECKING:
         from autogen_ext.models.llama_cpp._llama_cpp_completion_client import LlamaCppChatCompletionClient
