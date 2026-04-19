@@ -1,7 +1,7 @@
 import os
 import pytest
 from unittest.mock import patch
-from autogenstudio.cli import serve
+from autogenstudio.cli import serve, lite
 
 def test_serve_success():
     """Test the serve command with a valid team file."""
@@ -66,3 +66,61 @@ def test_serve_custom_params():
             workers=workers,
             reload=reload,
         )
+
+def test_lite_default():
+    """Test the lite command with default parameters."""
+    with patch("autogenstudio.lite.LiteStudio") as mock_lite:
+        mock_instance = mock_lite.return_value
+        lite()
+
+        mock_lite.assert_called_once_with(
+            team=None,
+            host="127.0.0.1",
+            port=8080,
+            auto_open=True,
+            session_name="Lite Session"
+        )
+        mock_instance.start.assert_called_once()
+        mock_instance.stop.assert_not_called()
+
+def test_lite_custom_params():
+    """Test the lite command with custom parameters."""
+    team_file = "custom_team.json"
+    host = "0.0.0.0"
+    port = 9000
+    auto_open = False
+    session_name = "Custom Session"
+
+    with patch("autogenstudio.lite.LiteStudio") as mock_lite:
+        mock_instance = mock_lite.return_value
+        lite(
+            team=team_file,
+            host=host,
+            port=port,
+            auto_open=auto_open,
+            session_name=session_name
+        )
+
+        mock_lite.assert_called_once_with(
+            team=team_file,
+            host=host,
+            port=port,
+            auto_open=auto_open,
+            session_name=session_name
+        )
+        mock_instance.start.assert_called_once()
+        mock_instance.stop.assert_not_called()
+
+def test_lite_keyboard_interrupt():
+    """Test that the lite command handles KeyboardInterrupt correctly."""
+    with patch("autogenstudio.lite.LiteStudio") as mock_lite:
+        mock_instance = mock_lite.return_value
+        # Make start() raise KeyboardInterrupt
+        mock_instance.start.side_effect = KeyboardInterrupt()
+
+        lite()
+
+        mock_lite.assert_called_once()
+        mock_instance.start.assert_called_once()
+        # stop() should be called when KeyboardInterrupt is raised
+        mock_instance.stop.assert_called_once()
