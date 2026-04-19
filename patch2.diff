@@ -1,0 +1,11 @@
+--- python/packages/autogen-ext/pyproject.toml
++++ python/packages/autogen-ext/pyproject.toml
+@@ -82,7 +82,7 @@
+ ]
+
+ llama-cpp = [
+-    "llama-cpp-python>=0.3.8",
++    "llama-cpp-python>=0.3.8; sys_platform != 'darwin'",
+ ]
+
+ graphrag = ["graphrag>=2.3.0"]
