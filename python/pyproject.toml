@@ -145,3 +145,7 @@ cmd = "python -m grpc_tools.protoc --python_out=./packages/autogen-ext/tests/pro
 markers = [
     "grpc: tests invoking gRPC functionality",
 ]
+
+[[tool.mypy.overrides]]
+module = "markitdown.*"
+ignore_missing_imports = true
