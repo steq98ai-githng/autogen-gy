@@ -13,7 +13,7 @@ from pydantic import BaseModel
 
 # from autogen_core.tools import FunctionTool
 try:
-    from llama_cpp import ChatCompletionMessageToolCalls, ChatCompletionRequestResponseFormat
+    from typing import Any
 
     if TYPE_CHECKING:
         from autogen_ext.models.llama_cpp._llama_cpp_completion_client import LlamaCppChatCompletionClient
@@ -47,9 +47,9 @@ class FakeLlama:
     def create_chat_completion(
         self,
         messages: Any,
-        tools: List[ChatCompletionMessageToolCalls] | None,
+        tools: List[Any] | None,
         stream: bool = False,
-        response_format: ChatCompletionRequestResponseFormat | None = None,
+        response_format: Any | None = None,
     ) -> dict[str, Any]:
         # Return fake non-streaming response.
 
