@@ -75,6 +75,10 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
                 // TODO: Cancellation propagation!
                 await agent.OnMessageAsync(envelope.Message, messageContext);
             }
+            catch (System.Reflection.TargetInvocationException ex) when (ex.InnerException is not null)
+            {
+                exceptions.Add(ex.InnerException);
+            }
             catch (Exception ex)
             {
                 exceptions.Add(ex);
@@ -83,7 +87,7 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
 
         if (exceptions.Count > 0)
         {
-            // TODO: Unwrap TargetInvocationException?
+
             throw new AggregateException("One or more exceptions occurred while processing the message.", exceptions);
         }
     }

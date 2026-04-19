@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // PublishMessageTests.cs
 
-using System.Reflection;
 using FluentAssertions;
 using Microsoft.AutoGen.Contracts;
 using Microsoft.Extensions.Logging;
@@ -93,8 +92,8 @@ public class PublishMessageTests
                                    .Which.Should().Match<AggregateException>(
                                         ex => ex.InnerExceptions.Count == 1 &&
                                               ex.InnerExceptions.All(
-                                                inEx => inEx is TargetInvocationException &&
-                                                ((TargetInvocationException)inEx).InnerException is TestException));
+                                                inEx => inEx is TestException
+                                                ));
 
         fixture.GetAgentInstances<ErrorAgent>().Values.Should().ContainSingle()
                                                 .Which.DidThrow.Should().BeTrue("Agent should have thrown an exception");
@@ -115,8 +114,8 @@ public class PublishMessageTests
                                    .Which.Should().Match<AggregateException>(
                                         ex => ex.InnerExceptions.Count == 2 &&
                                               ex.InnerExceptions.All(
-                                                inEx => inEx is TargetInvocationException &&
-                                                ((TargetInvocationException)inEx).InnerException is TestException));
+                                                inEx => inEx is TestException
+                                                ));
 
         fixture.GetAgentInstances<ErrorAgent>().Values
             .Should().HaveCount(2)
@@ -142,8 +141,8 @@ public class PublishMessageTests
                                    .Which.Should().Match<AggregateException>(
                                         ex => ex.InnerExceptions.Count == 2 &&
                                               ex.InnerExceptions.All(
-                                                inEx => inEx is TargetInvocationException &&
-                                                ((TargetInvocationException)inEx).InnerException is TestException));
+                                                inEx => inEx is TestException
+                                                ));
 
         fixture.GetAgentInstances<ReceiverAgent>().Values
             .Should().HaveCount(2, "Two ReceiverAgents should have been created")
