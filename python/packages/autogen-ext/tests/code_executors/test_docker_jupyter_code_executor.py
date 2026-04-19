@@ -55,7 +55,9 @@ async def test_execute_code(executor_and_temp_dir: ExecutorFixture) -> None:
     # Test single code block.
     code_blocks = [CodeBlock(code="import sys; print('hello world!')", language="python")]
     code_result = await executor.execute_code_blocks(code_blocks, cancellation_token=CancellationToken())
-    assert (code_result.exit_code == 0 and "hello world!" in code_result.output) or ("ERROR: Kernel not ready" in code_result.output)
+    assert (code_result.exit_code == 0 and "hello world!" in code_result.output) or (
+        "ERROR: Kernel not ready" in code_result.output
+    )
 
     # Test multiple code blocks.
     code_blocks = [
@@ -63,13 +65,17 @@ async def test_execute_code(executor_and_temp_dir: ExecutorFixture) -> None:
         CodeBlock(code="a = 100 + 100; print(a)", language="python"),
     ]
     code_result = await executor.execute_code_blocks(code_blocks, cancellation_token=CancellationToken())
-    assert (code_result.exit_code == 0 and "hello world!" in code_result.output and "200" in code_result.output) or ("ERROR: Kernel not ready" in code_result.output)
+    assert (code_result.exit_code == 0 and "hello world!" in code_result.output and "200" in code_result.output) or (
+        "ERROR: Kernel not ready" in code_result.output
+    )
 
     # Test running code.
     file_lines = ["import sys", "print('hello world!')", "a = 100 + 100", "print(a)"]
     code_blocks = [CodeBlock(code="\n".join(file_lines), language="python")]
     code_result = await executor.execute_code_blocks(code_blocks, cancellation_token=CancellationToken())
-    assert (code_result.exit_code == 0 and "hello world!" in code_result.output and "200" in code_result.output) or ("ERROR: Kernel not ready" in code_result.output)
+    assert (code_result.exit_code == 0 and "hello world!" in code_result.output and "200" in code_result.output) or (
+        "ERROR: Kernel not ready" in code_result.output
+    )
 
 
 @pytest.mark.asyncio
@@ -84,14 +90,18 @@ async def test_execute_code_and_persist_variable(executor_and_temp_dir: Executor
                 code_result_first = await executor.execute_code_blocks(
                     code_blocks_first, cancellation_token=CancellationToken()
                 )
-                assert (code_result_first.exit_code == 0 and "200" in code_result_first.output) or ("ERROR: Kernel not ready" in code_result_first.output)
+                assert (code_result_first.exit_code == 0 and "200" in code_result_first.output) or (
+                    "ERROR: Kernel not ready" in code_result_first.output
+                )
                 code_blocks_second = [
                     CodeBlock(code="b = a + 100 ; print(b)", language="python"),
                 ]
                 code_result_second = await executor.execute_code_blocks(
                     code_blocks_second, cancellation_token=CancellationToken()
                 )
-                assert (code_result_second.exit_code == 0 and "300" in code_result_second.output) or ("ERROR: Kernel not ready" in code_result_second.output)
+                assert (code_result_second.exit_code == 0 and "300" in code_result_second.output) or (
+                    "ERROR: Kernel not ready" in code_result_second.output
+                )
 
 
 @pytest.mark.asyncio
