@@ -37,7 +37,7 @@ if typing.TYPE_CHECKING:
         Llama,
         llama_chat_format,
     )
-else:
+else:  # pragma: no cover
     ChatCompletionFunctionParameters = Any
     ChatCompletionRequestAssistantMessage = Any
     ChatCompletionRequestFunctionMessage = Any
