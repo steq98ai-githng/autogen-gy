@@ -208,16 +208,22 @@ class JupyterKernelClient:
             # Send the request
             message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
 
-            # Wait for a reply for up to 1 second
-            wait_for_reply_timeout = min(1.0, max(0.1, timeout - (datetime.datetime.now().timestamp() - start_time)))
-            message = await self._receive_message(wait_for_reply_timeout)
+            # Wait for a reply for up to 1 second, but we might receive other buffered messages first,
+            # so loop a few times per request.
+            request_start_time = datetime.datetime.now().timestamp()
+            while datetime.datetime.now().timestamp() - request_start_time < 1.0:
+                wait_for_reply_timeout = min(0.5, max(0.1, timeout - (datetime.datetime.now().timestamp() - start_time)))
+                message = await self._receive_message(wait_for_reply_timeout)
 
-            if message is not None:
-                if (
-                    message.get("parent_header", {}).get("msg_id") == message_id
-                    and message["msg_type"] == "kernel_info_reply"
-                ):
-                    return True
+                if message is not None:
+                    if (
+                        message.get("parent_header", {}).get("msg_id") == message_id
+                        and message["msg_type"] == "kernel_info_reply"
+                    ):
+                        return True
+                else:
+                    # Timeout on receive, break out to resend request
+                    break
 
             # If we've exceeded the total timeout, return False
             if datetime.datetime.now().timestamp() - start_time >= timeout:
