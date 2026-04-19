@@ -43,6 +43,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`Galleries (${galleries.length})`}>
             <button
+              aria-label={`Open sidebar, ${galleries.length} galleries`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -54,6 +55,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         <div className="mt-4 px-2 -ml-1">
           <Tooltip title="Create new gallery">
             <Button
+              aria-label="Create new gallery"
               type="text"
               className="w-full p-2 flex justify-center"
               onClick={onCreateGallery}
@@ -78,6 +80,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         </div>
         <Tooltip title="Close Sidebar">
           <button
+            aria-label="Close Sidebar"
             onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
@@ -151,6 +154,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
                     {gallery.config.url && (
                       <Tooltip title="Sync gallery">
                         <Button
+                          aria-label={`Sync gallery ${gallery.config.name}`}
                           type="text"
                           size="small"
                           className="p-0 min-w-[24px] h-6"
@@ -170,6 +174,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
                       }
                     >
                       <Button
+                        aria-label={`Delete gallery ${gallery.config.name}`}
                         type="text"
                         size="small"
                         className="p-0 min-w-[24px] h-6"
