@@ -1,7 +1,7 @@
 import os
 import pytest
 from unittest.mock import patch
-from autogenstudio.cli import serve
+from autogenstudio.cli import serve, run
 
 def test_serve_success():
     """Test the serve command with a valid team file."""
@@ -66,3 +66,9 @@ def test_serve_custom_params():
             workers=workers,
             reload=reload,
         )
+
+def test_run():
+    """Test the run command calls the typer app."""
+    with patch("autogenstudio.cli.app") as mock_app:
+        run()
+        mock_app.assert_called_once()
