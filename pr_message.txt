@@ -1,0 +1,14 @@
+🧪 Add tests for add_workbench in GalleryBuilder
+
+🎯 **What:** The testing gap addressed
+The `add_workbench` function in `autogenstudio/gallery/builder.py` was clearly defined and functional but lacked any accompanying unit tests to ensure its logic correctly appends a workbench and handles optional overrides.
+
+📊 **Coverage:** What scenarios are now tested
+- Appending a `workbench` component to the builder's `workbenches` list.
+- Returning `self` to support method chaining.
+- Overriding the `label` property with custom string.
+- Overriding the `description` property with custom string.
+- Handling partial overrides correctly without affecting un-overridden parameters.
+
+✨ **Result:** The improvement in test coverage
+The code reliability is now improved by catching regressions in the `add_workbench` logic, matching the expected behavior of the gallery configuration builder module.
