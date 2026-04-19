@@ -235,7 +235,7 @@ jobs:
 
   codecov:
     runs-on: ubuntu-latest
-    needs: [test, test-grpc]
+    needs: [test, test-grpc, test-autogen-ext-pwsh]
     strategy:
       matrix:
         package:
