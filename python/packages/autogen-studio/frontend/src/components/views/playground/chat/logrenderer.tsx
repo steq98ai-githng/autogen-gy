@@ -56,6 +56,7 @@ const FullLogView = ({
     >
       <Tooltip title="Close">
         <button
+          aria-label="Close"
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-full bg-tertiary hover:bg-secondary text-primary transition-colors"
         >
@@ -174,6 +175,7 @@ const LLMLogRenderer: React.FC<LLMLogRendererProps> = ({ content }) => {
         </span>
         <Tooltip title="View details">
           <button
+            aria-label="View details"
             onClick={() => setShowFullLog(true)}
             className="p-1 mr-1 hover:bg-secondary rounded-md transition-colors"
           >
