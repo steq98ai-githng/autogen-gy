@@ -12,10 +12,10 @@ from autogen_core.models import RequestUsage, SystemMessage, UserMessage
 import typing
 from typing import Any
 
-if typing.TYPE_CHECKING:
+try:
     from llama_cpp import ChatCompletionRequestResponseFormat  # type: ignore
-else:
-    ChatCompletionRequestResponseFormat = Any
+except ImportError:
+    ChatCompletionRequestResponseFormat = Any  # type: ignore
 from pydantic import BaseModel
 
 # from autogen_core.tools import FunctionTool
