@@ -23,8 +23,7 @@ from autogen_core.models import (
 from autogen_core.tools import Tool, ToolSchema
 import typing
 from typing import Any
-
-if typing.TYPE_CHECKING:
+if typing.TYPE_CHECKING:  # pragma: no cover
     from llama_cpp import (  # type: ignore
         ChatCompletionFunctionParameters,
         ChatCompletionRequestAssistantMessage,
