@@ -4,6 +4,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Microsoft.AutoGen.Extensions.SemanticKernel;
+
 public class QdrantOptions
 {
     [Required]

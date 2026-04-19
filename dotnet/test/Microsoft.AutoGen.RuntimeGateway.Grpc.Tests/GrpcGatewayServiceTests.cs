@@ -12,6 +12,7 @@ using Moq;
 using NewMessageReceived = Tests.Events.NewMessageReceived;
 
 namespace Microsoft.AutoGen.RuntimeGateway.Grpc.Tests;
+
 [Collection(ClusterCollection.Name)]
 [Trait("Category", "UnitV2")]
 public class GrpcGatewayServiceTests

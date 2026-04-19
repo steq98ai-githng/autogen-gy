@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenAI;
 
 namespace Microsoft.Extensions.Hosting;
+
 public static class ServiceCollectionChatClientExtensions
 {
     public static IServiceCollection AddOllamaChatClient(

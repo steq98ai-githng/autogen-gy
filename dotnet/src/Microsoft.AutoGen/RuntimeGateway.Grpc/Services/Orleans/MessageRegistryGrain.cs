@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using Orleans.Concurrency;
 
 namespace Microsoft.AutoGen.RuntimeGateway.Grpc;
+
 [Reentrant]
 internal sealed class MessageRegistryGrain : Grain, IMessageRegistryGrain
 {

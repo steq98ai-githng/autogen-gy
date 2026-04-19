@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // TestGrpcClient.cs
 namespace Microsoft.AutoGen.RuntimeGateway.Grpc.Tests.Helpers.Grpc;
+
 internal sealed class TestGrpcClient<TMessage> : IDisposable
     where TMessage : class
 {

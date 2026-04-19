@@ -14,6 +14,7 @@ using Microsoft.SemanticKernel.Connectors.Qdrant;
 using Microsoft.SemanticKernel.Memory;
 
 namespace Microsoft.AutoGen.Extensions.SemanticKernel;
+
 public static class SemanticKernelHostingExtensions
 {
     public static IHostApplicationBuilder ConfigureSemanticKernel(this IHostApplicationBuilder builder)
