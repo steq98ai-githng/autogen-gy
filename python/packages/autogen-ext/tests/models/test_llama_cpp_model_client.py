@@ -9,7 +9,10 @@ import torch
 # from autogen_agentchat.messages import TextMessage
 # from autogen_core import CancellationToken
 from autogen_core.models import RequestUsage, SystemMessage, UserMessage
-from llama_cpp import ChatCompletionRequestResponseFormat
+try:
+    from llama_cpp import ChatCompletionRequestResponseFormat
+except ImportError:
+    pass
 from pydantic import BaseModel
 
 # from autogen_core.tools import FunctionTool
