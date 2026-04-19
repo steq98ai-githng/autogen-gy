@@ -6,8 +6,7 @@ import re
 import time
 from typing import List, Optional, Tuple, Union
 
-# TODO: Fix unfollowed import
-from markitdown import FileConversionException, MarkItDown, UnsupportedFormatException  # type: ignore
+from markitdown import FileConversionException, MarkItDown, UnsupportedFormatException
 
 
 class MarkdownFileBrowser:
@@ -15,8 +14,7 @@ class MarkdownFileBrowser:
     (In preview) An extremely simple Markdown-powered file browser.
     """
 
-    # TODO: Fix unfollowed import
-    def __init__(  # type: ignore
+    def __init__(
         self,
         viewport_size: Union[int, None] = 1024 * 8,
         base_path: str | None = os.getcwd(),
@@ -255,7 +253,7 @@ class MarkdownFileBrowser:
         else:
             try:
                 if os.path.isdir(path):  # TODO: Fix markdown_converter types
-                    res = self._markdown_converter.convert_stream(  # type: ignore
+                    res = self._markdown_converter.convert_stream(
                         io.BytesIO(self._fetch_local_dir(path).encode("utf-8")), file_extension=".txt"
                     )
                     assert self._validate_path(path)
