@@ -35,7 +35,7 @@ class MarkdownFileBrowser:
         self.page_title: Optional[str] = None
         self.viewport_current_page = 0
         self.viewport_pages: List[Tuple[int, int]] = list()
-        self._markdown_converter: Any = MarkItDown()
+        self._markdown_converter: MarkItDown = MarkItDown()
         self._base_path = None if base_path is None else os.path.realpath(base_path)
         self._page_content: str = ""
         self._find_on_page_query: Union[str, None] = None
