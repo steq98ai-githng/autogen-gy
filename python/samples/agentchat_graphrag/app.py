@@ -12,23 +12,27 @@ from autogen_ext.tools.graphrag import (
 )
 
 
-def download_sample_data(input_dir: str) -> None:
-
-    import requests
+async def download_sample_data(input_dir: str) -> None:
     from pathlib import Path
+
+    import aiofiles
+    import httpx
+
     url = "https://www.gutenberg.org/files/1661/1661-0.txt"
     file_path = Path(input_dir) / "sherlock_book.txt"
     try:
-        response = requests.get(url, timeout=30)
-        response.raise_for_status()
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(response.text)
-        print(f"✅ Successfully downloaded to: {file_path}")
-    except requests.exceptions.RequestException as e:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, timeout=30.0)
+            response.raise_for_status()
+            async with aiofiles.open(file_path, "w", encoding="utf-8") as f:
+                await f.write(response.text)
+            print(f"✅ Successfully downloaded to: {file_path}")
+    except httpx.RequestError as e:
         print(f"❌ Error downloading file: {e}")
+    except httpx.HTTPStatusError as e:
+        print(f"❌ HTTP Error: {e}")
     except IOError as e:
         print(f"❌ Error saving file: {e}")
-
 
 
 async def main() -> None:
@@ -46,16 +50,16 @@ async def main() -> None:
         print(f"Created input directory: {input_dir}")
     sherlock_path = os.path.join(input_dir, "sherlock_book.txt")
     if not os.path.exists(sherlock_path):
-        download_sample_data(input_dir)
+        await download_sample_data(input_dir)
     else:
         print(f"Sample data already exists: {sherlock_path}")
 
-    
     # Initialize the model client
     model_client = OpenAIChatCompletionClient(model="gpt-4o-mini", api_key=api_key)
-    
+
     # Set up global search tool
     from pathlib import Path
+
     global_tool = GlobalSearchTool.from_settings(root_dir=Path("./"), config_filepath=Path("./settings.yaml"))
     local_tool = LocalSearchTool.from_settings(root_dir=Path("./"), config_filepath=Path("./settings.yaml"))
 
@@ -84,7 +88,7 @@ async def main() -> None:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run a GraphRAG search with an agent.")
     parser.add_argument("--verbose", action="store_true", help="Enable verbose logging.")
-     
+
     args = parser.parse_args()
     if args.verbose:
         logging.basicConfig(level=logging.WARNING)
@@ -92,5 +96,4 @@ if __name__ == "__main__":
         handler = logging.FileHandler("graphrag_search.log")
         logging.getLogger("autogen_core").addHandler(handler)
 
-     
     asyncio.run(main())
