@@ -38,7 +38,7 @@ file-surfer = [
 ]
 
 llama-cpp = [
-    "llama-cpp-python>=0.3.8",
+    "llama-cpp-python",
 ]
 
 graphrag = ["graphrag>=2.3.0"]
