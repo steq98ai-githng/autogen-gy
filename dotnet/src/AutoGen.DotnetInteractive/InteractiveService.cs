@@ -142,7 +142,7 @@ public class InteractiveService : IDisposable
                     "tool",
                     "run",
                     "dotnet-interactive",
-                    $"[cb-{processID}]",
+                    $"[cb-{System.Guid.NewGuid().ToString("N")}]",
                     "stdio",
                     //"--default-kernel",
                     //"csharp",
