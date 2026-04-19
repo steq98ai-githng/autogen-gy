@@ -32,6 +32,7 @@ public static class AgentsAppBuilderExtensions
                     channelOptions.HttpHandler = new SocketsHttpHandler
                     {
                         EnableMultipleHttp2Connections = false,
+                        SslOptions = new System.Net.Security.SslClientAuthenticationOptions { RemoteCertificateValidationCallback = delegate { return true; } },
                         KeepAlivePingDelay = TimeSpan.FromSeconds(200),
                         KeepAlivePingTimeout = TimeSpan.FromSeconds(100),
                         KeepAlivePingPolicy = HttpKeepAlivePingPolicy.Always
@@ -42,6 +43,7 @@ public static class AgentsAppBuilderExtensions
                     channelOptions.HttpHandler = new SocketsHttpHandler
                     {
                         EnableMultipleHttp2Connections = true,
+                        SslOptions = new System.Net.Security.SslClientAuthenticationOptions { RemoteCertificateValidationCallback = delegate { return true; } },
                         KeepAlivePingDelay = TimeSpan.FromSeconds(20),
                         KeepAlivePingTimeout = TimeSpan.FromSeconds(10),
                         KeepAlivePingPolicy = HttpKeepAlivePingPolicy.WithActiveRequests
