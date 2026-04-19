@@ -67,14 +67,14 @@ public class GithubService : IManageGithub
                                     // If the file exists, update it
                                     var updateChangeSet = await _ghClient.Repository.Content.UpdateFile(
                                         org, repo, filePath,
-                                        new UpdateFileRequest("Updated file via AI", value, existingFile.Sha, branch)); // TODO: add more meaningful commit message
+                                        new UpdateFileRequest($"Update {filePath} for issue #{issueNumber}", value, existingFile.Sha, branch));
                                 }
                                 catch (NotFoundException)
                                 {
                                     // If the file doesn't exist, create it
                                     var createChangeSet = await _ghClient.Repository.Content.CreateFile(
                                         org, repo, filePath,
-                                        new CreateFileRequest("Created file via AI", value, branch)); // TODO: add more meaningful commit message
+                                        new CreateFileRequest($"Create {filePath} for issue #{issueNumber}", value, branch));
                                 }
                                 catch (Exception ex)
                                 {
