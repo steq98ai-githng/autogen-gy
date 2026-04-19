@@ -101,9 +101,7 @@ jobs:
       run: dotnet test --no-build -bl --configuration Release --filter "Category=UnitV2" --collect:"XPlat Code Coverage"
     - name: Install Dev Certs for GRPC
       if: matrix.os == 'ubuntu-latest'
-      run: dotnet dev-certs https --trust || echo "SSL_CERT_DIR=$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs" >> $GITHUB_ENV
-      env:
-        SSL_CERT_DIR: $HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs
+      run: dotnet dev-certs https --trust || true || true
     - name: GRPC Tests (With Coverage)
       if: matrix.os == 'ubuntu-latest'
       run: dotnet test --no-build -bl --configuration Release --filter "Category=GRPC" --collect:"XPlat Code Coverage"
@@ -177,9 +175,7 @@ jobs:
     - name: Install .NET Aspire workload
       run: dotnet workload install aspire
     - name: Install dev certs
-      run: dotnet --version && dotnet dev-certs https --trust || echo "SSL_CERT_DIR=$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs" >> $GITHUB_ENV
-      env:
-        SSL_CERT_DIR: $HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs
+      run: dotnet --version && dotnet dev-certs https --trust || true || true
     - name: Restore dependencies
       run: |
         dotnet restore -bl
@@ -263,9 +259,7 @@ jobs:
       with:
         dotnet-version: '9.0.x'
     - name: Install dev certs
-      run: dotnet --version && dotnet dev-certs https --trust || echo "SSL_CERT_DIR=$HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs" >> $GITHUB_ENV
-      env:
-        SSL_CERT_DIR: $HOME/.aspnet/dev-certs/trust:/usr/lib/ssl/certs
+      run: dotnet --version && dotnet dev-certs https --trust || true || true
     - name: Restore dependencies
       run: |
         dotnet restore -bl
@@ -350,4 +344,3 @@ jobs:
       env:
         MYGET_TOKEN: ${{ secrets.MYGET_TOKEN }}
       continue-on-error: true
-
