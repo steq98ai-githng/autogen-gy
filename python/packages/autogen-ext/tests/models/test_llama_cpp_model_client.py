@@ -11,6 +11,7 @@ import torch
 from autogen_core.models import RequestUsage, SystemMessage, UserMessage
 import typing
 from typing import Any
+
 if typing.TYPE_CHECKING:
     from llama_cpp import ChatCompletionRequestResponseFormat  # type: ignore
 else:
