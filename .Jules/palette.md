@@ -7,6 +7,6 @@
 ## 2026-04-17 - [Missing Accessibility on Standalone Utility Icon Buttons]
 **Learning:** In Autogen Studio, standalone utility icon buttons (like Dark Mode toggle, Mobile Menu, and User Profile Menu) frequently lack semantic `aria-label`, `title` tooltips, and distinct focus states for keyboard navigation. This compromises accessibility and makes these controls difficult to discern for screen readers and power users.
 **Action:** When working on navigation bars or generic headers, always verify that every icon-only button contains explicit `aria-label`/`title` tags and apply global focus visibility utilities such as `focus:outline-none focus-visible:ring-2 focus-visible:ring-accent` for uniform keyboard accessibility.
-## 2024-04-19 - Dynamic aria-labels for list items
-**Learning:** Icon-only buttons mapped from a list in React (like edit/delete session buttons in the playground) need context to be accessible. A static label like 'Delete' doesn't help screen reader users know *what* they are deleting.
-**Action:** Always use dynamic ARIA labels (e.g., `aria-label={\`Delete ${item.name}\`}`) when adding accessibility to buttons that interact with mapped list items.
+## 2024-04-19 - Missing ARIA Labels Inside Tooltip Components
+**Learning:** In the AutoGen Studio frontend, wrapping an icon-only `<button>` inside an antd `<Tooltip>` component does not automatically provide an accessible name to the inner interactive element. Screen readers would encounter these buttons as completely unlabelled despite the visual tooltip.
+**Action:** Always ensure that an `aria-label` is applied directly to the innermost interactive element (e.g. the `<button>`) even when wrapped in a `<Tooltip>` to maintain strict accessibility standards. For dynamic elements like sidebars, use context variables in the aria-label (e.g., `aria-label={\`Teams (${teams.length})\`}`) to provide richer context.

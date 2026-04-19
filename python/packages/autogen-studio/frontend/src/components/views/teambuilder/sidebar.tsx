@@ -109,6 +109,7 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`Teams (${teams.length})`}>
             <button
+              aria-label={`Teams (${teams.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -145,6 +146,7 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
         </div>
         <Tooltip title="Close Sidebar">
           <button
+            aria-label="Close Sidebar"
             onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
