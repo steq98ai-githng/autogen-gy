@@ -198,17 +198,33 @@ class JupyterKernelClient:
             return None
 
     async def wait_for_ready(self, timeout_seconds: Optional[float] = None) -> bool:
-        message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
+        start_time = asyncio.get_event_loop().time()
+
         while True:
-            message = await self._receive_message(timeout_seconds)
-            # This means we timed out with no new messages.
-            if message is None:
-                return False
-            if (
-                message.get("parent_header", {}).get("msg_id") == message_id
-                and message["msg_type"] == "kernel_info_reply"
-            ):
-                return True
+            message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
+
+            try_until = asyncio.get_event_loop().time() + 3.0
+
+            while True:
+                now = asyncio.get_event_loop().time()
+                wait_time = try_until - now
+                if wait_time <= 0:
+                    break
+
+                message = await self._receive_message(wait_time)
+                if message is None:
+                    break
+
+                if (
+                    message.get("parent_header", {}).get("msg_id") == message_id
+                    and message["msg_type"] == "kernel_info_reply"
+                ):
+                    return True
+
+            if timeout_seconds is not None:
+                elapsed = asyncio.get_event_loop().time() - start_time
+                if elapsed >= timeout_seconds:
+                    return False
 
     async def execute(self, code: str, timeout_seconds: Optional[float] = None) -> ExecutionResult:
         message_id = await self._send_message(
