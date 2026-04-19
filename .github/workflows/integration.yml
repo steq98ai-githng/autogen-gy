@@ -32,7 +32,7 @@ jobs:
           python-version: "3.11"
       - name: Run uv sync
         run: |
-          uv sync --locked
+          uv sync --locked --all-extras
           echo "PKG_NAME=$(basename '${{ matrix.package }}')" >> $GITHUB_ENV
 
         working-directory: ./python

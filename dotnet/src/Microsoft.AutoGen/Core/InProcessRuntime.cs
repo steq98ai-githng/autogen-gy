@@ -329,7 +329,7 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
     {
         if (this.shutdownSource == null)
         {
-            return ValueTask.CompletedTask;
+            throw new InvalidOperationException("Runtime is not running.");
         }
 
         if (this.finishSource != null)
