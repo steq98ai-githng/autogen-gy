@@ -70,9 +70,9 @@ public class GoogleGeminiClient : IGeminiClient
         var stream = await response.Content.ReadAsStreamAsync();
         var jp = new JsonParser(JsonParser.Settings.Default.WithIgnoreUnknownFields(true));
         using var streamReader = new System.IO.StreamReader(stream);
-        while (!streamReader.EndOfStream)
+        while (await streamReader.ReadLineAsync() is string json)
         {
-            var json = await streamReader.ReadLineAsync();
+            //var json = await streamReader.ReadLineAsync();
             if (string.IsNullOrWhiteSpace(json))
             {
                 continue;
