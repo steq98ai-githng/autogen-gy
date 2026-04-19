@@ -138,4 +138,10 @@ public class InProcessRuntimeTests()
         newRuntime.agentInstances.Count.Should().Be(1, "Agent should be registered in the new runtime");
         newRuntime.agentInstances.Should().ContainKey(agentId, "Agent should be loaded into the new runtime");
     }
-}
+
+    [Fact]
+    public async Task StopAsync_ShouldComplete_WhenNotRunning()
+    {
+        var runtime = new InProcessRuntime();
+        await runtime.StopAsync(); // Should not throw
+    }

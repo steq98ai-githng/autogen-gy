@@ -3,13 +3,27 @@ import sys
 from typing import TYPE_CHECKING, Any, ContextManager, Generator, List, Sequence, Union
 
 import pytest
-import torch
+try:
+    import torch
+except ImportError:
+    pass
 
 # from autogen_agentchat.agents import AssistantAgent
 # from autogen_agentchat.messages import TextMessage
 # from autogen_core import CancellationToken
 from autogen_core.models import RequestUsage, SystemMessage, UserMessage
-from llama_cpp import ChatCompletionRequestResponseFormat
+import pytest
+
+try:
+    from llama_cpp import ChatCompletionRequestResponseFormat
+    has_llama_cpp = True
+except ImportError:
+    has_llama_cpp = False
+
+pytestmark = pytest.mark.skipif(
+    not has_llama_cpp or 'torch' not in sys.modules,
+    reason="llama-cpp-python is not installed"
+)
 from pydantic import BaseModel
 
 # from autogen_core.tools import FunctionTool
