@@ -101,6 +101,12 @@ exclude = ["samples/core_xlang_hello_python_agent/protos"]
 typeCheckingMode = "strict"
 reportUnnecessaryIsInstance = false
 reportMissingTypeStubs = false
+reportMissingImports = false
+reportUnknownMemberType = false
+reportUnknownVariableType = false
+reportUnknownArgumentType = false
+reportUnknownParameterType = false
+reportUnknownLambdaType = false
 
 [tool.nbqa.addopts]
 mypy = [

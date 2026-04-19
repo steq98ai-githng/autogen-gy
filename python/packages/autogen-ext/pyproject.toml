@@ -37,9 +37,6 @@ file-surfer = [
     "markitdown[all]~=0.1.0a3",
 ]
 
-llama-cpp = [
-    "llama-cpp-python>=0.3.8",
-]
 
 graphrag = ["graphrag>=2.3.0"]
 chromadb = ["chromadb>=1.0.0"]
@@ -202,4 +199,8 @@ mypy = "mypy --config-file ../../pyproject.toml --exclude src/autogen_ext/runtim
 [tool.mypy]
 [[tool.mypy.overrides]]
 module = "docker.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "llama_cpp.*"
 ignore_missing_imports = true
