@@ -198,17 +198,19 @@ class JupyterKernelClient:
             return None
 
     async def wait_for_ready(self, timeout_seconds: Optional[float] = None) -> bool:
-        message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
-        while True:
-            message = await self._receive_message(timeout_seconds)
-            # This means we timed out with no new messages.
-            if message is None:
-                return False
-            if (
-                message.get("parent_header", {}).get("msg_id") == message_id
-                and message["msg_type"] == "kernel_info_reply"
-            ):
-                return True
+        for _ in range(3):
+            message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
+            while True:
+                message = await self._receive_message(timeout_seconds)
+                # This means we timed out with no new messages.
+                if message is None:
+                    break
+                if (
+                    message.get("parent_header", {}).get("msg_id") == message_id
+                    and message["msg_type"] == "kernel_info_reply"
+                ):
+                    return True
+        return False
 
     async def execute(self, code: str, timeout_seconds: Optional[float] = None) -> ExecutionResult:
         message_id = await self._send_message(
