@@ -50,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </span>
           >
             <button
-              aria-label={`Sessions (${sessions.length})`}
+              aria-label={`Open sidebar, ${sessions.length} sessions`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -61,6 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="mt-4 px-2 -ml-1">
           <Tooltip title="Create new session">
             <Button
+              aria-label="Create new session"
               type="text"
               className="w-full p-2 flex justify-center"
               onClick={() => onEditSession()}
@@ -154,6 +155,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="py-3 flex gap-1 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity">
                 <Tooltip title="Edit session">
                   <Button
+                    aria-label={`Edit session ${s.name}`}
                     type="text"
                     size="small"
                     className="p-1 min-w-[24px] h-6"
@@ -166,6 +168,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </Tooltip>
                 <Tooltip title="Delete session">
                   <Button
+                    aria-label={`Delete session ${s.name}`}
                     type="text"
                     size="small"
                     className="p-1 min-w-[24px] h-6"

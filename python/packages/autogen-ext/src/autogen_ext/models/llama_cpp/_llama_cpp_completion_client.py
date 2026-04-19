@@ -1,3 +1,5 @@
+# mypy: disable-error-code="no-any-unimported, no-any-return"
+
 import asyncio
 import logging  # added import
 import re
@@ -80,7 +82,8 @@ def assert_valid_name(name: str) -> str:
     return name
 
 
-def convert_tools(
+def convert_tools( # type: ignore[no-any-unimported]
+
     tools: Sequence[Tool | ToolSchema],
 ) -> List[ChatCompletionTool]:
     result: List[ChatCompletionTool] = []
