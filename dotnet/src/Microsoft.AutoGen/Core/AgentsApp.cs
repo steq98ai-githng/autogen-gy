@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // AgentsApp.cs
 
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AutoGen.Contracts;
