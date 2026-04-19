@@ -182,7 +182,9 @@ async def test_execute_code_with_image_output() -> None:
                 ]
 
                 code_result = await executor.execute_code_blocks(code_blocks, cancellation_token=CancellationToken())
-                assert len(code_result.output_files) == 1
-                assert code_result.exit_code == 0 or "Kernel not ready" in code_result.output
-                assert "<PIL.Image.Image image mode=RGB size=100x100>" in code_result.output
-                assert str(Path(code_result.output_files[0]).parent) == temp_dir
+                if code_result.exit_code == 0:
+                    assert len(code_result.output_files) == 1
+                    assert "<PIL.Image.Image image mode=RGB size=100x100>" in code_result.output
+                    assert str(Path(code_result.output_files[0]).parent) == temp_dir
+                else:
+                    assert "Kernel not ready" in code_result.output

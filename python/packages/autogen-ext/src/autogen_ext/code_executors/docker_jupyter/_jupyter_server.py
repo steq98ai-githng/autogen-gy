@@ -337,7 +337,7 @@ class DockerJupyterServer(JupyterConnectable):
                 here = Path(__file__).parent
                 dockerfile = io.BytesIO(self.DEFAULT_DOCKERFILE.encode("utf-8"))
                 logging.info(f"Building image {image_name}...")
-                client.images.build(path=str(here), fileobj=dockerfile, tag=image_name)
+                client.images.build(path=str(here), fileobj=dockerfile, tag=image_name, rm=True, pull=True)
                 logging.info(f"Image {image_name} built successfully")
         else:
             # Verify custom image exists
