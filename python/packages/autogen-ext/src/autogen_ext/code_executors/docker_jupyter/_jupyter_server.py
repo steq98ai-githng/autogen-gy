@@ -198,17 +198,30 @@ class JupyterKernelClient:
             return None
 
     async def wait_for_ready(self, timeout_seconds: Optional[float] = None) -> bool:
-        message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
+        start_time = datetime.datetime.now().timestamp()
+        timeout = timeout_seconds if timeout_seconds is not None else 60.0
+
+        # Give the kernel a small delay to actually bind the ZMQ socket before polling
+        await asyncio.sleep(1.0)
+
         while True:
-            message = await self._receive_message(timeout_seconds)
-            # This means we timed out with no new messages.
-            if message is None:
+            # Send the request
+            message_id = await self._send_message(content={}, channel="shell", message_type="kernel_info_request")
+
+            # Wait for a reply for up to 1 second
+            wait_for_reply_timeout = min(1.0, max(0.1, timeout - (datetime.datetime.now().timestamp() - start_time)))
+            message = await self._receive_message(wait_for_reply_timeout)
+
+            if message is not None:
+                if (
+                    message.get("parent_header", {}).get("msg_id") == message_id
+                    and message["msg_type"] == "kernel_info_reply"
+                ):
+                    return True
+
+            # If we've exceeded the total timeout, return False
+            if datetime.datetime.now().timestamp() - start_time >= timeout:
                 return False
-            if (
-                message.get("parent_header", {}).get("msg_id") == message_id
-                and message["msg_type"] == "kernel_info_reply"
-            ):
-                return True
 
     async def execute(self, code: str, timeout_seconds: Optional[float] = None) -> ExecutionResult:
         message_id = await self._send_message(
