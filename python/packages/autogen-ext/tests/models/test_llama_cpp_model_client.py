@@ -11,15 +11,19 @@ import torch
 from autogen_core.models import RequestUsage, SystemMessage, UserMessage
 from pydantic import BaseModel
 
-# from autogen_core.tools import FunctionTool
 try:
-    from llama_cpp import ChatCompletionMessageToolCalls, ChatCompletionRequestResponseFormat
+    from llama_cpp import ChatCompletionMessageToolCalls, ChatCompletionRequestResponseFormat  # type: ignore
 
     if TYPE_CHECKING:
         from autogen_ext.models.llama_cpp._llama_cpp_completion_client import LlamaCppChatCompletionClient
 except ImportError:
     # If llama_cpp is not installed, we can't run the tests.
     pytest.skip("Skipping LlamaCppChatCompletionClient tests: llama-cpp-python not installed", allow_module_level=True)
+    ChatCompletionMessageToolCalls = Any # type: ignore
+    ChatCompletionRequestResponseFormat = Any # type: ignore
+
+
+# from autogen_core.tools import FunctionTool
 
 
 class AgentResponse(BaseModel):
@@ -49,7 +53,7 @@ class FakeLlama:
         messages: Any,
         tools: List[ChatCompletionMessageToolCalls] | None,
         stream: bool = False,
-        response_format: ChatCompletionRequestResponseFormat | None = None,
+        response_format: Any | None = None,
     ) -> dict[str, Any]:
         # Return fake non-streaming response.
 
