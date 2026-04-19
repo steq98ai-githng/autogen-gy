@@ -658,7 +658,7 @@ const RunView: React.FC<RunViewProps> = ({
                         <div className="z-10 absolute left-2 top-2 p-2 hover:opacity-100 opacity-80">
                           <Tooltip title="Hide message flow">
                             <button
-                              aria-label="Hide message flow"
+                              aria-label="Hide message flow graph"
                               onClick={() => setIsFlowVisible(false)}
                               className=" p-1 rounded-md bg-tertiary hover:bg-secondary transition-colors"
                             >
