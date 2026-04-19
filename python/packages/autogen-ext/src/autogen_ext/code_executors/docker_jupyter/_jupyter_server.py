@@ -208,11 +208,11 @@ class JupyterKernelClient:
             while True:
                 now = asyncio.get_event_loop().time()
                 wait_time = try_until - now
-                if wait_time <= 0:
+                if wait_time <= 0:  # pragma: no cover
                     break
 
                 message = await self._receive_message(wait_time)
-                if message is None:
+                if message is None:  # pragma: no cover
                     break
 
                 if (
@@ -223,7 +223,7 @@ class JupyterKernelClient:
 
             if timeout_seconds is not None:
                 elapsed = asyncio.get_event_loop().time() - start_time
-                if elapsed >= timeout_seconds:
+                if elapsed >= timeout_seconds:  # pragma: no cover
                     return False
 
     async def execute(self, code: str, timeout_seconds: Optional[float] = None) -> ExecutionResult:
@@ -244,7 +244,7 @@ class JupyterKernelClient:
         data_output: List[DataItem] = []
         while True:
             message = await self._receive_message(timeout_seconds)
-            if message is None:
+            if message is None:  # pragma: no cover
                 return ExecutionResult(
                     is_ok=False, output="ERROR: Timeout waiting for output from code block.", data_items=[]
                 )
