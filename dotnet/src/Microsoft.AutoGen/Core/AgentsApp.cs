@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Reflection;
 using Microsoft.AutoGen.Contracts;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
