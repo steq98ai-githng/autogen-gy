@@ -212,7 +212,9 @@ class JupyterKernelClient:
             # so loop a few times per request.
             request_start_time = datetime.datetime.now().timestamp()
             while datetime.datetime.now().timestamp() - request_start_time < 1.0:
-                wait_for_reply_timeout = min(0.5, max(0.1, timeout - (datetime.datetime.now().timestamp() - start_time)))
+                wait_for_reply_timeout = min(
+                    0.5, max(0.1, timeout - (datetime.datetime.now().timestamp() - start_time))
+                )
                 message = await self._receive_message(wait_for_reply_timeout)
 
                 if message is not None:
