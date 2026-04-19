@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // MessageDelivery.cs
 
-using System.Reflection;
 using Microsoft.AutoGen.Contracts;
 
 namespace Microsoft.AutoGen.Core;
@@ -55,7 +54,7 @@ internal sealed class MessageEnvelope
                 object? result = await servicer(envelope, cancellation);
                 resultSink.SetResult(result);
             }
-            catch (TargetInvocationException ex) when (ex.InnerException is OperationCanceledException innerOCEx)
+            catch (OperationCanceledException innerOCEx)
             {
                 resultSink.SetCancelled(innerOCEx);
             }
