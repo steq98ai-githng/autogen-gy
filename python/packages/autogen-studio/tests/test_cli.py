@@ -1,7 +1,7 @@
 import os
 import pytest
 from unittest.mock import patch
-from autogenstudio.cli import serve
+from autogenstudio.cli import serve, get_env_file_path
 
 def test_serve_success():
     """Test the serve command with a valid team file."""
@@ -66,3 +66,28 @@ def test_serve_custom_params():
             workers=workers,
             reload=reload,
         )
+
+
+def test_get_env_file_path_exists():
+    """Test get_env_file_path when the .autogenstudio directory already exists."""
+    with patch("os.path.expanduser", return_value="/mock/user/dir"), \
+         patch("os.path.exists", return_value=True), \
+         patch("os.makedirs") as mock_makedirs:
+
+        env_file_path = get_env_file_path()
+
+        assert env_file_path == os.path.join("/mock/user/dir", ".autogenstudio", "temp_env_vars.env")
+        mock_makedirs.assert_not_called()
+
+
+def test_get_env_file_path_not_exists():
+    """Test get_env_file_path when the .autogenstudio directory does not exist."""
+    with patch("os.path.expanduser", return_value="/mock/user/dir"), \
+         patch("os.path.exists", return_value=False), \
+         patch("os.makedirs") as mock_makedirs:
+
+        env_file_path = get_env_file_path()
+
+        app_dir = os.path.join("/mock/user/dir", ".autogenstudio")
+        assert env_file_path == os.path.join(app_dir, "temp_env_vars.env")
+        mock_makedirs.assert_called_once_with(app_dir, exist_ok=True)
