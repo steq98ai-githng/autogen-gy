@@ -21,32 +21,18 @@ from autogen_core.models import (
     validate_model_info,
 )
 from autogen_core.tools import Tool, ToolSchema
-import typing
-from typing import Any
-if typing.TYPE_CHECKING:  # pragma: no cover
-    from llama_cpp import (  # type: ignore
-        ChatCompletionFunctionParameters,
-        ChatCompletionRequestAssistantMessage,
-        ChatCompletionRequestFunctionMessage,
-        ChatCompletionRequestSystemMessage,
-        ChatCompletionRequestToolMessage,
-        ChatCompletionRequestUserMessage,
-        ChatCompletionTool,
-        ChatCompletionToolFunction,
-        Llama,
-        llama_chat_format,
-    )
-else:  # pragma: no cover
-    ChatCompletionFunctionParameters = Any
-    ChatCompletionRequestAssistantMessage = Any
-    ChatCompletionRequestFunctionMessage = Any
-    ChatCompletionRequestSystemMessage = Any
-    ChatCompletionRequestToolMessage = Any
-    ChatCompletionRequestUserMessage = Any
-    ChatCompletionTool = Any
-    ChatCompletionToolFunction = Any
-    Llama = Any
-    llama_chat_format = Any
+from llama_cpp import (
+    ChatCompletionFunctionParameters,
+    ChatCompletionRequestAssistantMessage,
+    ChatCompletionRequestFunctionMessage,
+    ChatCompletionRequestSystemMessage,
+    ChatCompletionRequestToolMessage,
+    ChatCompletionRequestUserMessage,
+    ChatCompletionTool,
+    ChatCompletionToolFunction,
+    Llama,
+    llama_chat_format,
+)
 from pydantic import BaseModel
 from typing_extensions import Unpack
 
