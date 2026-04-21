@@ -448,7 +448,7 @@ export default function ChatInput({
                   </span>
                   placement="top"
                 >
-                  <Button type="text" aria-label="Upload File" disabled={isInputDisabled} className=" focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+                  <Button type="text" aria-label="Upload file" disabled={isInputDisabled} className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                     <UploadIcon
                       strokeWidth={2}
                       size={26}
