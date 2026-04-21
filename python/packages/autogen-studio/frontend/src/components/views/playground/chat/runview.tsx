@@ -366,7 +366,7 @@ const RunView: React.FC<RunViewProps> = ({
                 <div className="flex items-center gap-0">
                   <button
                     onClick={startReplay}
-                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus:z-10"
                   >
                     <Play className="inline-block" size={16} />
                     <span className="inline-block text-xs text-secondary ml-1">
