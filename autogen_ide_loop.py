@@ -54,7 +54,7 @@ Provide actionable fixes. If correct, return 'APPROVE'.
     groupchat = GroupChat(
         agents=[user_proxy, coder, reviewer],
         messages=[],
-        max_round=6
+        max_round=12
     )
     manager = GroupChatManager(groupchat=groupchat, llm_config=llm_config)
 
