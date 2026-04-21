@@ -45,7 +45,7 @@ Provide actionable fixes. If correct, return 'APPROVE'.
         is_termination_msg=lambda x: x.get("content", "") and "APPROVE" in x.get("content", ""),
         code_execution_config={
             "work_dir": "workspace",
-            "use_docker": False
+            "use_docker": True
         },
         system_message="You execute the code and report errors or confirm success."
     )
