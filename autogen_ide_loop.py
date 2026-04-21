@@ -67,8 +67,8 @@ def run_ide_loop(task: str):
     try:
         user_proxy, manager = create_ide_loop()
         print(f"Starting IDE Loop for task: {task}")
-        # To avoid actual API calls during CI/tests with mock keys, we simply print initialization
-        # In a real environment: user_proxy.initiate_chat(manager, message=task)
+        if os.environ.get("OPENAI_API_KEY"):
+            user_proxy.initiate_chat(manager, message=task)
         print("IDE Loop Executable Module Initialized Successfully.")
         return True
     except Exception as e:
