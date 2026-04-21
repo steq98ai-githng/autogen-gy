@@ -82,8 +82,7 @@ def assert_valid_name(name: str) -> str:
     return name
 
 
-def convert_tools( # type: ignore[no-any-unimported]
-
+def convert_tools(  # type: ignore[no-any-unimported]
     tools: Sequence[Tool | ToolSchema],
 ) -> List[ChatCompletionTool]:
     result: List[ChatCompletionTool] = []
