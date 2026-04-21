@@ -31,5 +31,5 @@ def test_add_termination():
 
     assert len(builder.terminations) == 2
     # Verify metadata was updated
-    assert getattr(builder.terminations[1], "label", None) == "Stop Termination"
-    assert getattr(builder.terminations[1], "description", None) == "Terminates on STOP"
+    assert builder.terminations[1].label == "Stop Termination"
+    assert builder.terminations[1].description == "Terminates on STOP"
