@@ -409,7 +409,7 @@ const RunView: React.FC<RunViewProps> = ({
                     <button
                       aria-label="Select replay speed"
                       title="Select replay speed"
-                      className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                      className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus:z-10"
                     >
                       <ChevronDown className="inline-block" size={12} />
                     </button>
