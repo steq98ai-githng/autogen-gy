@@ -16,3 +16,7 @@
 ## 2024-04-20 - Missing ARIA Labels and Focus Rings on Interactive Chat Controls
 **Learning:** In the AutoGen Studio playground, numerous interactive icon-only elements (like the replay speed dropdown triggers and upload file button) lacked `aria-label`s, rendering them functionally invisible to screen readers. Furthermore, virtually all control buttons (start replay, cancel run, expand tool calls, flow graph toggles) lacked visible focus rings, severely hindering keyboard-only navigation within the chat interface.
 **Action:** When auditing chat or complex interaction views, explicitly test tab navigation. Ensure every actionable element has both a semantic label (`aria-label` or `title`) if it relies on icons, and an active `focus-visible:ring-2` (or equivalent Tailwind class) applied to it.
+
+## 2026-04-21 - [Accessible Diagram Nodes]
+**Learning:** Diagram/graph views often use compact, icon-only nodes where the interactive elements lack context. Using dynamic ARIA labels (e.g., incorporating the specific node's label) combined with visual tooltips and focus indicators significantly improves accessibility and clarity for both screen reader and sighted keyboard users.
+**Action:** Always wrap icon-only buttons inside node diagrams with `<Tooltip>`, apply dynamic `aria-label` attributes, and ensure `focus-visible` utility classes are present.

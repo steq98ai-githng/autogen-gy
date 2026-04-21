@@ -7,6 +7,7 @@ import {
   getBezierPath,
   BaseEdge,
 } from "@xyflow/react";
+import { Tooltip } from "antd";
 import {
   LucideIcon,
   Users,
@@ -140,27 +141,33 @@ const BaseNode = memo<BaseNodeProps>(
               <span className="text-xs px-2 py-1 bg-gray-200 rounded text-gray-700">
                 {data.component.component_type}
               </span>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedNode(id);
-                }}
-                className="p-1 hover:bg-secondary rounded"
-              >
-                <Edit className="w-4 h-4 text-accent" />
-              </button>
+              <Tooltip title="Edit Node">
+                <button
+                  aria-label={`Edit ${data.component.label || 'node'}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedNode(id);
+                  }}
+                  className="p-1 hover:bg-secondary rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                >
+                  <Edit className="w-4 h-4 text-accent" />
+                </button>
+              </Tooltip>
               {showDelete && (
                 <>
-                  <button
-                    onClick={(e) => {
-                      console.log("remove node", id);
-                      e.stopPropagation();
-                      if (id) removeNode(id);
-                    }}
-                    className="p-1 hover:bg-red-100 rounded"
-                  >
-                    <Trash2Icon className="w-4 h-4 text-red-500" />
-                  </button>
+                  <Tooltip title="Delete Node">
+                    <button
+                      aria-label={`Delete ${data.component.label || 'node'}`}
+                      onClick={(e) => {
+                        console.log("remove node", id);
+                        e.stopPropagation();
+                        if (id) removeNode(id);
+                      }}
+                      className="p-1 hover:bg-red-100 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                    >
+                      <Trash2Icon className="w-4 h-4 text-red-500" />
+                    </button>
+                  </Tooltip>
                 </>
               )}
             </div>
