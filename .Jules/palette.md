@@ -10,3 +10,6 @@
 ## 2024-04-19 - Missing ARIA Labels Inside Tooltip Components
 **Learning:** In the AutoGen Studio frontend, wrapping an icon-only `<button>` inside an antd `<Tooltip>` component does not automatically provide an accessible name to the inner interactive element. Screen readers would encounter these buttons as completely unlabelled despite the visual tooltip.
 **Action:** Always ensure that an `aria-label` is applied directly to the innermost interactive element (e.g. the `<button>`) even when wrapped in a `<Tooltip>` to maintain strict accessibility standards. For dynamic elements like sidebars, use context variables in the aria-label (e.g., `aria-label={\`Teams (${teams.length})\`}`) to provide richer context.
+## 2026-04-21 - Labs Sidebar Accessibility Fix
+**Learning:** Icon-only sidebar toggle buttons lacked ARIA labels, creating accessibility issues for screen reader navigation in the Labs UI.
+**Action:** Applied `aria-label`s matching the contextual purpose of the buttons to improve accessibility without changing visual output.
