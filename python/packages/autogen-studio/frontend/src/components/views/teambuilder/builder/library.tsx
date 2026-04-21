@@ -175,8 +175,9 @@ export const ComponentLibrary: React.FC<LibraryProps> = ({
         <span>Show Component Library</span>
         <button
           onClick={() => setIsMinimized(false)}
-          className="p-1 group-hover:bg-tertiary rounded transition-colors"
+          className="p-1 group-hover:bg-tertiary rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           title="Maximize Library"
+          aria-label="Maximize Component Library"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
@@ -194,8 +195,9 @@ export const ComponentLibrary: React.FC<LibraryProps> = ({
           <div className="text-normal">Component Library</div>
           <button
             onClick={() => setIsMinimized(true)}
-            className="p-1 hover:bg-tertiary rounded transition-colors"
+            className="p-1 hover:bg-tertiary rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             title="Minimize Library"
+            aria-label="Minimize Component Library"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
