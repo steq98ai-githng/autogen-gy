@@ -351,13 +351,12 @@ class DatabaseManager:
 
     async def _check_team_exists(self, config: dict, user_id: str) -> Optional[Team]:
         """Check if identical team config already exists"""
-        response = self.get(Team, {"user_id": user_id})
-        teams = response.data if response.status and response.data is not None else []
-
-        for team in teams:
-            if team.component == config:
-                return team
-
+        with Session(self.engine) as session:
+            statement = select(Team.id, Team.component).where(Team.user_id == user_id)
+            results = session.exec(statement.execution_options(yield_per=100))
+            for t_id, component in results:
+                if component == config:
+                    return session.get(Team, t_id)
         return None
 
     async def close(self):

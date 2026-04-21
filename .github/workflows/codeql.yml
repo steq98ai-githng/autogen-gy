@@ -39,6 +39,8 @@ jobs:
       actions: read
       contents: read
 
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     strategy:
       fail-fast: false
       matrix:
@@ -68,8 +70,8 @@ jobs:
     - name: Install jupyter and ipykernel
       run: |
         python -m pip install --upgrade pip
-        python -m pip install jupyter
-        python -m pip install ipykernel
+        python -m pip install --no-cache-dir jupyter
+        python -m pip install --no-cache-dir ipykernel
     - name: list available kernels
       run: |
         python -m jupyter kernelspec list

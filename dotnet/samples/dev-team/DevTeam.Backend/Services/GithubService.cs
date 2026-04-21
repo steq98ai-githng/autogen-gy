@@ -74,7 +74,7 @@ public class GithubService : IManageGithub
                                     // If the file doesn't exist, create it
                                     var createChangeSet = await _ghClient.Repository.Content.CreateFile(
                                         org, repo, filePath,
-                                        new CreateFileRequest("Created file via AI", value, branch)); // TODO: add more meaningful commit message
+                                        new CreateFileRequest($"Created {filePath} via AI", value, branch));
                                 }
                                 catch (Exception ex)
                                 {

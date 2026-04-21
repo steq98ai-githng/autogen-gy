@@ -1,3 +1,5 @@
+# mypy: disable-error-code="no-any-unimported"
+
 import contextlib
 import sys
 from typing import TYPE_CHECKING, Any, ContextManager, Generator, List, Sequence, Union

@@ -366,7 +366,7 @@ const RunView: React.FC<RunViewProps> = ({
                 <div className="flex items-center gap-0">
                   <button
                     onClick={startReplay}
-                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-secondary hover:text-primary"
+                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus:z-10"
                   >
                     <Play className="inline-block" size={16} />
                     <span className="inline-block text-xs text-secondary ml-1">
@@ -406,7 +406,11 @@ const RunView: React.FC<RunViewProps> = ({
                     }}
                     trigger={["click"]}
                   >
-                    <button className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary">
+                    <button
+                      aria-label="Select replay speed"
+                      title="Select replay speed"
+                      className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus:z-10"
+                    >
                       <ChevronDown className="inline-block" size={12} />
                     </button>
                   </Dropdown>
@@ -417,7 +421,7 @@ const RunView: React.FC<RunViewProps> = ({
                 <div className="flex items-center gap-0">
                   <button
                     onClick={pauseReplay}
-                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-accent hover:text-primary"
+                    className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-accent hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     <Pause className="inline-block" size={16} />
                     <span className="inline-block text-xs text-accent ml-1">
@@ -458,7 +462,11 @@ const RunView: React.FC<RunViewProps> = ({
                     }}
                     trigger={["click"]}
                   >
-                    <button className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary">
+                    <button
+                      aria-label="Select replay speed"
+                      title="Select replay speed"
+                      className="p-1 px-1 rounded-r hover:bg-secondary transition-colors text-secondary hover:text-primary border-l border-secondary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
                       <ChevronDown className="inline-block" size={12} />
                     </button>
                   </Dropdown>
@@ -468,7 +476,7 @@ const RunView: React.FC<RunViewProps> = ({
               {(isReplaying || originalRun) && (
                 <button
                   onClick={resetReplay}
-                  className="p-1 px-2 rounded hover:bg-secondary transition-colors text-secondary hover:text-primary"
+                  className="p-1 px-2 rounded hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <RotateCcw className="inline-block" size={16} />{" "}
                   <span className="inline-block text-xs text-secondary">
@@ -516,7 +524,7 @@ const RunView: React.FC<RunViewProps> = ({
               {isActive && onCancel && !isReplaying && (
                 <button
                   onClick={onCancel}
-                  className="px-4 text-sm py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors flex items-center gap-2"
+                  className="px-4 text-sm py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   <StopCircle size={16} />
                   Cancel Run
@@ -554,7 +562,7 @@ const RunView: React.FC<RunViewProps> = ({
                   <div className="flex-1">
                     <button
                       onClick={() => setIsExpanded(!isExpanded)}
-                      className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors"
+                      className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
                       <MessageSquare size={16} /> Agent steps [
                       <span className="text-accent text-xs">
@@ -593,8 +601,9 @@ const RunView: React.FC<RunViewProps> = ({
                       <div className="z-50 absolute right-2 top-2 bg-tertiary rounded p-2 hover:opacity-100 opacity-80">
                         <Tooltip title="Show message flow graph">
                           <button
+                            aria-label="Show message flow graph"
                             onClick={() => setIsFlowVisible(true)}
-                            className=" p-1 rounded-md bg-tertiary  hover:bg-secondary  transition-colors"
+                            className=" p-1 rounded-md bg-tertiary hover:bg-secondary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                           >
                             <PanelRightOpen strokeWidth={1.5} size={22} />
                           </button>
@@ -657,8 +666,9 @@ const RunView: React.FC<RunViewProps> = ({
                         <div className="z-10 absolute left-2 top-2 p-2 hover:opacity-100 opacity-80">
                           <Tooltip title="Hide message flow">
                             <button
+                              aria-label="Hide message flow graph"
                               onClick={() => setIsFlowVisible(false)}
-                              className=" p-1 rounded-md bg-tertiary hover:bg-secondary transition-colors"
+                              className=" p-1 rounded-md bg-tertiary hover:bg-secondary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                             >
                               <PanelRightClose strokeWidth={1.5} size={22} />
                             </button>

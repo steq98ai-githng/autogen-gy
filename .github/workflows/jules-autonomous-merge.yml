@@ -1,0 +1,44 @@
+name: Jules Autonomous Auto-Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  # 設定定期排程，檢查是否有卡住的衝突 PR (每 4 小時執行一次)
+  schedule:
+    - cron: '0 */4 * * *'
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  auto-process-jules-pr:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'jules[bot]' || github.actor == 'jules[bot]'
+    steps:
+      - name: 取得 PR 當前狀態
+        id: pr-status
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # 檢查 PR 是否有衝突
+          MERGE_STATE=$(gh pr view ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --json mergeable -q .mergeable)
+          echo "merge_state=$MERGE_STATE" >> $GITHUB_OUTPUT
+
+      - name: 處理衝突 (AI 自動修復)
+        if: steps.pr-status.outputs.merge_state == 'CONFLICTING'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "偵測到代碼衝突，正在呼叫 Jules 自動解決..."
+          # 透過留言觸發 Jules 的重新審視與修復機制
+          gh pr comment ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --body "@jules please resolve merge conflicts and update the branch."
+
+      - name: 執行自動合併與壓縮 (Squash & Merge)
+        if: steps.pr-status.outputs.merge_state != 'CONFLICTING'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "PR 狀態正常，啟用自動 Squash & Merge..."
+          # 啟用自動合併，並指定使用 squash。分支刪除由 GitHub 倉庫設定接管
+          gh pr merge ${{ github.event.pull_request.number }} --repo ${{ github.repository }} --auto --squash

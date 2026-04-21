@@ -203,3 +203,7 @@ mypy = "mypy --config-file ../../pyproject.toml --exclude src/autogen_ext/runtim
 [[tool.mypy.overrides]]
 module = "docker.*"
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "llama_cpp.*"
+ignore_missing_imports = true
