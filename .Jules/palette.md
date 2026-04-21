@@ -10,3 +10,6 @@
 ## 2024-04-19 - Missing ARIA Labels Inside Tooltip Components
 **Learning:** In the AutoGen Studio frontend, wrapping an icon-only `<button>` inside an antd `<Tooltip>` component does not automatically provide an accessible name to the inner interactive element. Screen readers would encounter these buttons as completely unlabelled despite the visual tooltip.
 **Action:** Always ensure that an `aria-label` is applied directly to the innermost interactive element (e.g. the `<button>`) even when wrapped in a `<Tooltip>` to maintain strict accessibility standards. For dynamic elements like sidebars, use context variables in the aria-label (e.g., `aria-label={\`Teams (${teams.length})\`}`) to provide richer context.
+## 2026-04-21 - [Added Accessibility to Chat Input Buttons]
+**Learning:** The chat input view lacked proper accessibility and keyboard focus indicators for the 'Upload File' and 'Send message' buttons, which could be frustrating for keyboard-only or screen reader users navigating the main interactive component.
+**Action:** Always ensure critical interactive elements in forms/inputs have clear `aria-label` attributes and explicitly utilize `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent` to provide distinct visual feedback during keyboard navigation.

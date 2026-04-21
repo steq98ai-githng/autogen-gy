@@ -448,7 +448,7 @@ export default function ChatInput({
                   </span>
                   placement="top"
                 >
-                  <Button type="text" disabled={isInputDisabled} className=" ">
+                  <Button type="text" aria-label="Upload File" disabled={isInputDisabled} className=" focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                     <UploadIcon
                       strokeWidth={2}
                       size={26}
@@ -467,7 +467,7 @@ export default function ChatInput({
               }
               aria-label={loading ? "Sending message" : "Send message"}
               title={loading ? "Sending message" : "Send message"}
-              className={`bg-accent transition duration-300 rounded flex justify-center items-center w-11 h-9 ${
+              className={`bg-accent transition duration-300 rounded flex justify-center items-center w-11 h-9 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
                 isInputDisabled || (text.trim() === "" && fileList.length === 0)
                   ? "cursor-not-allowed opacity-50"
                   : "hover:brightness-75"
