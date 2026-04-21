@@ -38,7 +38,7 @@ const TestDetails: React.FC<TestDetailsProps> = ({ result, onClose }) => {
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-              aria-label={isExpanded ? "Collapse test results" : "Expand test results"}
+              aria-label="Test results"
               aria-expanded={isExpanded}
             >
               {isExpanded ? (
