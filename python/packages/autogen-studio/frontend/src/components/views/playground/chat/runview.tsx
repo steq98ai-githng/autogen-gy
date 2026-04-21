@@ -524,7 +524,7 @@ const RunView: React.FC<RunViewProps> = ({
               {isActive && onCancel && !isReplaying && (
                 <button
                   onClick={onCancel}
-                  className="px-4 text-sm py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="px-4 text-sm py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
                   <StopCircle size={16} />
                   Cancel Run
