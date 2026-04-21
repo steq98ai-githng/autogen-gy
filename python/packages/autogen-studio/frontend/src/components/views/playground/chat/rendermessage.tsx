@@ -118,7 +118,7 @@ const RenderToolCall: React.FC<{ content: FunctionCall[] }> = ({ content }) => {
           >
             <button
               onClick={() => toggleExpansion(call.id)}
-              className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors"
+              className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <DraftingCompass className="w-4 h-4 text-accent flex-shrink-0" />
               <span className="font-base text-sm">
@@ -176,7 +176,7 @@ const RenderToolResult: React.FC<{ content: FunctionExecutionResult[] }> = ({
           >
             <button
               onClick={() => toggleExpansion(result.call_id)}
-              className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors"
+              className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <DraftingCompass className="w-4 h-4 text-accent flex-shrink-0" />
               <span className="font-medium text-sm">
