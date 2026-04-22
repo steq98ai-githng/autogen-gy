@@ -162,7 +162,7 @@ const BaseNode = memo<BaseNodeProps>(
                         e.stopPropagation();
                         if (id) removeNode(id);
                       }}
-                      className="p-1 hover:bg-red-100 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                      className="p-1 hover:bg-red-100 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
                     >
                       <Trash2Icon className="w-4 h-4 text-red-500" />
                     </button>
