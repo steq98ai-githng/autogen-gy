@@ -159,7 +159,6 @@ const BaseNode = memo<BaseNodeProps>(
                     <button
                       aria-label={`Delete ${data.component.label || 'node'}`}
                       onClick={(e) => {
-                        console.log("remove node", id);
                         e.stopPropagation();
                         if (id) removeNode(id);
                       }}
