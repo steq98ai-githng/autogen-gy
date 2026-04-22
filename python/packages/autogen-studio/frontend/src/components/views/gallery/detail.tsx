@@ -117,6 +117,7 @@ const ComponentCard: React.FC<
         {allowDelete && (
           <Button
             title="Delete"
+            aria-label="Delete component"
             type="text"
             className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600"
             icon={<Trash className="w-3.5 h-3.5" />}
@@ -129,6 +130,7 @@ const ComponentCard: React.FC<
         )}
         <Button
           title="Duplicate"
+          aria-label="Duplicate component"
           type="text"
           className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity"
           icon={<Copy className="w-3.5 h-3.5" />}
@@ -140,6 +142,7 @@ const ComponentCard: React.FC<
         />
         <Button
           title="Edit"
+          aria-label="Edit component"
           type="text"
           className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity"
           icon={<Edit className="w-3.5 h-3.5" />}
@@ -514,6 +517,7 @@ export const GalleryDetail: React.FC<{
                 <div className="flex gap-0">
                   <Tooltip title="Edit Gallery">
                     <Button
+                      aria-label="Edit Gallery"
                       icon={<Edit className="w-4 h-4" />}
                       onClick={() => setIsEditingDetails(true)}
                       type="text"
@@ -523,6 +527,7 @@ export const GalleryDetail: React.FC<{
                   </Tooltip>
                   <Tooltip title="Download Gallery">
                     <Button
+                      aria-label="Download Gallery"
                       icon={<Download className="w-4 h-4" />}
                       onClick={handleDownload}
                       type="text"
@@ -533,6 +538,7 @@ export const GalleryDetail: React.FC<{
                     title={isJsonEditing ? "Form Editor" : "JSON Editor"}
                   >
                     <Button
+                      aria-label={isJsonEditing ? "Open Form Editor" : "Open JSON Editor"}
                       icon={
                         isJsonEditing ? (
                           <FormInput className="w-4 h-4" />

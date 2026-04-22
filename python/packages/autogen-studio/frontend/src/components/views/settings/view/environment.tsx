@@ -312,6 +312,7 @@ export const EnvironmentVariablesPanel: React.FC<
       render: (_, record) => (
         <Tooltip title="Delete variable">
           <Button
+            aria-label="Delete variable"
             type="text"
             danger
             icon={<Trash2 className="w-4 h-4" />}
