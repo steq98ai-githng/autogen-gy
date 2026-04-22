@@ -102,8 +102,8 @@ class IDESystemController:
             self.persist_knowledge(task_description, False, [])
 
     def persist_knowledge(self, task: str, success: bool, logs: List[str]):
-        date_str = datetime.datetime.now().strftime("%Y%m%d")
-        file_path = os.path.join(self.kb_path, f"seed_knowledge_v{date_str}.json")
+        timestamp_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = os.path.join(self.kb_path, f"seed_knowledge_{timestamp_str}.json")
         data = {
             "version": f"v{date_str}",
             "timestamp": datetime.datetime.now().isoformat(),
