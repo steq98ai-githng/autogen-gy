@@ -122,6 +122,7 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
           <Tooltip title="Create new team">
             <Button
               type="text"
+              aria-label="Create new team"
               className="w-full p-2 flex justify-center"
               onClick={() => createTeam()}
               icon={<Plus className="w-4 h-4" />}
@@ -252,6 +253,7 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Tooltip title="Delete team">
                             <Button
+                              aria-label={`Delete team ${team.component?.label}`}
                               type="text"
                               size="small"
                               className="p-0 min-w-[24px] h-6"
@@ -350,6 +352,7 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
                     <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Tooltip title="Use as template">
                         <Button
+                          aria-label={`Use template ${galleryTeam.label}`}
                           type="text"
                           size="small"
                           className="p-0 min-w-[24px] h-6"
