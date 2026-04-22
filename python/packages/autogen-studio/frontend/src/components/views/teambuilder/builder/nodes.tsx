@@ -148,7 +148,7 @@ const BaseNode = memo<BaseNodeProps>(
                     e.stopPropagation();
                     setSelectedNode(id);
                   }}
-                  className="p-1 hover:bg-secondary rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="p-1 hover:bg-secondary rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
                   <Edit className="w-4 h-4 text-accent" />
                 </button>
