@@ -263,8 +263,16 @@ export const ClickableImage: React.FC<{
       <img
         src={safeSrc}
         alt={alt}
-        className={`${className} cursor-pointer rounded hover:opacity-90 transition-opacity`}
+        className={`${className} cursor-pointer rounded hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
         onClick={() => setIsFullScreen(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsFullScreen(true);
+          }
+        }}
       />
       {isFullScreen && (
         <FullScreenImage
