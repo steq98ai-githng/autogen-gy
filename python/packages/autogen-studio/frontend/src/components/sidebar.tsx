@@ -136,7 +136,7 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
           to="/"
           onClick={() => setNavigationHeader("/")}
           aria-label="Home"
-          className="w-8 text-right text-accent hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
+          className="w-8 text-right text-accent hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-md"
         >
           <Icon icon="app" size={8} />
         </Link>
