@@ -117,6 +117,7 @@ const RenderToolCall: React.FC<{ content: FunctionCall[] }> = ({ content }) => {
             className="border mt-1 border-secondary bg-secondary rounded hover:bg-tertiary transition-colors"
           >
             <button
+              aria-label={`Toggle details for ${call.name} tool`}
               onClick={() => toggleExpansion(call.id)}
               className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
@@ -175,6 +176,7 @@ const RenderToolResult: React.FC<{ content: FunctionExecutionResult[] }> = ({
             className="border mt-1 border-secondary bg-secondary rounded hover:bg-tertiary transition-colors"
           >
             <button
+              aria-label={`Toggle details for tool result ID ${result.call_id.slice(-8)}`}
               onClick={() => toggleExpansion(result.call_id)}
               className="w-full flex items-center gap-2 p-2 text-left hover:bg-secondary/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
