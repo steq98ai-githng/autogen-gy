@@ -54,10 +54,12 @@ class MockChatCompletionClient(ChatCompletionClient):
     async def close(self) -> None:
         pass
 
-    def actual_usage(self):
+    @property
+    def actual_usage(self) -> RequestUsage:
         return RequestUsage(prompt_tokens=10, completion_tokens=10)
 
-    def total_usage(self):
+    @property
+    def total_usage(self) -> RequestUsage:
         return RequestUsage(prompt_tokens=10, completion_tokens=10)
 
     def count_tokens(self, messages, tools=None):
