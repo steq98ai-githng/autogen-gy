@@ -135,7 +135,8 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
         <Link
           to="/"
           onClick={() => setNavigationHeader("/")}
-          className="w-8 text-right text-accent hover:opacity-80 transition-opacity"
+          aria-label="Home"
+          className="w-8 text-right text-accent hover:opacity-80 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded"
         >
           <Icon icon="app" size={8} />
         </Link>
@@ -175,9 +176,10 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
                     <Link
                       to={item.href}
                       onClick={() => handleNavClick(item)}
+                      aria-label={item.name}
                       className={classNames(
                         // Base styles
-                        "group  ml-1 flex gap-x-3 rounded-md mr-2  p-2 text-sm font-medium",
+                        "group  ml-1 flex gap-x-3 rounded-md mr-2  p-2 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                         !showFull && "justify-center",
                         // Color states
                         isActive
@@ -238,7 +240,8 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
                         ],
                       })
                     }
-                    className="group   flex gap-x-3 rounded-md p-2 text-sm font-medium text-primary hover:text-accent hover:bg-secondary justify-center"
+                    aria-label="Settings"
+                    className="group   flex gap-x-3 rounded-md p-2 text-sm font-medium text-primary hover:text-accent hover:bg-secondary justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
                     <Settings className="h-6 w-6 shrink-0 text-secondary group-hover:text-accent" />
                   </Link>
@@ -283,7 +286,8 @@ const Sidebar = ({ link, meta, isMobile }: SidebarProps) => {
                           ],
                         })
                       }
-                      className="group flex flex-1 gap-x-3 rounded-md p-2 text-sm font-medium text-primary hover:text-accent hover:bg-secondary"
+                      aria-label="Settings"
+                      className="group flex flex-1 gap-x-3 rounded-md p-2 text-sm font-medium text-primary hover:text-accent hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
                       <Settings className="h-6 w-6 shrink-0 text-secondary group-hover:text-accent" />
                       {showFull && "Settings"}
