@@ -20,3 +20,6 @@
 ## 2026-04-21 - [Accessible Diagram Nodes]
 **Learning:** Diagram/graph views often use compact, icon-only nodes where the interactive elements lack context. Using dynamic ARIA labels (e.g., incorporating the specific node's label) combined with visual tooltips and focus indicators significantly improves accessibility and clarity for both screen reader and sighted keyboard users.
 **Action:** Always wrap icon-only buttons inside node diagrams with `<Tooltip>`, apply dynamic `aria-label` attributes, and ensure `focus-visible` utility classes are present.
+## 2023-10-27 - Sidebar Icon-Only Link Accessibility
+**Learning:** When building collapsible sidebars where navigation items become icon-only, wrapping the routing component (`<Link>`) in an antd `<Tooltip>` (via an intermediary `<div>` or otherwise) does not reliably transfer an accessible name to the focusable inner element. Screen readers and keyboard users may still encounter generic links without context.
+**Action:** Always apply the `aria-label` attribute directly to the interactive component (e.g., the `<Link>`), and ensure there is a clear visual focus indicator (like `focus-visible:ring-2`) directly on the element itself rather than relying entirely on tooltip hover states.
