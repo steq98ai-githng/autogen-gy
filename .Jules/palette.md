@@ -23,3 +23,6 @@
 ## 2023-10-27 - Sidebar Icon-Only Link Accessibility
 **Learning:** When building collapsible sidebars where navigation items become icon-only, wrapping the routing component (`<Link>`) in an antd `<Tooltip>` (via an intermediary `<div>` or otherwise) does not reliably transfer an accessible name to the focusable inner element. Screen readers and keyboard users may still encounter generic links without context.
 **Action:** Always apply the `aria-label` attribute directly to the interactive component (e.g., the `<Link>`), and ensure there is a clear visual focus indicator (like `focus-visible:ring-2`) directly on the element itself rather than relying entirely on tooltip hover states.
+## 2024-04-25 - Tooltip Aria Labels
+**Learning:** Tooltips do not always automatically provide accessible names to child buttons depending on component library internals, leaving icon-only buttons completely unlabelled to screen readers. Applying `aria-label` directly to the button element within a tooltip fixes this pattern.
+**Action:** Always add explicit `aria-label` attributes to icon-only buttons, even when wrapped in a Tooltip component.

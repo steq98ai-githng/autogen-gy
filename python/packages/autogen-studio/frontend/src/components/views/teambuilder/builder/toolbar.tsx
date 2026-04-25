@@ -81,6 +81,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
             <Tooltip title="Undo">
               <Button
                 type="text"
+                aria-label="Undo"
                 icon={<Undo2 size={18} />}
                 className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={onUndo}
@@ -91,6 +92,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
             <Tooltip title="Redo">
               <Button
                 type="text"
+                aria-label="Redo"
                 icon={<Redo2 size={18} />}
                 className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={onRedo}
@@ -102,6 +104,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
             >
               <Button
                 type="text"
+                aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
                 icon={
                   isFullscreen ? (
                     <Minimize2 size={18} />
@@ -119,6 +122,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
         <Tooltip title="Save Changes">
           <Button
             type="text"
+            aria-label="Save Changes"
             icon={
               <div className="relative">
                 <Save size={18} />
@@ -136,6 +140,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
         <Tooltip title={isJsonMode ? "Switch to Visual" : "Switch to JSON"}>
           <Button
             type="text"
+            aria-label={isJsonMode ? "Switch to Visual" : "Switch to JSON"}
             icon={isJsonMode ? <Cable size={18} /> : <Code2 size={18} />}
             className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
             onClick={onToggleView}
@@ -151,6 +156,7 @@ export const TeamBuilderToolbar: React.FC<TeamBuilderToolbarProps> = ({
           >
             <Button
               type="text"
+              aria-label="More Options"
               icon={<MoreHorizontal size={18} />}
               className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
               title="More Options"
