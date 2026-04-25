@@ -7,7 +7,7 @@ import {
   getBezierPath,
   BaseEdge,
 } from "@xyflow/react";
-import { Tooltip } from "antd";
+import { Tooltip, Popconfirm } from "antd";
 import {
   LucideIcon,
   Users,
@@ -156,16 +156,24 @@ const BaseNode = memo<BaseNodeProps>(
               {showDelete && (
                 <>
                   <Tooltip title="Delete Node">
-                    <button
-                      aria-label={`Delete ${data.component.label || 'node'}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
+                    <Popconfirm
+                      title="Delete Node"
+                      description="Are you sure you want to delete this node?"
+                      onConfirm={(e) => {
+                        e?.stopPropagation();
                         if (id) removeNode(id);
                       }}
-                      className="p-1 hover:bg-red-100 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                      onCancel={(e) => e?.stopPropagation()}
+                      okButtonProps={{ danger: true }}
                     >
-                      <Trash2Icon className="w-4 h-4 text-red-500" />
-                    </button>
+                      <button
+                        aria-label={`Delete ${data.component.label || 'node'}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="p-1 hover:bg-red-100 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+                      >
+                        <Trash2Icon className="w-4 h-4 text-red-500" />
+                      </button>
+                    </Popconfirm>
                   </Tooltip>
                 </>
               )}

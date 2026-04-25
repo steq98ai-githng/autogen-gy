@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip, Popconfirm } from "antd";
 import {
   Plus,
   Edit,
@@ -167,18 +167,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   />
                 </Tooltip>
                 <Tooltip title="Delete session">
-                  <Button
-                    aria-label={`Delete session ${s.name}`}
-                    type="text"
-                    size="small"
-                    className="p-1 min-w-[24px] h-6"
-                    danger
-                    icon={<Trash2 className="w-4 h-4 text-red-500" />}
-                    onClick={(e) => {
-                      e.stopPropagation();
+                  <Popconfirm
+                    title="Delete session"
+                    description="Are you sure you want to delete this session?"
+                    onConfirm={(e) => {
+                      e?.stopPropagation();
                       if (s.id) onDeleteSession(s.id);
                     }}
-                  />
+                    onCancel={(e) => e?.stopPropagation()}
+                    okButtonProps={{ danger: true }}
+                  >
+                    <Button
+                      aria-label={`Delete session ${s.name}`}
+                      type="text"
+                      size="small"
+                      className="p-1 min-w-[24px] h-6"
+                      danger
+                      icon={<Trash2 className="w-4 h-4 text-red-500" />}
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  </Popconfirm>
                 </Tooltip>
               </div>
             </div>

@@ -9,6 +9,7 @@ import {
   message,
   Tooltip,
   Card,
+  Popconfirm,
 } from "antd";
 import type { FormInstance, InputRef } from "antd";
 import { Plus, Trash2, Save, Edit, TriangleAlert } from "lucide-react";
@@ -311,13 +312,19 @@ export const EnvironmentVariablesPanel: React.FC<
       dataIndex: "operation",
       render: (_, record) => (
         <Tooltip title="Delete variable">
-          <Button
-            aria-label="Delete variable"
-            type="text"
-            danger
-            icon={<Trash2 className="w-4 h-4" />}
-            onClick={() => handleDelete(record.key)}
-          />
+          <Popconfirm
+            title="Delete variable"
+            description="Are you sure you want to delete this variable?"
+            onConfirm={() => handleDelete(record.key)}
+            okButtonProps={{ danger: true }}
+          >
+            <Button
+              aria-label="Delete variable"
+              type="text"
+              danger
+              icon={<Trash2 className="w-4 h-4" />}
+            />
+          </Popconfirm>
         </Tooltip>
       ),
     },

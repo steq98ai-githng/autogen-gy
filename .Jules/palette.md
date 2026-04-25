@@ -23,3 +23,6 @@
 ## 2023-10-27 - Sidebar Icon-Only Link Accessibility
 **Learning:** When building collapsible sidebars where navigation items become icon-only, wrapping the routing component (`<Link>`) in an antd `<Tooltip>` (via an intermediary `<div>` or otherwise) does not reliably transfer an accessible name to the focusable inner element. Screen readers and keyboard users may still encounter generic links without context.
 **Action:** Always apply the `aria-label` attribute directly to the interactive component (e.g., the `<Link>`), and ensure there is a clear visual focus indicator (like `focus-visible:ring-2`) directly on the element itself rather than relying entirely on tooltip hover states.
+## 2025-02-15 - Popconfirm on Destructive Actions
+**Learning:** Users can accidentally delete critical resources (sessions, galleries, teams) when delete buttons lack confirmation prompts. Relying solely on tooltips and danger styling is insufficient for safe UX.
+**Action:** Wrapped all destructive "Delete" buttons in `antd` `Popconfirm` components across list views and details. Handled `stopPropagation` carefully to prevent list row selection when interacting with the confirmation dialog.

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Button, Tooltip, Select, message } from "antd";
+import { Button, Tooltip, Select, message, Popconfirm } from "antd";
 import {
   Bot,
   Plus,
@@ -252,18 +252,26 @@ export const TeamSidebar: React.FC<TeamSidebarProps> = ({
                         </span>
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                           <Tooltip title="Delete team">
-                            <Button
-                              aria-label={`Delete team ${team.component?.label}`}
-                              type="text"
-                              size="small"
-                              className="p-0 min-w-[24px] h-6"
-                              danger
-                              icon={<Trash2 className="w-4 h-4 text-red-500" />}
-                              onClick={(e) => {
-                                e.stopPropagation();
+                            <Popconfirm
+                              title="Delete team"
+                              description="Are you sure you want to delete this team?"
+                              onConfirm={(e) => {
+                                e?.stopPropagation();
                                 if (team.id) onDeleteTeam(team.id);
                               }}
-                            />
+                              onCancel={(e) => e?.stopPropagation()}
+                              okButtonProps={{ danger: true }}
+                            >
+                              <Button
+                                aria-label={`Delete team ${team.component?.label}`}
+                                type="text"
+                                size="small"
+                                className="p-0 min-w-[24px] h-6"
+                                danger
+                                icon={<Trash2 className="w-4 h-4 text-red-500" />}
+                                onClick={(e) => e.stopPropagation()}
+                              />
+                            </Popconfirm>
                           </Tooltip>
                         </div>
                       </div>
