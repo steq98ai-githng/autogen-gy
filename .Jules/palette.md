@@ -23,3 +23,7 @@
 ## 2023-10-27 - Sidebar Icon-Only Link Accessibility
 **Learning:** When building collapsible sidebars where navigation items become icon-only, wrapping the routing component (`<Link>`) in an antd `<Tooltip>` (via an intermediary `<div>` or otherwise) does not reliably transfer an accessible name to the focusable inner element. Screen readers and keyboard users may still encounter generic links without context.
 **Action:** Always apply the `aria-label` attribute directly to the interactive component (e.g., the `<Link>`), and ensure there is a clear visual focus indicator (like `focus-visible:ring-2`) directly on the element itself rather than relying entirely on tooltip hover states.
+
+## 2026-04-26 - [AgentFlowToolbar Accessibility]
+**Learning:** Interactive icon-only elements in the agent flow toolbar (like fullscreen, layout toggle, labels toggle, and more options) lacked ARIA labels and focus indicators. This severely hindered screen reader clarity and keyboard navigation accessibility in the playground view.
+**Action:** Always ensure that every actionable icon-only button possesses a semantic `aria-label` (or `title`) that dynamically reflects its state, and explicitly apply `focus:outline-none focus-visible:ring-2 focus-visible:ring-accent` for uniform keyboard accessibility.
