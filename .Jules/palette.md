@@ -23,3 +23,6 @@
 ## 2023-10-27 - Sidebar Icon-Only Link Accessibility
 **Learning:** When building collapsible sidebars where navigation items become icon-only, wrapping the routing component (`<Link>`) in an antd `<Tooltip>` (via an intermediary `<div>` or otherwise) does not reliably transfer an accessible name to the focusable inner element. Screen readers and keyboard users may still encounter generic links without context.
 **Action:** Always apply the `aria-label` attribute directly to the interactive component (e.g., the `<Link>`), and ensure there is a clear visual focus indicator (like `focus-visible:ring-2`) directly on the element itself rather than relying entirely on tooltip hover states.
+## 2026-04-26 - Tooltips on Disabled Buttons
+**Learning:** React UI component libraries (like antd Tooltip) often fail to trigger when attached directly to disabled buttons because disabled buttons swallow mouse events in many browsers.
+**Action:** When adding Tooltips to buttons that have a disabled state, wrap the button in a `<span className="inline-block">` (or similar container) and attach the Tooltip to the container instead to ensure it still shows when the button is disabled.
