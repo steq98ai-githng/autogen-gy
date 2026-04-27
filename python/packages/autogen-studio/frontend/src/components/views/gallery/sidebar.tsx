@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Tooltip } from "antd";
+import { Button, Tooltip, Popconfirm } from "antd";
 import {
   Plus,
   Trash2,
@@ -43,7 +43,7 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`Galleries (${galleries.length})`}>
             <button
-              aria-label={`Galleries (${galleries.length})`}
+              aria-label={`Toggle sidebar: Galleries (${galleries.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -173,19 +173,28 @@ export const GallerySidebar: React.FC<GallerySidebarProps> = ({
                           : "Delete gallery"
                       }
                     >
-                      <Button
-                        aria-label={`Delete gallery ${gallery.config.name}`}
-                        type="text"
-                        size="small"
-                        className="p-0 min-w-[24px] h-6"
-                        danger
-                        disabled={galleries.length === 1}
-                        icon={<Trash2 className="w-4 h-4 text-red-500" />}
-                        onClick={(e) => {
-                          e.stopPropagation();
+                      <Popconfirm
+                        title="Delete gallery"
+                        description="Are you sure you want to delete this gallery?"
+                        onConfirm={(e) => {
+                          e?.stopPropagation();
                           onDeleteGallery(gallery.id!);
                         }}
-                      />
+                        onCancel={(e) => e?.stopPropagation()}
+                        okButtonProps={{ danger: true }}
+                        disabled={galleries.length === 1}
+                      >
+                        <Button
+                          aria-label={`Delete gallery ${gallery.config.name}`}
+                          type="text"
+                          size="small"
+                          className="p-0 min-w-[24px] h-6"
+                          danger
+                          disabled={galleries.length === 1}
+                          icon={<Trash2 className="w-4 h-4 text-red-500" />}
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      </Popconfirm>
                     </Tooltip>
                   </div>
                 </div>

@@ -25,7 +25,7 @@ export const SettingsSidebar: React.FC<SettingsSidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title={`Settings (${sections.length})`}>
             <button
-              aria-label={`Settings (${sections.length})`}
+              aria-label={`Toggle sidebar: Settings (${sections.length})`}
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >

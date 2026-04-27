@@ -80,10 +80,11 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
         <Tooltip title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}>
           <Button
             type="text"
+            aria-label={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
             icon={
               isFullscreen ? <Minimize2 size={18} /> : <Maximize2 size={18} />
             }
-            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={onToggleFullscreen}
           />
         </Tooltip>
@@ -95,6 +96,7 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
         >
           <Button
             type="text"
+            aria-label={`Switch to ${settings.direction === "TB" ? "Horizontal" : "Vertical"} Layout`}
             icon={
               settings.direction === "TB" ? (
                 <ArrowDown size={18} />
@@ -102,7 +104,7 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
                 <ArrowRight size={18} />
               )
             }
-            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() =>
               setAgentFlowSettings({
                 direction: settings.direction === "TB" ? "LR" : "TB",
@@ -114,6 +116,7 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
         <Tooltip title={settings.showLabels ? "Hide Labels" : "Show Labels"}>
           <Button
             type="text"
+            aria-label={settings.showLabels ? "Hide Labels" : "Show Labels"}
             icon={
               settings.showLabels ? (
                 <MessageSquareIcon size={18} />
@@ -121,7 +124,7 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
                 <MessageSquareOffIcon size={18} />
               )
             }
-            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={toggleSetting("showLabels")}
           />
         </Tooltip>
@@ -136,8 +139,9 @@ export const AgentFlowToolbar: React.FC<AgentFlowToolbarProps> = ({
         >
           <Button
             type="text"
+            aria-label="More Options"
             icon={<MoreHorizontal size={18} />}
-            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+            className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             title="More Options" // Use native title instead of Tooltip
           />
         </Dropdown>

@@ -58,8 +58,9 @@ export const CodeSection: React.FC<CodeSectionProps> = ({
       <div className="relative bg-secondary text-sm p-4 rounded overflow-auto scroll h-72">
         <MonacoEditor language={language} editorRef={editorRef} value={code} />
         <button
+          aria-label="Copy code to clipboard"
           onClick={() => onCopy(code)}
-          className="absolute right-2 top-2 p-2  bg-secondary hover:bg-primary rounded-md"
+          className="absolute right-2 top-2 p-2  bg-secondary hover:bg-primary rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
           <Copy className="w-4 h-4 hover:text-accent transition duration-100" />
         </button>
