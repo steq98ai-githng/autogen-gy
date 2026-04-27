@@ -460,7 +460,7 @@ export default function ChatInput({
             </div>
 
             <Tooltip title={loading ? "Sending message" : "Send message"}>
-              <span className="inline-block">
+              <span className={`inline-block ${ (isInputDisabled || (text.trim() === "" && fileList.length === 0)) ? "cursor-not-allowed" : "" }`}>
                 <button
                   type="button"
                   onClick={handleSubmit}
