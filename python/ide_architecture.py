@@ -97,7 +97,7 @@ class AutoGenIDEArchitecture:
 def persist_knowledge(data: Dict[str, Any]) -> None:
     """Persists output knowledge to a JSON file."""
     # Ensure date strictly matches the request
-    date_str = "20260425"
+    date_str = datetime.now().strftime("%Y%m%d")
     filename = f"../knowledge_base/seed_knowledge_v{date_str}.json"
 
     knowledge_entry = {
