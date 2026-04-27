@@ -128,7 +128,6 @@ const ComponentCard: React.FC<
             disabled={disabled}
           >
             <Button
-              title="Delete"
               aria-label="Delete component"
               type="text"
               className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600"
