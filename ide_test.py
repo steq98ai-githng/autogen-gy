@@ -76,7 +76,7 @@ class AutoGenIDEArchitecture:
         messages = []
         async for msg in result_stream:
             if hasattr(msg, "content"):
-                messages.append(f"[{msg.source}]: {msg.content}")
+                messages.append(f"[{getattr(msg, 'source', 'user')}]: {msg.content}")
 
         optimized_knowledge = "\n".join(messages)
 
