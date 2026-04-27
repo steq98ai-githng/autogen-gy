@@ -177,17 +177,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                   onCancel={(e) => {
                     e?.stopPropagation();
                   }}
+                  onClick={(e) => e.stopPropagation()}
                 >
-                  <div onClick={(e) => e.stopPropagation()} className="inline-block">
-                    <Button
-                      aria-label={`Delete session ${s.name}`}
-                      type="text"
-                      size="small"
-                      className="p-1 min-w-[24px] h-6"
-                      danger
-                      icon={<Trash2 className="w-4 h-4 text-red-500" />}
-                    />
-                  </div>
+                  <Button
+                    aria-label={`Delete session ${s.name}`}
+                    type="text"
+                    size="small"
+                    className="p-1 min-w-[24px] h-6"
+                    danger
+                    icon={<Trash2 className="w-4 h-4 text-red-500" />}
+                  />
                 </Popconfirm>
               </div>
             </div>
