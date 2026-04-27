@@ -43,13 +43,15 @@ class SeedKnowledgeManager:
 
     def load(self) -> Dict:
         if os.path.exists(self.filepath):
-            with open(self.filepath, "r") as f:
-                data = json.load(f)
-                if "history" not in data:
-                    data["history"] = []
-                if "modules" not in data:
-                    data["modules"] = []
-                return data
+            try:
+                with open(self.filepath, "r") as f:
+                    data = json.load(f)
+                    if isinstance(data, dict):
+                        data.setdefault("history", [])
+                        data.setdefault("modules", [])
+                        return data
+            except (json.JSONDecodeError, IOError):
+                pass
         return {"version": "v1.0", "summary": "Initial seed", "history": [], "modules": []}
 
     def save(self, data: Dict):
