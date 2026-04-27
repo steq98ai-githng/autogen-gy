@@ -1,0 +1,28 @@
+--- python/packages/autogen-studio/frontend/src/components/views/playground/sidebar.tsx
++++ python/packages/autogen-studio/frontend/src/components/views/playground/sidebar.tsx
+@@ -174,15 +174,16 @@
+                   onCancel={(e) => {
+                     e?.stopPropagation();
+                   }}
+-                  onClick={(e) => e.stopPropagation()}
+                 >
+-                  <Button
+-                    aria-label={`Delete session ${s.name}`}
+-                    type="text"
+-                    size="small"
+-                    className="p-1 min-w-[24px] h-6"
+-                    danger
+-                    icon={<Trash2 className="w-4 h-4 text-red-500" />}
+-                  />
++                  <div onClick={(e) => e.stopPropagation()} className="inline-block">
++                    <Button
++                      aria-label={`Delete session ${s.name}`}
++                      type="text"
++                      size="small"
++                      className="p-1 min-w-[24px] h-6"
++                      danger
++                      icon={<Trash2 className="w-4 h-4 text-red-500" />}
++                    />
++                  </div>
+                 </Popconfirm>
+               </div>

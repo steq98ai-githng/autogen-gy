@@ -33,7 +33,7 @@ export const LabsSidebar: React.FC<LabsSidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title="Documentation">
             <button
-              aria-label="Open Labs Sidebar"
+              aria-label="Toggle sidebar: Documentation"
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >

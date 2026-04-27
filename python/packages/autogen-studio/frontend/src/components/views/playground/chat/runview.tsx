@@ -365,6 +365,7 @@ const RunView: React.FC<RunViewProps> = ({
               {!isReplaying && !originalRun && (
                 <div className="flex items-center gap-0">
                   <button
+                    aria-label={`Replay Run at ${replaySpeed}x speed`}
                     onClick={startReplay}
                     className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus:z-10"
                   >
@@ -420,6 +421,7 @@ const RunView: React.FC<RunViewProps> = ({
               {isReplaying && (
                 <div className="flex items-center gap-0">
                   <button
+                    aria-label={`Pause Replay at ${replaySpeed}x speed`}
                     onClick={pauseReplay}
                     className="p-1 px-2 rounded-l hover:bg-secondary transition-colors text-accent hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   >
@@ -475,6 +477,7 @@ const RunView: React.FC<RunViewProps> = ({
 
               {(isReplaying || originalRun) && (
                 <button
+                  aria-label="Reset Replay"
                   onClick={resetReplay}
                   className="p-1 px-2 rounded hover:bg-secondary transition-colors text-secondary hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                 >
@@ -523,6 +526,7 @@ const RunView: React.FC<RunViewProps> = ({
               {/* Cancel Button - More prominent placement */}
               {isActive && onCancel && !isReplaying && (
                 <button
+                  aria-label="Cancel Run"
                   onClick={onCancel}
                   className="px-4 text-sm py-2 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                 >
@@ -561,6 +565,8 @@ const RunView: React.FC<RunViewProps> = ({
                 <div className="flex pt-2">
                   <div className="flex-1">
                     <button
+                      aria-label={isExpanded ? "Hide Agent steps" : "Show Agent steps"}
+                      aria-expanded={isExpanded}
                       onClick={() => setIsExpanded(!isExpanded)}
                       className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >

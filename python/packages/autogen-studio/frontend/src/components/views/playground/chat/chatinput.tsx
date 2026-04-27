@@ -459,26 +459,29 @@ export default function ChatInput({
               </Upload>
             </div>
 
-            <button
-              type="button"
-              onClick={handleSubmit}
-              disabled={
-                isInputDisabled || (text.trim() === "" && fileList.length === 0)
-              }
-              aria-label={loading ? "Sending message" : "Send message"}
-              title={loading ? "Sending message" : "Send message"}
-              className={`bg-accent transition duration-300 rounded flex justify-center items-center w-11 h-9 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
-                isInputDisabled || (text.trim() === "" && fileList.length === 0)
-                  ? "cursor-not-allowed opacity-50"
-                  : "hover:brightness-75"
-              }`}
-            >
-              {loading ? (
-                <Cog6ToothIcon className="text-white animate-spin rounded-full h-6 w-6" />
-              ) : (
-                <PaperAirplaneIcon className="h-6 w-6 text-white" />
-              )}
-            </button>
+            <Tooltip title={loading ? "Sending message" : "Send message"}>
+              <span className={`inline-block ${ (isInputDisabled || (text.trim() === "" && fileList.length === 0)) ? "cursor-not-allowed" : "" }`}>
+                <button
+                  type="button"
+                  onClick={handleSubmit}
+                  disabled={
+                    isInputDisabled || (text.trim() === "" && fileList.length === 0)
+                  }
+                  aria-label={loading ? "Sending message" : "Send message"}
+                  className={`bg-accent transition duration-300 rounded flex justify-center items-center w-11 h-9 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${
+                    isInputDisabled || (text.trim() === "" && fileList.length === 0)
+                      ? "cursor-not-allowed opacity-50"
+                      : "hover:brightness-75"
+                  }`}
+                >
+                  {loading ? (
+                    <Cog6ToothIcon className="text-white animate-spin rounded-full h-6 w-6" />
+                  ) : (
+                    <PaperAirplaneIcon className="h-6 w-6 text-white" />
+                  )}
+                </button>
+              </span>
+            </Tooltip>
           </div>
         </form>
       </div>
