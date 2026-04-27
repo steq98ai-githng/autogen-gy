@@ -33,7 +33,7 @@ const SettingToggle: React.FC<SettingToggleProps> = ({
 }) => (
   <div className="flex justify-between items-start p-4 hover:bg-secondary/5 rounded transition-colors">
     <div className="flex flex-col gap-1">
-      <label className="font-medium">{label}</label>
+      <label htmlFor={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`} className="font-medium cursor-pointer">{label}</label>
       {description && (
         <span className="text-sm text-secondary">{description}</span>
       )}
@@ -75,13 +75,14 @@ const SettingNumberInput: React.FC<SettingNumberInputProps> = ({
 }) => (
   <div className="flex justify-between items-start p-4 hover:bg-secondary rounded transition-colors">
     <div className="flex flex-col gap-1">
-      <label className="font-medium">{label}</label>
+      <label htmlFor={`input-${label.replace(/\s+/g, "-").toLowerCase()}`} className="font-medium cursor-pointer">{label}</label>
       {description && (
         <span className="text-sm text-secondary">{description}</span>
       )}
     </div>
     <div className="flex items-center gap-2">
       <input
+        id={`input-${label.replace(/\s+/g, "-").toLowerCase()}`}
         type="number"
         value={value}
         onChange={(e) => {
