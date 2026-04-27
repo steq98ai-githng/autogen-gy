@@ -196,12 +196,13 @@ export const TeamFields: React.FC<TeamFieldsProps> = ({
                     </div>
                   </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-primary">
+                  <div className="block">
+                    <label htmlFor="emit-team-events" className="text-sm font-medium text-primary cursor-pointer">
                       Emit Team Events
-                    </span>
-                    <div className="mt-1">
+                    </label>
+                    <div className="mt-1 flex items-center">
                       <input
+                        id="emit-team-events"
                         type="checkbox"
                         checked={component.config.emit_team_events || false}
                         onChange={(e) =>
@@ -210,13 +211,13 @@ export const TeamFields: React.FC<TeamFieldsProps> = ({
                             e.target.checked
                           )
                         }
-                        className="mr-2"
+                        className="mr-2 cursor-pointer"
                       />
-                      <span className="text-sm text-secondary">
+                      <label htmlFor="emit-team-events" className="text-sm text-secondary cursor-pointer">
                         Enable team event emission for debugging and monitoring
-                      </span>
+                      </label>
                     </div>
-                  </label>
+                  </div>
                 </div>
               )}
 

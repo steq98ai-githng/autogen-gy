@@ -24,6 +24,7 @@ const ValidationErrorView: React.FC<ValidationErrorViewProps> = ({
     >
       <Tooltip title="Close">
         <button
+          aria-label="Close"
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-full bg-tertiary  hover:bg-secondary text-primary transition-colors"
         >

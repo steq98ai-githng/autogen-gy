@@ -33,6 +33,7 @@ export const DeploySidebar: React.FC<DeploySidebarProps> = ({
         <div className="p-2 -ml-2">
           <Tooltip title="Documentation">
             <button
+              aria-label="Toggle sidebar: Documentation"
               onClick={onToggle}
               className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
             >
@@ -57,6 +58,7 @@ export const DeploySidebar: React.FC<DeploySidebarProps> = ({
         </div>
         <Tooltip title="Close Sidebar">
           <button
+            aria-label="Close Sidebar"
             onClick={onToggle}
             className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
           >
