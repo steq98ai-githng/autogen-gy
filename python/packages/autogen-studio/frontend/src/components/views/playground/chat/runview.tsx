@@ -566,6 +566,7 @@ const RunView: React.FC<RunViewProps> = ({
                   <div className="flex-1">
                     <button
                       aria-label={isExpanded ? "Hide Agent steps" : "Show Agent steps"}
+                      aria-expanded={isExpanded}
                       onClick={() => setIsExpanded(!isExpanded)}
                       className="flex items-center gap-1 text-sm text-secondary hover:text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                     >
