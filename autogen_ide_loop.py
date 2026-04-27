@@ -83,7 +83,7 @@ Provide actionable fixes. If correct, return 'APPROVE'."""
     system = AssistantAgent(
         name="System_Controller",
         model_client=model_client,
-        description="""You act as the IDE environment and system controller. Check conditions and manage persistence."""
+        system_message="""You act as the IDE environment and system controller. Check conditions and manage persistence."""
     )
 
     # Module 4: Group Chat Manager
