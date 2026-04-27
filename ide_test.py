@@ -100,7 +100,7 @@ def persist_knowledge(data: Dict[str, Any]):
     }
 
     os.makedirs("knowledge_base", exist_ok=True)
-    with open(filename, "w") as f:
+    with open(filename, "w", encoding="utf-8") as f:
         json.dump(knowledge_entry, f, indent=4)
     print(f"Knowledge persisted to {filename}")
 
