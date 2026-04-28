@@ -860,8 +860,9 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           />
                         </label>
 
-                        <label className="flex items-center gap-2">
+                        <div className="flex items-center gap-2">
                           <input
+                            id="terminate-on-close"
                             type="checkbox"
                             checked={serverParams.terminate_on_close ?? true}
                             onChange={(e) =>
@@ -871,10 +872,10 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                             }
                             className="rounded"
                           />
-                          <span className="text-sm font-medium text-primary">
+                          <label htmlFor="terminate-on-close" className="text-sm font-medium text-primary cursor-pointer">
                             Terminate on Close
-                          </span>
-                        </label>
+                          </label>
+                        </div>
                       </>
                     )}
 
