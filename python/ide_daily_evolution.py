@@ -247,6 +247,6 @@ async def run_ide_team():
         print("\nAll daily evolution steps completed successfully.")
 
 if __name__ == "__main__":
-    SEED_FILE = "../knowledge_base/seed_knowledge_v20260428.json"
+    SEED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "knowledge_base", "seed_knowledge_v20260428.json")
     loop = DailyEvolutionLoop(seed_file=SEED_FILE)
     loop.run_daily_loop()
