@@ -30,3 +30,7 @@
 ## 2026-04-27 - [Forms Label Linking]
 **Learning:** Wrapping inputs with <label> tags is insufficient for screen readers if htmlFor and id are not explicitly defined, especially for custom UI controls like toggles.
 **Action:** Always link the label using htmlFor pointing to the input id, even when wrapping.
+
+## 2024-05-24 - Keyboard Focus States for Visually Hidden Inputs
+**Learning:** Found that the custom `SettingToggle` component in the settings view, which uses a visually hidden `<input type="checkbox">` styled as `sr-only`, lacked keyboard focus states. When users tabbed to the toggle, no visual indicator was shown.
+**Action:** When styling custom checkboxes with a hidden input and a visible `<label>`, apply the Tailwind `peer` class to the hidden input, and use `peer-focus-visible:ring-2` on the visible element (the label or its inner span) to ensure keyboard focus is properly surfaced to users.
