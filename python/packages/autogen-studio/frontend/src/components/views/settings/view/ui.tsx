@@ -94,7 +94,7 @@ const SettingNumberInput: React.FC<SettingNumberInputProps> = ({
         disabled={disabled}
         min={min}
         max={max}
-        className="w-16 px-2 py-1 text-sm border border-secondary rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 bg-primary"
+        className="w-16 px-2 py-1 text-sm border border-secondary rounded focus:border-accent outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 bg-primary"
       />
       {suffix && <span className="text-sm text-secondary">{suffix}</span>}
     </div>
