@@ -272,6 +272,7 @@ export const TerminationFields: React.FC<TerminationFieldsProps> = ({
                         <Edit className="w-4 h-4" />
                       </Button>
                       <Button
+                        aria-label="Remove Condition"
                         type="text"
                         danger
                         icon={<MinusCircle className="w-4 h-4" />}

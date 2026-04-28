@@ -868,6 +868,7 @@ export const AgentFields: React.FC<AgentFieldsProps> = ({
                                 <div className="flex items-center gap-2">
                                   {onNavigate && (
                                     <Button
+                                      aria-label="Edit Workbench"
                                       type="text"
                                       icon={<Edit className="w-4 h-4" />}
                                       onClick={() => {
@@ -883,6 +884,7 @@ export const AgentFields: React.FC<AgentFieldsProps> = ({
                                     />
                                   )}
                                   <Button
+                                    aria-label="Delete Workbench"
                                     type="text"
                                     danger
                                     icon={<Trash2 className="w-4 h-4" />}

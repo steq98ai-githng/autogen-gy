@@ -371,6 +371,7 @@ export const NestedComponentButton: React.FC<NestedComponentButtonProps> = ({
             </Button>
             {parentField === "tools" && (
               <Button
+                aria-label="Remove Tool"
                 type="text"
                 danger
                 icon={<MinusCircle className="w-4 h-4" />}
