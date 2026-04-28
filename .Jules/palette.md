@@ -27,3 +27,6 @@
 ## 2024-04-27 - Fully associating visible text labels with custom inputs
 **Learning:** Found instances where custom UI controls (like styled toggles or number inputs) had descriptive text placed nearby visually, but without semantic connection (missing `htmlFor` on the `<label>` and/or `id` on the `<input>`). This disconnect means the labels are not announced properly by screen readers, and clicking the text does not focus or toggle the control, creating a frustrating experience, especially on mobile or for users with motor impairments.
 **Action:** Always ensure any `<label>` text conceptually tied to an input is formally linked via `htmlFor` corresponding to the input's `id`. Additionally, adding `cursor-pointer` to the label text provides visual feedback that the label is an active click target.
+## 2026-04-27 - [Forms Label Linking]
+**Learning:** Wrapping inputs with <label> tags is insufficient for screen readers if htmlFor and id are not explicitly defined, especially for custom UI controls like toggles.
+**Action:** Always link the label using htmlFor pointing to the input id, even when wrapping.

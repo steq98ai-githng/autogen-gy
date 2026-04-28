@@ -126,6 +126,7 @@ const InputRequestView: React.FC<InputRequestProps> = ({
       </div>
       <div className="flex gap-2">
         <input
+          aria-label="Agent input request"
           ref={inputRef}
           type="text"
           value={response}
