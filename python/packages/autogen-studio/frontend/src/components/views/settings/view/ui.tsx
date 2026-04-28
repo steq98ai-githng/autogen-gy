@@ -44,12 +44,12 @@ const SettingToggle: React.FC<SettingToggleProps> = ({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className="sr-only"
+        className="sr-only peer"
         id={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`}
       />
       <label
         htmlFor={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`}
-        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 cursor-pointer ${
+        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 cursor-pointer ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         } ${checked ? "bg-accent" : "bg-gray-300"}`}
       >
@@ -94,7 +94,7 @@ const SettingNumberInput: React.FC<SettingNumberInputProps> = ({
         disabled={disabled}
         min={min}
         max={max}
-        className="w-16 px-2 py-1 text-sm border border-secondary rounded focus:border-accent focus:ring-1 focus:ring-accent outline-none disabled:opacity-50 bg-primary"
+        className="w-16 px-2 py-1 text-sm border border-secondary rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 bg-primary"
       />
       {suffix && <span className="text-sm text-secondary">{suffix}</span>}
     </div>
