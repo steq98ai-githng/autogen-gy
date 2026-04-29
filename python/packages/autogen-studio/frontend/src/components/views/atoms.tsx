@@ -160,7 +160,7 @@ export const TruncatableText = memo(
               title={isExpanded ? "Show less" : "Show more"}
               type="button"
               onClick={toggleExpand}
-              className="inline-flex items-center justify-center p-2 rounded bg-secondary text-primary hover:text-accent hover:scale-105 transition-all duration-300 z-10"
+              className="inline-flex items-center justify-center p-2 rounded bg-secondary text-primary hover:text-accent hover:scale-105 transition-all duration-300 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               aria-label={isExpanded ? "Show less" : "Show more"}
             >
               {isExpanded ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
@@ -172,7 +172,7 @@ export const TruncatableText = memo(
                 <button
                   type="button"
                   onClick={() => setIsFullscreen(true)}
-                  className="inline-flex items-center justify-center p-2 rounded bg-secondary text-primary hover:text-accent hover:scale-105 transition-all duration-300 z-10"
+                  className="inline-flex items-center justify-center p-2 rounded bg-secondary text-primary hover:text-accent hover:scale-105 transition-all duration-300 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="Toggle fullscreen"
                 >
                   <Maximize2 size={18} />
@@ -195,7 +195,7 @@ export const TruncatableText = memo(
               <Tooltip title="Close">
                 <button
                   onClick={() => setIsFullscreen(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-primary transition-colors"
+                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="Close fullscreen view"
                 >
                   <X size={24} />
@@ -235,7 +235,7 @@ const FullScreenImage: React.FC<{
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors"
+        className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         aria-label="Close fullscreen image"
       >
         <X size={24} />
