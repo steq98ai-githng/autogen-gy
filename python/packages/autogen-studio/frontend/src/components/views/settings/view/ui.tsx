@@ -44,12 +44,12 @@ const SettingToggle: React.FC<SettingToggleProps> = ({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className="sr-only"
+        className="sr-only peer"
         id={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`}
       />
       <label
         htmlFor={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`}
-        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50 cursor-pointer ${
+        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors focus:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-accent focus:ring-opacity-50 cursor-pointer ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         } ${checked ? "bg-accent" : "bg-gray-300"}`}
       >
