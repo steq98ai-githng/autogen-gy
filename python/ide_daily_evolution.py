@@ -163,7 +163,7 @@ def run_distillation_pipeline():
 
 async def main():
     seed_mgr = SeedKnowledgeManager("../knowledge_base")
-    seed_mgr.load_latest()
+    latest_knowledge = seed_mgr.load_latest()
 
     run_distillation_pipeline()
 
