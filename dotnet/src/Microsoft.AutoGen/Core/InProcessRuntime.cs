@@ -152,7 +152,7 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
         return this.agentInstances[agentId];
     }
 
-    public async ValueTask<AgentId> GetAgentAsync(AgentId agentId, bool lazy = true)
+    public async ValueTask<AgentId> Resolve(AgentId agentId, bool lazy = true)
     {
         if (!lazy)
         {
@@ -162,11 +162,11 @@ public sealed class InProcessRuntime : IAgentRuntime, IHostedService
         return agentId;
     }
 
-    public ValueTask<AgentId> GetAgentAsync(AgentType agentType, string key = "default", bool lazy = true)
-        => this.GetAgentAsync(new AgentId(agentType, key), lazy);
+    public ValueTask<AgentId> Resolve(AgentType agentType, string key = "default", bool lazy = true)
+        => this.Resolve(new AgentId(agentType, key), lazy);
 
-    public ValueTask<AgentId> GetAgentAsync(string agent, string key = "default", bool lazy = true)
-        => this.GetAgentAsync(new AgentId(agent, key), lazy);
+    public ValueTask<AgentId> Resolve(string agent, string key = "default", bool lazy = true)
+        => this.Resolve(new AgentId(agent, key), lazy);
 
     public async ValueTask<AgentMetadata> GetAgentMetadataAsync(AgentId agentId)
     {

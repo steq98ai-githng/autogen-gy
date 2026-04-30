@@ -27,7 +27,7 @@ public class AgentTests()
         });
 
         // Ensure the agent is actually created
-        AgentId agentId = await runtime.GetAgentAsync("MyAgent", lazy: false);
+        AgentId agentId = await runtime.Resolve("MyAgent", lazy: false);
 
         // Validate agent ID
         agentId.Should().Be(agent.Id, "Agent ID should match the registered agent");
@@ -56,7 +56,7 @@ public class AgentTests()
         });
 
         // Ensure the agent id is registered
-        AgentId agentId = await runtime.GetAgentAsync("MyAgent", lazy: false);
+        AgentId agentId = await runtime.Resolve("MyAgent", lazy: false);
 
         // Validate agent ID
         agentId.Should().Be(agent.Id, "Agent ID should match the registered agent");
@@ -122,7 +122,7 @@ public class AgentTests()
         });
 
         Assert.Null(agent);
-        await runtime.GetAgentAsync("MyAgent", lazy: false);
+        await runtime.Resolve("MyAgent", lazy: false);
         Assert.NotNull(agent);
         Assert.True(agent.ReceivedItems.Count == 0);
 

@@ -28,7 +28,7 @@ public class InProcessRuntimeTests()
         });
 
         // Ensure the agent is actually created
-        AgentId agentId = await runtime.GetAgentAsync("MyAgent", lazy: false);
+        AgentId agentId = await runtime.Resolve("MyAgent", lazy: false);
 
         // Validate agent ID
         agentId.Should().Be(agent.Id, "Agent ID should match the registered agent");
@@ -64,7 +64,7 @@ public class InProcessRuntimeTests()
         });
 
         // Ensure the agent is actually created
-        AgentId agentId = await runtime.GetAgentAsync("MyAgent", lazy: false);
+        AgentId agentId = await runtime.Resolve("MyAgent", lazy: false);
 
         // Validate agent ID
         agentId.Should().Be(agent.Id, "Agent ID should match the registered agent");
@@ -97,7 +97,7 @@ public class InProcessRuntimeTests()
         });
 
         // Get agent ID and instantiate agent by publishing
-        AgentId agentId = await runtime.GetAgentAsync("MyAgent", lazy: true);
+        AgentId agentId = await runtime.Resolve("MyAgent", lazy: true);
         await runtime.RegisterImplicitAgentSubscriptionsAsync<SubscribedSaveLoadAgent>("MyAgent");
         var topicType = "TestTopic";
         await runtime.PublishMessageAsync(new TextMessage { Source = topicType, Content = "test" }, new TopicId(topicType)).ConfigureAwait(true);
