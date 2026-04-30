@@ -41,7 +41,7 @@ internal sealed class AgentsContainer(IAgentRuntime hostingRuntime, IProtoSerial
         return this.agentInstances[agentId];
     }
 
-    public async ValueTask<Contracts.AgentId> GetAgentAsync(Contracts.AgentId agentId, bool lazy = true)
+    public async ValueTask<Contracts.AgentId> Resolve(Contracts.AgentId agentId, bool lazy = true)
     {
         if (!lazy)
         {
@@ -364,13 +364,13 @@ public sealed class GrpcAgentRuntime : IHostedService, IAgentRuntime, IMessageSi
         await this._messageRouter.RouteMessageAsync(msg, cancellationToken);
     }
 
-    public ValueTask<Contracts.AgentId> GetAgentAsync(Contracts.AgentId agentId, bool lazy = true) => this._agentsContainer.GetAgentAsync(agentId, lazy);
+    public ValueTask<Contracts.AgentId> Resolve(Contracts.AgentId agentId, bool lazy = true) => this._agentsContainer.Resolve(agentId, lazy);
 
-    public ValueTask<Contracts.AgentId> GetAgentAsync(AgentType agentType, string key = "default", bool lazy = true)
-        => this.GetAgentAsync(new Contracts.AgentId(agentType, key), lazy);
+    public ValueTask<Contracts.AgentId> Resolve(AgentType agentType, string key = "default", bool lazy = true)
+        => this.Resolve(new Contracts.AgentId(agentType, key), lazy);
 
-    public ValueTask<Contracts.AgentId> GetAgentAsync(string agent, string key = "default", bool lazy = true)
-        => this.GetAgentAsync(new Contracts.AgentId(agent, key), lazy);
+    public ValueTask<Contracts.AgentId> Resolve(string agent, string key = "default", bool lazy = true)
+        => this.Resolve(new Contracts.AgentId(agent, key), lazy);
 
     public async ValueTask<JsonElement> SaveAgentStateAsync(Contracts.AgentId agentId)
     {
