@@ -239,7 +239,7 @@ export const TeamFields: React.FC<TeamFieldsProps> = ({
                       </div>
                       {onNavigate && (
                         <Button
-                          aria-label="Edit Termination Condition"
+                          aria-label={`Edit Termination Condition: ${config.label || config.name}`}
                           type="text"
                           icon={<Edit className="w-4 h-4" />}
                           onClick={() =>
