@@ -53,7 +53,7 @@ const Header = ({ meta, link }: any) => {
                 }
               }}
               type="button"
-              className="flex-shrink-0 bg-primary p-1 text-secondary rounded-full hover:text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+              className="flex-shrink-0 bg-primary p-1 text-secondary rounded-full hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
             >
               <span className="sr-only">Toggle dark mode </span>
               {context.darkMode === "dark" && (
@@ -128,7 +128,7 @@ const Header = ({ meta, link }: any) => {
 
               <div className="flex items-center md:hidden">
                 {/* Mobile menu button */}
-                <DisclosureButton className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-secondary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
+                <DisclosureButton className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-secondary hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -151,7 +151,7 @@ const Header = ({ meta, link }: any) => {
                       {/* Profile dropdown */}
                       <Menu as="div" className="ml-4 relative flex-shrink-0">
                         <div>
-                          <MenuButton className="bg-primary rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent">
+                          <MenuButton className="bg-primary rounded-full flex text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent">
                             <span className="sr-only">Open user menu</span>
                             {userAvatarUrl && (
                               <img
@@ -257,7 +257,7 @@ const Header = ({ meta, link }: any) => {
                   </div>
                   <button
                     type="button"
-                    className="ml-auto flex-shrink-0 bg-primary p-1 text-secondary rounded-full hover:text-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent"
+                    className="ml-auto flex-shrink-0 bg-primary p-1 text-secondary rounded-full hover:text-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-accent"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />

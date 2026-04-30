@@ -55,7 +55,7 @@ const ContentHeader = ({
               className={classNames(
                 "p-2 rounded-md hover:bg-secondary",
                 "hover:text-accent text-secondary transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
+                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
               )}
             >
               {isExpanded ? (
