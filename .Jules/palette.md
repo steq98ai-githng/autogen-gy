@@ -30,3 +30,6 @@
 ## 2026-04-27 - [Forms Label Linking]
 **Learning:** Wrapping inputs with <label> tags is insufficient for screen readers if htmlFor and id are not explicitly defined, especially for custom UI controls like toggles.
 **Action:** Always link the label using htmlFor pointing to the input id, even when wrapping.
+## 2024-05-18 - [Forms Label Linking & Keyboard Accessibility]
+**Learning:** When using visually hidden `<input type="checkbox">` controls (via `sr-only`) styled via adjacent sibling labels in Tailwind, the visual label loses its keyboard focus outline, creating an accessibility failure for keyboard navigation users.
+**Action:** When implementing custom toggle/checkbox patterns with hidden inputs, always apply the `peer` class to the hidden `<input>` and use `peer-focus-visible:ring-2` (and associated classes) on the visual label element to ensure keyboard focus state is accurately rendered.
