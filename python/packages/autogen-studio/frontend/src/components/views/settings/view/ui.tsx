@@ -49,7 +49,7 @@ const SettingToggle: React.FC<SettingToggleProps> = ({
       />
       <label
         htmlFor={`toggle-${label.replace(/\s+/g, "-").toLowerCase()}`}
-        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-primary cursor-pointer ${
+        className={`relative inline-flex items-center h-6 rounded-full w-11 transition-colors peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-accent peer-focus-visible:ring-opacity-50 cursor-pointer ${
           disabled ? "opacity-50 cursor-not-allowed" : ""
         } ${checked ? "bg-accent" : "bg-gray-300"}`}
       >
