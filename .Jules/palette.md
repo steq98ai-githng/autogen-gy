@@ -34,3 +34,7 @@
 ## 2026-04-29 - [Added Keyboard Focus to Interactive Utility Buttons]
 **Learning:** In Autogen Studio, custom utility buttons like truncate expansion arrows and fullscreen modal triggers frequently lack visual focus indicators. This makes keyboard navigation difficult or impossible for non-mouse users.
 **Action:** When adding custom interactive buttons (e.g. icon-only utility toggles), always explicitly add Tailwind focus utilities such as `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent` to ensure they are fully navigable by keyboard.
+
+## 2024-05-10 - Sidebar Keyboard Accessibility
+**Learning:** In Autogen Studio, the main sidebars and various inner navigation sidebars have icon-only buttons for toggling visibility. While they have `aria-label`s, their focus indicator classes (`focus:ring-2`) were missing the `focus-visible:` prefix. This causes them to show an outline even when clicked with a mouse, which designers often dislike, or they lack visual focus entirely for keyboard users.
+**Action:** Always verify that interactive buttons use `focus-visible:` modifiers (e.g., `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent`) instead of `focus:` to ensure keyboard-only navigation is visually supported while maintaining a clean experience for mouse users.

@@ -52,7 +52,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <button
               aria-label={`Open sidebar, ${sessions.length} sessions`}
               onClick={onToggle}
-              className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
+              className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
             >
               <PanelLeftOpen strokeWidth={1.5} className="h-6 w-6" />
             </button>
@@ -86,7 +86,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <button
             aria-label="Close Sidebar"
             onClick={onToggle}
-            className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus:outline-none focus:ring-2 focus:ring-accent focus:ring-opacity-50"
+            className="p-2 rounded-md hover:bg-secondary hover:text-accent text-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-opacity-50"
           >
             <PanelLeftClose strokeWidth={1.5} className="h-6 w-6" />
           </button>
