@@ -195,7 +195,7 @@ export const TruncatableText = memo(
               <Tooltip title="Close">
                 <button
                   onClick={() => setIsFullscreen(false)}
-                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
                   aria-label="Close fullscreen view"
                 >
                   <X size={24} />
