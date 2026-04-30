@@ -159,7 +159,7 @@ export const TeamFields: React.FC<TeamFieldsProps> = ({
                           </span>
                           {onNavigate && (
                             <Button
-                              aria-label="Edit Model"
+                              aria-label={`Edit Model: ${model.label || model.name}`}
                               type="text"
                               icon={<Edit className="w-4 h-4" />}
                               onClick={() =>
