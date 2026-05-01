@@ -6,6 +6,7 @@ using Microsoft.AutoGen.RuntimeGateway.Grpc.Abstractions;
 using Microsoft.AutoGen.RuntimeGateway.Grpc.Tests.Helpers.Orleans;
 
 namespace Microsoft.AutoGen.RuntimeGateway.Grpc.Tests;
+
 public class MessageRegistryTests
 {
     public MessageRegistryTests() { }
