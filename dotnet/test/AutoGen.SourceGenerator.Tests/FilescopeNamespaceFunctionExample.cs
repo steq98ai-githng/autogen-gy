@@ -4,6 +4,7 @@
 using AutoGen.Core;
 
 namespace AutoGen.SourceGenerator.Tests;
+
 public partial class FilescopeNamespaceFunctionExample
 {
     [Function]

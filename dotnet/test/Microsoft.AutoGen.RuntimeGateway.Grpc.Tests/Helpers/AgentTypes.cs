@@ -2,6 +2,7 @@
 // AgentTypes.cs
 using Microsoft.AutoGen.Core;
 namespace Microsoft.AutoGen.RuntimeGateway.Grpc.Tests;
+
 public sealed class AgentTypes(Dictionary<string, Type> types)
 {
     public Dictionary<string, Type> Types { get; } = types;
