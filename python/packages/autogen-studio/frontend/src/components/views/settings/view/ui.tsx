@@ -237,31 +237,35 @@ export const UISettingsPanel: React.FC<UISettingsPanelProps> = ({ userId }) => {
         <h3 className="text-lg font-medium">UI Settings</h3>
         <div className="space-x-2 inline-flex">
           <Tooltip title="Reset to defaults">
-            <Button
-              icon={<RotateCcw className="w-4 h-4" />}
-              onClick={handleReset}
-              disabled={isSaving}
-            >
-              Reset
-            </Button>
+            <span className="inline-block">
+              <Button
+                icon={<RotateCcw className="w-4 h-4" />}
+                onClick={handleReset}
+                disabled={isSaving}
+              >
+                Reset
+              </Button>
+            </span>
           </Tooltip>
           <Tooltip title={isDirty ? "Save your changes" : "No unsaved changes"}>
-            <Button
-              type="primary"
-              icon={
-                <div className="relative">
-                  <Save className="w-4 h-4" />
-                  {isDirty && (
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
-                  )}
-                </div>
-              }
-              onClick={handleSave}
-              disabled={!isDirty || isSaving}
-              loading={isSaving}
-            >
-              Save
-            </Button>
+            <span className="inline-block">
+              <Button
+                type="primary"
+                icon={
+                  <div className="relative">
+                    <Save className="w-4 h-4" />
+                    {isDirty && (
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                    )}
+                  </div>
+                }
+                onClick={handleSave}
+                disabled={!isDirty || isSaving}
+                loading={isSaving}
+              >
+                Save
+              </Button>
+            </span>
           </Tooltip>
         </div>
       </div>
