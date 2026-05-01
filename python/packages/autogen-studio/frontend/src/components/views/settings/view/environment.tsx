@@ -373,21 +373,23 @@ export const EnvironmentVariablesPanel: React.FC<
             </Button>
           </Tooltip>
           <Tooltip title={isDirty ? "Save your changes" : "No unsaved changes"}>
-            <Button
-              type="primary"
-              icon={
-                <div className="relative">
-                  <Save className="w-4 h-4" />
-                  {isDirty && (
-                    <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
-                  )}
-                </div>
-              }
-              onClick={handleSave}
-              disabled={!isDirty}
-            >
-              Save
-            </Button>
+            <span className="inline-block">
+              <Button
+                type="primary"
+                icon={
+                  <div className="relative">
+                    <Save className="w-4 h-4" />
+                    {isDirty && (
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full" />
+                    )}
+                  </div>
+                }
+                onClick={handleSave}
+                disabled={!isDirty}
+              >
+                Save
+              </Button>
+            </span>
           </Tooltip>
         </div>
       </div>
