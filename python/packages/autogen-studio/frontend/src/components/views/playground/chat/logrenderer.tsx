@@ -58,7 +58,7 @@ const FullLogView = ({
         <button
           aria-label="Close"
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-tertiary hover:bg-secondary text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="absolute top-4 right-4 p-2 rounded-full bg-tertiary hover:bg-secondary text-primary transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
         >
           <X size={24} />
         </button>
