@@ -455,6 +455,7 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
 
           <Tooltip title="Run Team">
             <Button
+              aria-label="Run Team"
               type="primary"
               icon={<PlayCircle size={18} />}
               className="p-1.5 ml-2 px-2.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
