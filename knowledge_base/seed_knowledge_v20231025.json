@@ -1,0 +1,8 @@
+{
+  "version": "1.0",
+  "knowledge_axis": "IDE_Execution",
+  "modules": {
+    "AutoGen_Workflow": "RoundRobinGroupChat with Planner, Engineer, and Reviewer."
+  },
+  "overall_improvement": 100
+}
