@@ -48,7 +48,7 @@ class SeedKnowledgeManager:
         """Loads seed knowledge from file or returns default structure if not found."""
         if os.path.exists(self.filepath):
             try:
-                with open(self.filepath, "r") as f:
+                with open(self.filepath, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     if isinstance(data, dict):
                         data.setdefault("history", [])
