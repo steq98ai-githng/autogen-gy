@@ -1,0 +1,11 @@
+--- python/packages/autogen-studio/frontend/src/components/contentheader.tsx
++++ python/packages/autogen-studio/frontend/src/components/contentheader.tsx
+@@ -163,7 +163,7 @@
+             {/* User Menu */}
+             {user && (
+               <Menu as="div" className="relative">
+-                <MenuButton className="flex items-center rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
++                <MenuButton className="flex items-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2">
+                   <span className="sr-only">Open user menu</span>
+                   {safeAvatarUrl ? (
+                     <img

@@ -1,0 +1,20 @@
+--- python/packages/autogen-studio/frontend/src/components/views/teambuilder/builder/component-editor/fields/team-fields.tsx
++++ python/packages/autogen-studio/frontend/src/components/views/teambuilder/builder/component-editor/fields/team-fields.tsx
+@@ -159,7 +159,7 @@
+                           </span>
+                           {onNavigate && (
+                             <Button
+-                              aria-label={`Edit Model: ${model.label || model.name}`}
++                              aria-label={`Edit Model: ${component.config.model_client.label || component.config.model_client.provider}`}
+                               type="text"
+                               icon={<Edit className="w-4 h-4" />}
+                               onClick={() =>
+@@ -239,7 +239,7 @@
+                             {termination.component_type}
+                           </span>
+                           <Button
+-                            aria-label={`Edit Termination Condition: ${config.label}`}
++                            aria-label={`Edit Termination Condition: ${termination.label || termination.component_type}`}
+                             type="text"
+                             icon={<Edit className="w-4 h-4" />}
+                             onClick={() =>
