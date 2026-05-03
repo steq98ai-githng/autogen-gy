@@ -123,8 +123,7 @@ async def create_and_run_ide_loop(task: str, seed_knowledge: Dict[str, Any]) -> 
 
 
 async def main() -> None:
-    date_str = datetime.datetime.now().strftime("%Y%m%d")
-    filepath = f"knowledge_base/seed_knowledge_v{date_str}.json"
+    filepath = "knowledge_base/seed_knowledge.json"
     knowledge_manager = SeedKnowledgeManager(filepath)
     seed_knowledge = knowledge_manager.load()
 
