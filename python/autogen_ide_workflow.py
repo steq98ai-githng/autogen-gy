@@ -111,12 +111,12 @@ async def create_and_run_ide_loop(task: str, seed_knowledge: Dict[str, Any]) -> 
         logger.warning("IDE Loop failed to achieve 'APPROVE' state.")
 
     seed_knowledge["history"].append({"timestamp": str(datetime.datetime.now()), "task": task, "success": success})
-    seed_knowledge["modules"].append(
-        {
-            "name": "IDE_GroupChat",
-            "description": "Multi-agent loop containing Coder, Reviewer, and System_Controller",
-        }
-    )
+    module_info = {
+        "name": "IDE_GroupChat",
+        "description": "Multi-agent loop containing Coder, Reviewer, and System_Controller",
+    }
+    if module_info not in seed_knowledge["modules"]:
+        seed_knowledge["modules"].append(module_info)
     return seed_knowledge
 
 
