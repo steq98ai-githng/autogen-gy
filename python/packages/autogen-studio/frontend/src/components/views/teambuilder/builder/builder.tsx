@@ -377,9 +377,10 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
           )}
           <Tooltip title="Download Team">
             <Button
+              aria-label="Download Team"
               type="text"
               icon={<Download size={18} />}
-              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               onClick={() => {
                 const json = JSON.stringify(syncToJson(), null, 2);
                 const blob = new Blob([json], { type: "application/json" });
@@ -395,6 +396,7 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
 
           <Tooltip title="Save Changes">
             <Button
+              aria-label="Save Changes"
               type="text"
               icon={
                 <div className="relative">
@@ -404,7 +406,7 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
                   )}
                 </div>
               }
-              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleSave}
               // disabled={!isDirty}
             />
@@ -431,6 +433,7 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
             </div>
           >
             <Button
+              aria-label="Validate Team"
               type="text"
               loading={validationLoading}
               icon={
@@ -445,16 +448,17 @@ export const TeamBuilder: React.FC<TeamBuilderProps> = ({
                   )}
                 </div>
               }
-              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-1.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-50 disabled:cursor-not-allowed"
               onClick={handleValidate}
             />
           </Tooltip>
 
           <Tooltip title="Run Team">
             <Button
+              aria-label="Run Team"
               type="primary"
               icon={<PlayCircle size={18} />}
-              className="p-1.5 ml-2 px-2.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary"
+              className="p-1.5 ml-2 px-2.5 hover:bg-primary/10 rounded-md text-primary/75 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               onClick={() => {
                 setTestDrawerVisible(true);
               }}
