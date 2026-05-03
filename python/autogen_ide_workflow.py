@@ -40,7 +40,9 @@ class SeedKnowledgeManager:
 
     def __init__(self, filepath: str):
         self.filepath = filepath
-        os.makedirs(os.path.dirname(self.filepath), exist_ok=True)
+        dirname = os.path.dirname(self.filepath)
+        if dirname:
+            os.makedirs(dirname, exist_ok=True)
 
     def load(self) -> Dict[str, Any]:
         """Loads seed knowledge from file or returns default structure if not found."""
