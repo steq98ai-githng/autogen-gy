@@ -60,7 +60,7 @@ class SeedKnowledgeManager:
 
     def save(self, data: Dict[str, Any]) -> None:
         """Saves seed knowledge to file."""
-        with open(self.filepath, "w") as f:
+        with open(self.filepath, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2)
         logger.info("Seed knowledge saved successfully.")
 
