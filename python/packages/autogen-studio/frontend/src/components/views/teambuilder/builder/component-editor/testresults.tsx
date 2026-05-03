@@ -36,7 +36,7 @@ const TestDetails: React.FC<TestDetailsProps> = ({ result, onClose }) => {
             <span className="font-medium text-primary">{result.message}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Tooltip title="Test results">
+            <Tooltip title={isExpanded ? "Hide test results" : "Show test results"}>
               <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
