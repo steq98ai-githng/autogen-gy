@@ -8,7 +8,6 @@ import {
   CheckCircle,
 } from "lucide-react";
 import { ComponentTestResult } from "../../api";
-import { Tooltip } from "antd";
 
 interface TestDetailsProps {
   result: ComponentTestResult;
@@ -36,29 +35,25 @@ const TestDetails: React.FC<TestDetailsProps> = ({ result, onClose }) => {
             <span className="font-medium text-primary">{result.message}</span>
           </div>
           <div className="flex items-center gap-2">
-            <Tooltip title={isExpanded ? "Hide test results" : "Show test results"}>
-              <button
-                onClick={() => setIsExpanded(!isExpanded)}
-                className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                aria-label="Test results"
-                aria-expanded={isExpanded}
-              >
-                {isExpanded ? (
-                  <ChevronUp className="w-4 h-4" />
-                ) : (
-                  <ChevronDown className="w-4 h-4" />
-                )}
-              </button>
-            </Tooltip>
-            <Tooltip title="Close test results">
-              <button
-                onClick={onClose}
-                className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-                aria-label="Close test results"
-              >
-                <XCircle className="w-4 h-4" />
-              </button>
-            </Tooltip>
+            <button
+              onClick={() => setIsExpanded(!isExpanded)}
+              className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Test results"
+              aria-expanded={isExpanded}
+            >
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+            <button
+              onClick={onClose}
+              className="p-1 hover:bg-black/5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              aria-label="Close test results"
+            >
+              <XCircle className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
