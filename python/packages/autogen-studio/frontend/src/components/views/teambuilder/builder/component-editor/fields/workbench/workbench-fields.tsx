@@ -218,11 +218,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                 label: getComponentDetailsTitle(),
                 children: (
                   <div className="space-y-4">
-                    <label className="block">
+                    <label className="block cursor-pointer" htmlFor="static-label">
                       <span className="text-sm font-medium text-secondary">
                         Label
                       </span>
                       <Input
+                        id="static-label"
                         value={component.label || ""}
                         onChange={(e) =>
                           handleComponentUpdate({ label: e.target.value })
@@ -232,11 +233,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block cursor-pointer" htmlFor="static-description">
                       <span className="text-sm font-medium text-secondary">
                         Description
                       </span>
                       <TextArea
+                        id="static-description"
                         value={component.description || ""}
                         onChange={(e) =>
                           handleComponentUpdate({ description: e.target.value })
@@ -248,11 +250,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                     </label>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <label className="block">
+                      <label className="block cursor-pointer" htmlFor="static-version">
                         <span className="text-sm font-medium text-secondary">
                           Version
                         </span>
                         <InputNumber
+                          id="static-version"
                           value={component.version || 1}
                           onChange={(value) =>
                             handleComponentUpdate({ version: value || 1 })
@@ -264,11 +267,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                         />
                       </label>
 
-                      <label className="block">
+                      <label className="block cursor-pointer" htmlFor="static-component-version">
                         <span className="text-sm font-medium text-secondary">
                           Component Version
                         </span>
                         <InputNumber
+                          id="static-component-version"
                           value={component.component_version || 1}
                           onChange={(value) =>
                             handleComponentUpdate({
@@ -479,11 +483,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                 label: getComponentDetailsTitle(),
                 children: (
                   <div className="space-y-4">
-                    <label className="block">
+                    <label className="block cursor-pointer" htmlFor="mcp-label">
                       <span className="text-sm font-medium text-secondary">
                         Label
                       </span>
                       <Input
+                        id="mcp-label"
                         value={component.label || ""}
                         onChange={(e) =>
                           handleComponentUpdate({ label: e.target.value })
@@ -493,11 +498,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                       />
                     </label>
 
-                    <label className="block">
+                    <label className="block cursor-pointer" htmlFor="mcp-description">
                       <span className="text-sm font-medium text-secondary">
                         Description
                       </span>
                       <TextArea
+                        id="mcp-description"
                         value={component.description || ""}
                         onChange={(e) =>
                           handleComponentUpdate({ description: e.target.value })
@@ -509,11 +515,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                     </label>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <label className="block">
+                      <label className="block cursor-pointer" htmlFor="mcp-version">
                         <span className="text-sm font-medium text-secondary">
                           Version
                         </span>
                         <InputNumber
+                          id="mcp-version"
                           value={component.version || 1}
                           onChange={(value) =>
                             handleComponentUpdate({ version: value || 1 })
@@ -525,11 +532,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                         />
                       </label>
 
-                      <label className="block">
+                      <label className="block cursor-pointer" htmlFor="mcp-component-version">
                         <span className="text-sm font-medium text-secondary">
                           Component Version
                         </span>
                         <InputNumber
+                          id="mcp-component-version"
                           value={component.component_version || 1}
                           onChange={(value) =>
                             handleComponentUpdate({
@@ -563,11 +571,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
 
                     {serverParams.type === "StdioServerParams" && (
                       <>
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-command">
                           <span className="text-sm font-medium text-primary">
                             Command
                           </span>
                           <Input
+                            id="mcp-command"
                             value={serverParams.command || ""}
                             onChange={(e) =>
                               handleServerParamsUpdate({
@@ -657,11 +666,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           )}
                         </div>
 
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-read-timeout">
                           <span className="text-sm font-medium text-primary">
                             Read Timeout (seconds)
                           </span>
                           <Input
+                            id="mcp-read-timeout"
                             type="number"
                             value={serverParams.read_timeout_seconds || 5}
                             onChange={(e) =>
@@ -761,11 +771,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
 
                     {serverParams.type === "SseServerParams" && (
                       <>
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-url-sse">
                           <span className="text-sm font-medium text-primary">
                             Server URL
                           </span>
                           <Input
+                            id="mcp-url-sse"
                             value={serverParams.url || ""}
                             onChange={(e) =>
                               handleServerParamsUpdate({ url: e.target.value })
@@ -775,11 +786,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           />
                         </label>
 
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-timeout-sse">
                           <span className="text-sm font-medium text-primary">
                             Timeout (seconds)
                           </span>
                           <Input
+                            id="mcp-timeout-sse"
                             type="number"
                             value={serverParams.timeout || 5}
                             onChange={(e) =>
@@ -791,11 +803,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           />
                         </label>
 
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-sse-read-timeout-sse">
                           <span className="text-sm font-medium text-primary">
                             SSE Read Timeout (seconds)
                           </span>
                           <Input
+                            id="mcp-sse-read-timeout-sse"
                             type="number"
                             value={serverParams.sse_read_timeout || 300}
                             onChange={(e) =>
@@ -812,11 +825,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
 
                     {serverParams.type === "StreamableHttpServerParams" && (
                       <>
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-url-http">
                           <span className="text-sm font-medium text-secondary">
                             Server URL
                           </span>
                           <Input
+                            id="mcp-url-http"
                             type="url"
                             value={serverParams.url || ""}
                             onChange={(e) =>
@@ -827,11 +841,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           />
                         </label>
 
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-timeout-http">
                           <span className="text-sm font-medium text-primary">
                             Timeout (seconds)
                           </span>
                           <Input
+                            id="mcp-timeout-http"
                             type="number"
                             value={serverParams.timeout || 30}
                             onChange={(e) =>
@@ -843,11 +858,12 @@ export const WorkbenchFields: React.FC<WorkbenchFieldsProps> = ({
                           />
                         </label>
 
-                        <label className="block">
+                        <label className="block cursor-pointer" htmlFor="mcp-sse-read-timeout-http">
                           <span className="text-sm font-medium text-primary">
                             SSE Read Timeout (seconds)
                           </span>
                           <Input
+                            id="mcp-sse-read-timeout-http"
                             type="number"
                             value={serverParams.sse_read_timeout || 300}
                             onChange={(e) =>
