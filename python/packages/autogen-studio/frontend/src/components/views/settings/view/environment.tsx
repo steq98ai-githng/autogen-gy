@@ -323,6 +323,7 @@ export const EnvironmentVariablesPanel: React.FC<
               type="text"
               danger
               icon={<Trash2 className="w-4 h-4" />}
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
             />
           </Popconfirm>
         </Tooltip>
@@ -365,9 +366,11 @@ export const EnvironmentVariablesPanel: React.FC<
         <div className="space-x-2 inline-flex">
           <Tooltip title="Add new variable">
             <Button
+              aria-label="Add new variable"
               type="default"
               icon={<Plus className="w-4 h-4" />}
               onClick={handleAdd}
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               Add
             </Button>
@@ -375,6 +378,7 @@ export const EnvironmentVariablesPanel: React.FC<
           <Tooltip title={isDirty ? "Save your changes" : "No unsaved changes"}>
             <span className="inline-block">
               <Button
+                aria-label="Save environment variables"
                 type="primary"
                 icon={
                   <div className="relative">
@@ -386,6 +390,7 @@ export const EnvironmentVariablesPanel: React.FC<
                 }
                 onClick={handleSave}
                 disabled={!isDirty}
+                className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 Save
               </Button>

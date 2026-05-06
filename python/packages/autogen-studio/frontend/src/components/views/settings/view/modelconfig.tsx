@@ -42,10 +42,11 @@ export const ModelConfigPanel: React.FC<ModelConfigPanelProps> = ({
           <h3 className="text-lg font-medium">Default Model Configuration</h3>
           <Tooltip title="Edit Default Model Settings">
             <Button
+              aria-label="Edit Default Model Settings"
               type="primary"
               icon={<Edit2 className="w-4 h-4 mr-1" />}
               onClick={handleOpenModelEditor}
-              className="flex items-center"
+              className="flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               Edit Model
             </Button>
