@@ -191,11 +191,12 @@ export const AddComponentDropdown: React.FC<AddComponentDropdownProps> = ({
         disabled={disabled}
       >
         <Button
+          aria-label={displayButtonText}
           type={type}
           size={size}
           icon={showIcon ? <Plus className="w-4 h-4" /> : undefined}
           disabled={disabled}
-          className={`flex items-center gap-1 ${className}`}
+          className={`flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${className}`}
         >
           {displayButtonText}
           {showChevron && <ChevronDown className="w-3 h-3" />}

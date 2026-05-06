@@ -130,7 +130,7 @@ const ComponentCard: React.FC<
             <Button
               aria-label="Delete component"
               type="text"
-              className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity text-red-500 hover:text-red-600"
+              className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition-opacity text-red-500 hover:text-red-600"
               icon={<Trash className="w-3.5 h-3.5" />}
               disabled={disabled}
               onClick={(e) => e.stopPropagation()}
@@ -141,7 +141,7 @@ const ComponentCard: React.FC<
           title="Duplicate"
           aria-label="Duplicate component"
           type="text"
-          className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-opacity"
           icon={<Copy className="w-3.5 h-3.5" />}
           disabled={disabled}
           onClick={(e) => {
@@ -153,7 +153,7 @@ const ComponentCard: React.FC<
           title="Edit"
           aria-label="Edit component"
           type="text"
-          className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+          className="h-6 w-6 flex items-center justify-center p-0 opacity-0 group-hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-opacity"
           icon={<Edit className="w-3.5 h-3.5" />}
           disabled={disabled}
           onClick={(e) => {
@@ -530,7 +530,7 @@ export const GalleryDetail: React.FC<{
                       icon={<Edit className="w-4 h-4" />}
                       onClick={() => setIsEditingDetails(true)}
                       type="text"
-                      className="text-white hover:text-white/80"
+                      className="text-white hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                       disabled={isJsonEditing}
                     />
                   </Tooltip>
@@ -540,7 +540,7 @@ export const GalleryDetail: React.FC<{
                       icon={<Download className="w-4 h-4" />}
                       onClick={handleDownload}
                       type="text"
-                      className="text-white hover:text-white/80"
+                      className="text-white hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                     />
                   </Tooltip>
                   <Tooltip
@@ -564,7 +564,7 @@ export const GalleryDetail: React.FC<{
                         }
                       }}
                       type="text"
-                      className="text-white hover:text-white/80"
+                      className="text-white hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
                     />
                   </Tooltip>
                 </div>
